@@ -84,10 +84,10 @@ class HttpRequestInterface {
   virtual void set_preserve_protocol(bool preserve_protocol) = 0;
 
   // Gets the user agent for this http request. The default user agent has
-  // the following format: Google Update/a.b.c.d;req1;req2 where a.b.c.d is
+  // the following format: ViaSat Update/a.b.c.d;req1;req2 where a.b.c.d is
   // the version of the client code and req1, req2,... are appended by
   // different http requests. For example:
-  //    User-Agent: Google Update/1.2.15.0;winhttp;cup
+  //    User-Agent: ViaSat Update/1.2.15.0;winhttp;cup
   // indicates a WinHTTP+CUP request.
   virtual CString user_agent() const = 0;
 

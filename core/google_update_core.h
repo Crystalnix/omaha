@@ -82,7 +82,7 @@ class ATL_NO_VTABLE GoogleUpdateCore
                                             kProgIDGoogleUpdateCoreMachine)
     REGMAP_ENTRY(_T("VERSION"), _T("1"))
     REGMAP_ENTRY(_T("NAME"), _T("GoogleUpdateCoreClass"))
-    REGMAP_ENTRY(_T("DESCRIPTION"), _T("Google Update Core Class"))
+    REGMAP_ENTRY(_T("DESCRIPTION"), _T("ViaSat Update Core Class"))
     REGMAP_UUID(_T("CLSID"), is_service ?
                              __uuidof(GoogleUpdateCoreClass) :
                              __uuidof(GoogleUpdateCoreMachineClass))

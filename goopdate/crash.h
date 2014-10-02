@@ -114,7 +114,7 @@ class Crash {
 
   static HRESULT Initialize(bool is_machine);
 
-  // Reports a crash of Google Update. Does not delete the crash file.
+  // Reports a crash of ViaSat Update. Does not delete the crash file.
   static HRESULT ReportGoogleUpdateCrash(bool can_upload,
                                          const CString& crash_filename,
                                          const CString& custom_info_filename,

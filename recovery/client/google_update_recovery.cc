@@ -14,7 +14,7 @@
 // ========================================================================
 
 //
-// Implementation of the Google Update recovery mechanism to be included in
+// Implementation of the ViaSat Update recovery mechanism to be included in
 // Google apps.
 
 #include "omaha/recovery/client/google_update_recovery.h"

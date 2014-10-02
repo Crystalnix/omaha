@@ -52,11 +52,11 @@ namespace goopdate_utils {
 
 typedef HRESULT (*RegisterOrUnregisterFunction)(void* data, bool is_register);
 
-// Builds the directory of the Google Update executable.
+// Builds the directory of the ViaSat Update executable.
 CString BuildGoogleUpdateExeDir(bool is_machine);
 
-// Builds the path of the Google Update version found in the registry. The
-// command line is of the form "<install location>\googleupdate.exe"
+// Builds the path of the ViaSat Update version found in the registry. The
+// command line is of the form "<install location>\viasatupdate.exe"
 CString BuildGoogleUpdateExePath(bool is_machine);
 
 CString BuildGoogleUpdateServicesPath(bool is_machine);
@@ -68,7 +68,7 @@ bool IsRunningFromOfficialGoopdateDir(bool is_machine);
 // If running the installed machine instance, returns HKLM. Else returns HKCU.
 CString GetHKRoot();
 
-// Starts an instance of the Google Update version found in the registry.
+// Starts an instance of the ViaSat Update version found in the registry.
 // Only use to start interactive processes because it uses ::ShellExecuteEx().
 // args can be NULL.
 // process can be NULL. If not NULL, caller is responsible for closing handle.

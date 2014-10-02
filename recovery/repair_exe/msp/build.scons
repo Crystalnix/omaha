@@ -56,7 +56,7 @@ old_unsigned_env.Append(
         ],
 )
 
-old_unsigned_output = old_unsigned_env.WiX('GoogleUpdateHelper_unsigned.msi',
+old_unsigned_output = old_unsigned_env.WiX('ViaSatUpdateHelper_unsigned.msi',
     'patchableinstaller.wxs')
 
 env.Depends(old_unsigned_output, [_custom_actions_path, _required_file])
@@ -81,7 +81,7 @@ new_unsigned_env.Append(
 new_unsigned_env['WIXOBJPREFIX'] = new_unsigned_env['WIXOBJPREFIX'] + 'new/'
 
 new_unsigned_output = new_unsigned_env.WiX(
-    target='new/GoogleUpdateHelper_unsigned.msi',
+    target='new/ViaSatUpdateHelper_unsigned.msi',
     source='patchableinstaller.wxs'
 )
 
@@ -131,7 +131,7 @@ if os.path.exists(_temp_dir):
   # Remove the temp dir.
   rm_rf(_temp_dir)
 
-unsigned_msp_name = 'GoogleUpdateHelperPatch_unsigned.msp'
+unsigned_msp_name = 'ViaSatUpdateHelperPatch_unsigned.msp'
 unsigned_msp_path = _repair_exe_obj_dir + 'msp/' + unsigned_msp_name
 
 msp_output = msp_env.Command(
@@ -150,12 +150,12 @@ Depends(msp_output, pcp_output)
 # Sign the old MSI and MSP
 #
 signed_msi = env.SignedBinary(
-    target='GoogleUpdateHelper.msi',
+    target='ViaSatUpdateHelper.msi',
     source=old_unsigned_output,
 )
 
 signed_msp = env.SignedBinary(
-    target='GoogleUpdateHelperPatch.msp',
+    target='ViaSatUpdateHelperPatch.msp',
     source=msp_output,
 )
 

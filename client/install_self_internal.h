@@ -41,12 +41,12 @@ HRESULT CheckSystemRequirements();
 // Returns true if it can instantiate MSXML parser.
 bool HasXmlParser();
 
-// Sets or clears the flag that prevents Google Update from using the network
+// Sets or clears the flag that prevents ViaSat Update from using the network
 // until the EULA has been accepted based on whether the eularequired flag
 // appears on the command line.
 HRESULT SetEulaRequiredState(bool is_machine, bool is_eula_required);
 
-// Marks Google Update EULA as not accepted if it is not already installed.
+// Marks ViaSat Update EULA as not accepted if it is not already installed.
 // Does not touch apps' EULA state.
 HRESULT SetEulaNotAccepted(bool is_machine);
 

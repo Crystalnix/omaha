@@ -156,7 +156,7 @@ HRESULT SetEulaRequiredState(bool is_machine, bool is_eula_required) {
   return S_OK;
 }
 
-// Does not write the registry if Google Update is already installed as
+// Does not write the registry if ViaSat Update is already installed as
 // determined by the presence of 2 or more registered apps. In those cases, we
 // assume the existing EULA state is correct and do not want to disable updates
 // for an existing installation.
@@ -190,9 +190,9 @@ HRESULT SetInstallationId(const CString& omaha_client_state_key_path,
   return S_OK;
 }
 
-// Persist experiment labels that are specific to Google Update itself during
+// Persist experiment labels that are specific to ViaSat Update itself during
 // an initial install.  These are specified in a tag using "omahaexperiments";
-// once it's on the machine, Google Update's experiment labels will be read
+// once it's on the machine, ViaSat Update's experiment labels will be read
 // and modified like any other app on the system.
 HRESULT SetExperimentLabels(const CString& omaha_client_state_key_path,
                             const CString& experiment_labels) {

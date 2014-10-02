@@ -43,8 +43,8 @@ def BuildCOMForwarder(cmd_line_switch,
           'shlwapi.lib',
       ],
   )
-  # The resource file used is the same as the one for GoogleUpdate.exe.
-  # The version resource used is the same as the one for goopdate.dll.
+  # The resource file used is the same as the one for ViaSatUpdate.exe.
+  # The version resource used is the same as the one for vsupdate.dll.
   com_forwarder_inputs = [
        com_forwarder_env.ComponentObject('%s.obj' % signed_exe_name,
                                          'com_forwarder.cc'),
@@ -65,8 +65,8 @@ def BuildCOMForwarder(cmd_line_switch,
 
 
 # Build the broker forwarder and legacy on-demand.
-BuildCOMForwarder('/broker', 'GoogleUpdateBroker')
-BuildCOMForwarder('/ondemand', 'GoogleUpdateOnDemand')
+BuildCOMForwarder('/broker', 'ViaSatUpdateBroker')
+BuildCOMForwarder('/ondemand', 'ViaSatUpdateOnDemand')
 
 #
 # Build COM libraries and headers.
@@ -416,7 +416,7 @@ for omaha_version_info in env['omaha_versions_info']:
   )
 
   signed_dll = temp_env.SignedBinary(
-      target=prefix + 'goopdate.dll',
+      target=prefix + 'vsupdate.dll',
       source=unsigned_dll,
   )
 
@@ -446,7 +446,7 @@ customization_test = customization_test_env.OmahaUnittest(
 )
 
 # The test uses the DLL for its TypeLib.
-customization_test_env.Depends(customization_test, '$STAGING_DIR/goopdate.dll')
+customization_test_env.Depends(customization_test, '$STAGING_DIR/vsupdate.dll')
 
 
 # Build all the resource dlls.

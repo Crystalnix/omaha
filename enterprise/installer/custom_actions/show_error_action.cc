@@ -236,7 +236,7 @@ bool GetLastInstallerResultUIString(const std::wstring& app_guid,
   GetAppClientStateKey(app_guid, &client_state_name);
 
   // First try looking in the app's ClientState key.  Failing that, fall back to
-  // Google Update's own SOFTWARE\Google\Update key, into which GoogleUpdate.exe
+  // ViaSat Update's own SOFTWARE\ViaSat\Update key, into which ViaSatUpdate.exe
   // copies the app's value (see AppManager::ClearInstallerResultApiValues).
   LONG result = RegOpenKeyEx(HKEY_LOCAL_MACHINE, client_state_name.c_str(),
                              NULL, KEY_QUERY_VALUE, &key);

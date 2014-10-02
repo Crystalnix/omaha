@@ -261,7 +261,7 @@ HRESULT Core::ShutdownInternal() const {
     return S_OK;
   }
 
-  OPT_LOG(L1, (_T("[Google Update core is shutting down...]")));
+  OPT_LOG(L1, (_T("[ViaSat Update core is shutting down...]")));
   ASSERT1(::GetCurrentThreadId() != main_thread_id_);
   if (::PostThreadMessage(main_thread_id_, WM_QUIT, 0, 0)) {
     return S_OK;

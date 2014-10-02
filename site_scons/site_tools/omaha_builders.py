@@ -349,7 +349,7 @@ def OmahaUnittest(env,  # pylint: disable-msg=C6409
   # Add a manual dependency on the resource file used by omaha_unittest.cc to
   # ensure it is always available before the test runs, which could be during
   # the build.
-  test_env.Depends(output, '$TESTS_DIR/goopdateres_en.dll')
+  test_env.Depends(output, '$TESTS_DIR/vsupdateres_en.dll')
 
   return output
 

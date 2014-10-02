@@ -19,7 +19,7 @@
 # subsystem so that it does not throw up windows. It is useful for unit tests.
 # There is a resource file, so that we can include a manifest that tells Windows
 # Vista not to elevate this file. We need this when it is renamed to
-# GoogleUpdate.exe for unit tests.
+# ViaSatUpdate.exe for unit tests.
 
 Import('env')
 

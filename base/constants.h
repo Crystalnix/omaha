@@ -90,7 +90,7 @@ const TCHAR* const kCompanyInternalLanGroupName = COMPANY_DOMAIN_BASE;
 // Application name.
 // Use the localized IDS_PRODUCT_DISPLAY_NAME or the formatted
 // IDS_INSTALLER_DISPLAY_NAME instead when string is displayed to user.
-// kAppName == "Google Update"
+// kAppName == "ViaSat Update"
 // TODO(omaha): Maybe rename all of these kOmahaAppName.
 const TCHAR* const kAppName = _T(OMAHA_APP_NAME_ANSI);
 
@@ -145,10 +145,10 @@ const TCHAR* const kCertificateSubjectName = _T("Google Inc");
 // Omaha's app ID
 //
 // TODO(omaha): Rename all of these "Omaha".
-#define GOOPDATE_APP_ID _T("{430FD4D0-B729-4F61-AA34-91526481799D}")
+#define GOOPDATE_APP_ID _T("{555B8D18-076D-4576-9579-1FD7F0399EAE}")
 const TCHAR* const kGoogleUpdateAppId = GOOPDATE_APP_ID;
-const GUID kGoopdateGuid = {0x430FD4D0, 0xB729, 0x4F61,
-                            {0xAA, 0x34, 0x91, 0x52, 0x64, 0x81, 0x79, 0x9D}};
+const GUID kGoopdateGuid = {0x555b8d18, 0x76d, 0x4576,
+    {0x95, 0x79, 0x1f, 0xd7, 0xf0, 0x39, 0x9e, 0xae }};
 
 //
 // Directory names

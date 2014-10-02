@@ -65,7 +65,7 @@ const TCHAR* const kCmdLineAppHandoffInstall = _T("handoff");
 
 // The "ig" switch was used in Omaha 2 to indicate a worker to finish installing
 // Omaha and perform an interactive install of an application.
-// ig = Install Google Update.
+// ig = Install ViaSat Update.
 const TCHAR* const kCmdLineLegacyFinishGoogleUpdateInstall = _T("ig");
 
 // The "ua" switch indicates a worker to perform an update check for all

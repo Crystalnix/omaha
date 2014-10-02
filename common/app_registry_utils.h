@@ -58,7 +58,7 @@ HRESULT SetUsageStatsEnable(bool is_machine,
                             const CString& app_guid,
                             Tristate usage_stats_enable);
 
-// Writes branding information for Google Update in the registry if it does not
+// Writes branding information for ViaSat Update in the registry if it does not
 // already exist. Otherwise, the information remains unchanged.
 // Writes a default Omaha-specific brand code if one is not specified in args.
 HRESULT SetGoogleUpdateBranding(const CString& client_state_key_path,

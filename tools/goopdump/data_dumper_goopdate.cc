@@ -339,7 +339,7 @@ void DataDumperGoopdate::DumpEventLog(const DumpLog& dump_log) {
 }
 
 void DataDumperGoopdate::DumpGoogleUpdateProcessInfo(const DumpLog& dump_log) {
-  DumpHeader header(dump_log, _T("GoogleUpdate.exe Process Info"));
+  DumpHeader header(dump_log, _T("ViaSatUpdate.exe Process Info"));
 
   EnableDebugPrivilege();
 
@@ -363,7 +363,7 @@ void DataDumperGoopdate::DumpGoogleUpdateProcessInfo(const DumpLog& dump_log) {
     CString exe_file_name = process_entry32.szExeFile;
     exe_file_name.MakeLower();
 
-    if (exe_file_name.Find(_T("googleupdate.exe")) >= 0) {
+    if (exe_file_name.Find(_T("viasatupdate.exe")) >= 0) {
       if (first) {
         first = false;
       } else {

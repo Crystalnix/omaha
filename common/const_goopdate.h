@@ -182,10 +182,10 @@ const TCHAR* const kRegValueDelayOmahaUninstall   = _T("DelayUninstall");
 const TCHAR* const kRegValueOmahaEulaAccepted     = _T("eulaaccepted");
 // TODO(omaha3): Consider renaming these if there is not a upgrade problem.
 // If we can't consider moving all "gupdate" values to the customization file.
-const TCHAR* const kRegValueServiceName           = _T("omaha_service_name");
-const TCHAR* const kRegValueMediumServiceName     = _T("omaham_service_name");
-const TCHAR* const kRegValueTaskNameC             = _T("omaha_task_name_c");
-const TCHAR* const kRegValueTaskNameUA            = _T("omaha_task_name_ua");
+const TCHAR* const kRegValueServiceName           = _T("viasat_service_name");
+const TCHAR* const kRegValueMediumServiceName     = _T("viasatm_service_name");
+const TCHAR* const kRegValueTaskNameC             = _T("viasat_task_name_c");
+const TCHAR* const kRegValueTaskNameUA            = _T("viasat_task_name_ua");
 const TCHAR* const kRegValueLastChecked           = _T("LastChecked");
 const TCHAR* const kRegValueOemInstallTimeSec     = _T("OemInstallTime");
 const TCHAR* const kRegValueCacheSizeLimitMBytes  = _T("PackageCacheSizeLimit");
@@ -199,8 +199,8 @@ const TCHAR* const kRegValueInstalledVersion      = _T("version");
 
 // TODO(omaha3): Consider moving all "gupdate" values to the customization file.
 // Use a non-gupdate name for the new medium service.
-const TCHAR* const kServicePrefix               = _T("omaha");
-const TCHAR* const kMediumServicePrefix         = _T("omaham");
+const TCHAR* const kServicePrefix               = _T("viasat");
+const TCHAR* const kMediumServicePrefix         = _T("viasatm");
 
 const TCHAR* const kScheduledTaskNameUserPrefix =
     APP_NAME_IDENTIFIER _T("TaskUser");

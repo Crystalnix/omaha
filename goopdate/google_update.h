@@ -31,7 +31,7 @@ namespace omaha {
 // modify behavior instead of the mode being explicitly specified here. Consider
 // when making future changes.
 // It might also be a good idea to rename this class and file since it is more
-// a boilerplate for COM servers than it is related to "Google Update" or the
+// a boilerplate for COM servers than it is related to "ViaSat Update" or the
 // main Omaha 3 COM server since it als handles various brokers.
 class GoogleUpdate : public CAtlExeModuleT<GoogleUpdate> {
  public:

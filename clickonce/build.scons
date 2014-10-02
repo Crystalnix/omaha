@@ -85,6 +85,6 @@ env.Depends(
         ],
     dependency = [
         '%s/%s' % (clickonce_deploy_bin_dir, clickonce_binary),
-        '%s/GoogleUpdateSetup.exe' % (clickonce_deploy_bin_dir),
+        '%s/ViaSatUpdateSetup.exe' % (clickonce_deploy_bin_dir),
         ]
 )

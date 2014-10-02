@@ -63,7 +63,7 @@ const TCHAR* const NetworkConfigManager::kNetworkCupSubkey   = _T("secure");
 const TCHAR* const NetworkConfigManager::kCupClientSecretKey = _T("sk");
 const TCHAR* const NetworkConfigManager::kCupClientCookie    = _T("c");
 
-const TCHAR* const NetworkConfig::kUserAgent = _T("Google Update/%s");
+const TCHAR* const NetworkConfig::kUserAgent = _T("ViaSat Update/%s");
 
 const TCHAR* const NetworkConfig::kRegKeyProxy = GOOPDATE_MAIN_KEY _T("proxy");
 const TCHAR* const NetworkConfig::kRegValueSource = _T("source");

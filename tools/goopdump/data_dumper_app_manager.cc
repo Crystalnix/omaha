@@ -63,9 +63,9 @@ CString GuidToFriendlyAppName(const GUID& guid) {
   // IMPORTANT: Only put released products in this list since this tool will go
   // to customers.
   MapGuidToName guid_to_name[] = {
-    {_T("{283EAF47-8817-4c2b-A801-AD1FADFB7BAA}"), _T("Gears")},
-    {_T("{430FD4D0-B729-4F61-AA34-91526481799D}"), _T("Google Update")},
-    {_T("{8A69D345-D564-463C-AFF1-A69D9E530F96}"), _T("Chrome")},
+    //{_T("{283EAF47-8817-4c2b-A801-AD1FADFB7BAA}"), _T("Gears")},
+    {_T("{555B8D18-076D-4576-9579-1FD7F0399EAE}"), _T("ViaSat Update")},
+    //{_T("{8A69D345-D564-463C-AFF1-A69D9E530F96}"), _T("Chrome")},
   };
 
   CString str = _T("unknown");

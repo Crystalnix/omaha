@@ -182,7 +182,7 @@ HRESULT SetUsageStatsEnable(bool is_machine,
   return S_OK;
 }
 
-// Google Update does not have a referral_id. Everything else is the same as for
+// ViaSat Update does not have a referral_id. Everything else is the same as for
 // apps.
 HRESULT SetGoogleUpdateBranding(const CString& client_state_key_path,
                                 const CString& brand_code,

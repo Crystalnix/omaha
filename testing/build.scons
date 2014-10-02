@@ -46,10 +46,10 @@ unittest_support = env.Replicate('$STAGING_DIR/unittest_support/', [
     # Installer files used by the Install Manager unit tests.
     'unittest_support/test_foo_v1.0.101.0.msi',
 
-    'unittest_support/GoogleUpdate_corrupted.exe',
-    'unittest_support/GoogleUpdate_now_expired_cert.exe',
-    'unittest_support/GoogleUpdate_old_signature.exe',
-    'unittest_support/GoogleUpdateHelper.msi',
+    'unittest_support/ViaSatUpdate_corrupted.exe',
+    'unittest_support/ViaSatUpdate_now_expired_cert.exe',
+    'unittest_support/ViaSatUpdate_old_signature.exe',
+    'unittest_support/ViaSatUpdateHelper.msi',
     'unittest_support/SaveArguments.exe',
     'unittest_support/SaveArguments_different_ou.exe',
     'unittest_support/SaveArguments_multiple_cn.exe',
@@ -73,34 +73,34 @@ unittest_support = env.Replicate('$STAGING_DIR/unittest_support/', [
     'unittest_support/{CDABE316-39CD-43BA-8440-6D1E0547AEE6}.v3.gup',
     ])
 
-# Saved versions of Google Update for the Setup tests.
+# Saved versions of ViaSat Update for the Setup tests.
 unittest_support += env.Replicate(
     '$STAGING_DIR/unittest_support/omaha_1.2.131.7_shell/', [
-    'unittest_support/omaha_1.2.131.7_shell/GoogleUpdate.exe',
+    'unittest_support/omaha_1.2.131.7_shell/ViaSatUpdate.exe',
     ])
 unittest_support += env.Replicate(
     '$STAGING_DIR/unittest_support/omaha_1.2.183.9_shell/', [
-    'unittest_support/omaha_1.2.183.9_shell/GoogleUpdate.exe',
+    'unittest_support/omaha_1.2.183.9_shell/ViaSatUpdate.exe',
     ])
 unittest_support += env.Replicate('$STAGING_DIR/unittest_support/omaha_1.2.x/',
-    'unittest_support/omaha_1.2.x/GoogleUpdate.exe'
+    'unittest_support/omaha_1.2.x/ViaSatUpdate.exe'
     )
 unittest_support += env.Replicate('$STAGING_DIR/unittest_support/omaha_1.3.x/',
-    [ 'unittest_support/omaha_1.3.x/GoogleUpdate.exe',
-      'unittest_support/omaha_1.3.x/goopdate.dll',
-      'unittest_support/omaha_1.3.x/goopdateres_en.dll',
+    [ 'unittest_support/omaha_1.3.x/ViaSatUpdate.exe',
+      'unittest_support/omaha_1.3.x/vsupdate.dll',
+      'unittest_support/omaha_1.3.x/vsupdateres_en.dll',
     ])
 
-# Newer versions of Google Update for the Setup tests.
+# Newer versions of ViaSat Update for the Setup tests.
 #unittest_support += env.Replicate(
 #              '$STAGING_DIR/unittest_support/omaha_1.3.x_newer/',
-#              'unittest_support/omaha_1.2.x_newer/GoogleUpdate.exe')
+#              'unittest_support/omaha_1.2.x_newer/ViaSatUpdate.exe')
 
-# Copy longrunning.exe to GoogleUpdate.exe for use in Setup.
+# Copy longrunning.exe to ViaSatUpdate.exe for use in Setup.
 unittest_support += env.Replicate(
     target='$STAGING_DIR/unittest_support/does_not_shutdown/',
     source='$MAIN_DIR/testing/unittest_support/LongRunningSilent.exe',
-    REPLICATE_REPLACE=[('LongRunningSilent\\.exe', 'GoogleUpdate.exe')],
+    REPLICATE_REPLACE=[('LongRunningSilent\\.exe', 'ViaSatUpdate.exe')],
 )
 
 # download_cache test files
@@ -119,7 +119,7 @@ unittest_support += env.Replicate(
 # assumes they are in the same directory as the tests.
 # For coverage builds, use a custom command instead of Replicate() because
 # Replicate() will cause the DLL to be re-instrumented.
-resource_dll = '$STAGING_DIR/goopdateres_en.dll'
+resource_dll = '$STAGING_DIR/vsupdateres_en.dll'
 if env.IsCoverageBuild():
   env.CopyFileToDirectory('$TESTS_DIR', resource_dll)
 else:
@@ -367,7 +367,7 @@ omaha_unittest_inputs = [
     '../core/system_monitor_unittest.cc',
     '../core/google_update_core_unittest.cc',
 
-    # Google Update unit tests.
+    # ViaSat Update unit tests.
     '../google_update/google_update_unittest.cc',
 
     # Goopdate unit tests
@@ -490,7 +490,7 @@ if 'HAMMER_RUNS_TESTS' in os.environ.keys():
   omaha_unittest_env.Depends(test, unittest_support)
 
   # resource_manager_unittest.cc uses the Russian resources.
-  omaha_unittest_env.Depends(test, '$TESTS_DIR/goopdateres_ru.dll')
+  omaha_unittest_env.Depends(test, '$TESTS_DIR/vsupdateres_ru.dll')
 
 else:
   test = omaha_unittest_env.ComponentProgram(target_name, omaha_unittest_inputs)
@@ -499,7 +499,7 @@ else:
   omaha_unittest_env.Depends(test, unittest_support)
 
   # resource_manager_unittest.cc uses the Russian resources.
-  omaha_unittest_env.Depends(test, '$STAGING_DIR/goopdateres_ru.dll')
+  omaha_unittest_env.Depends(test, '$STAGING_DIR/vsupdateres_ru.dll')
 
 if env.Bit('all'):
   save_args_env = env.Clone()

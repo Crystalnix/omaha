@@ -24,7 +24,7 @@ namespace omaha {
 
 namespace internal {
 
-// Marks Google Update's EULA as accepted if an app EULA has been accepted.
+// Marks ViaSat Update's EULA as accepted if an app EULA has been accepted.
 HRESULT PromoteAppEulaAccepted(bool is_machine);
 
 // Returns whether a process is a machine process.

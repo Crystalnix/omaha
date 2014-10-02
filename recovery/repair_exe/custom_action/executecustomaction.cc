@@ -14,7 +14,7 @@
 // ========================================================================
 //
 // Custom action helper DLL:
-// The custom actions created in this project are for Google Update MSI patch,
+// The custom actions created in this project are for ViaSat Update MSI patch,
 // which is installed temporarily and uses this DLL to verify a downloaded
 // executable and run it with elevated privileges.
 

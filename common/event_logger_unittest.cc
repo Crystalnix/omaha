@@ -52,7 +52,7 @@ TEST_F(EventLoggerTest, AddEventSource) {
     return;
   }
 
-  // Registers the "Google Update" event source for the "Application" log
+  // Registers the "ViaSat Update" event source for the "Application" log
   EXPECT_SUCCEEDED(EventLogger::AddEventSource(EventLogger::kSourceName,
                                                _T("path")));
 

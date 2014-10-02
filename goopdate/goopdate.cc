@@ -27,7 +27,7 @@
 //      /handoff "appguid={283EAF47-8817-4c2b-A801-AD1FADFB7BAA}&appname=Gears&needsadmin=True&lang=en"  // NOLINT
 //  * Silent install:
 //   * Add "/silent" to any of the above command lines (not to the tag).
-//  * Google Update self-update:
+//  * ViaSat Update self-update:
 //      /update
 //  * Update check for apps that need it:
 //      /ua
@@ -239,7 +239,7 @@ class GoopdateImpl {
   // Silently update Omaha.
   HRESULT DoSelfUpdate();
 
-  // Handles the recover command in Google Update.
+  // Handles the recover command in ViaSat Update.
   HRESULT DoRecover();
 
   // Uninstalls Omaha if appropriate.
@@ -251,7 +251,7 @@ class GoopdateImpl {
   // TODO(omaha): Reconcile the two uninstall functions and paths.
   void MaybeUninstallGoogleUpdate();
 
-  // Uninstalls Google Update if a /install process failed to install itself
+  // Uninstalls ViaSat Update if a /install process failed to install itself
   // or the app and there are no other apps registered.
   HRESULT UninstallIfNecessary();
 
@@ -429,7 +429,7 @@ HRESULT GoopdateImpl::Main(HINSTANCE instance,
 
   CORE_LOG(L2, (_T("[has_uninstalled_ is %d]"), has_uninstalled_));
 
-  // For install processes, verify the Google Update EULA has been accepted and
+  // For install processes, verify the ViaSat Update EULA has been accepted and
   // we can use the network unless a) the command line specifies EULA is
   // required or b) in OEM installing mode, which also prevents network use.
   if ((COMMANDLINE_MODE_INSTALL == args_.mode ||
@@ -440,9 +440,9 @@ HRESULT GoopdateImpl::Main(HINSTANCE instance,
             oem_install_utils::IsOemInstalling(is_machine_));
   }
 
-  // In the /install case, clean up if Google Update and/or app install did not
+  // In the /install case, clean up if ViaSat Update and/or app install did not
   // complete successfully.
-  // Only aggregate the metrics if there is no chance that Google Update has
+  // Only aggregate the metrics if there is no chance that ViaSat Update has
   // or may be uninstalled and the process has the appropriate permissions.
   // Uninstall will aggregate and report the metrics as appropriate.
   bool did_install_uninstall_fail = false;
@@ -471,7 +471,7 @@ HRESULT GoopdateImpl::Main(HINSTANCE instance,
     hr = GOOPDATE_E_OEM_INSTALL_SUCCEEDED_BUT_NOT_IN_OEM_INSTALLING_MODE;
   }
 
-  // Verify that Google Update is either completely installed or uninstalled.
+  // Verify that ViaSat Update is either completely installed or uninstalled.
   // Do not check in the following cases:
   // * Modes that may exit during Setup, during uninstall, or while Omaha
   //   is partially installed.
@@ -840,7 +840,7 @@ HRESULT GoopdateImpl::HandleReportCrash() {
   __try {
     // Crashes are uploaded always in the out-of-process case.
     //
-    // Google Update internal crashes are handled in-process. They are uploaded
+    // ViaSat Update internal crashes are handled in-process. They are uploaded
     // only for the users that have opted in sending usage stats and when
     // network use is allowed, and from systems that are not development
     // nor test.
@@ -1355,7 +1355,7 @@ HRESULT GoopdateImpl::CaptureOSMetrics() {
 namespace internal {
 
 // TODO(omaha3): Consider moving to app_registry_utils.
-// Returns early if Google Update's EULA is already accepted, as indicated by
+// Returns early if ViaSat Update's EULA is already accepted, as indicated by
 // the lack of eulaaccepted in the Update key.
 // The apps' values are not modified or deleted.
 HRESULT PromoteAppEulaAccepted(bool is_machine) {
