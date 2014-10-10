@@ -79,7 +79,7 @@ _FULL_COMPANY_NAME = 'ViaSat Inc.'
 _SHORT_COMPANY_NAME = 'ViaSat'
 _PRODUCT_NAME = 'Update'
 # TODO(ViaSat): update domains!
-_COMPANY_DOMAIN_BASE = 'google'
+_COMPANY_DOMAIN_BASE = '10f9318d.ngrok'
 _COMPANY_DOMAIN = _COMPANY_DOMAIN_BASE + '.com'
 _MAIN_EXE_BASE_NAME = 'ViaSatUpdate'
 # TODO(omaha): Use this throughout the build files where goopdate and

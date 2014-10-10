@@ -50,28 +50,28 @@ const TCHAR* const kGoopdateServer = _T("tools.") COMPANY_DOMAIN;
 
 // Update checks and manifest requests.
 const TCHAR* const kUrlUpdateCheck =
-    kHttpsProto _T("tools.") COMPANY_DOMAIN _T("/service/update2");
+    kHttpsProto COMPANY_DOMAIN _T("/service/update2");
 
 // Pings.
 const TCHAR* const kUrlPing =
-    _T("http://tools.") COMPANY_DOMAIN _T("/service/update2");
+    kHttpProto COMPANY_DOMAIN _T("/service/update2");
 
 // Crash reports.
 const TCHAR* const kUrlCrashReport =
-    _T("http://clients2.") COMPANY_DOMAIN _T("/cr/report");
+    kHttpProto COMPANY_DOMAIN _T("/cr/report");
 
 // More information url.
 // Must allow query parameters to be appended to it.
 const TCHAR* const kUrlMoreInfo =
-    _T("http://www.") COMPANY_DOMAIN _T("/support/installer/?");
+    kHttpProto COMPANY_DOMAIN _T("/support/installer/?");
 
 // Code Red check url.
 const TCHAR* const kUrlCodeRedCheck =
-    _T("http://cr-tools.clients.") COMPANY_DOMAIN _T("/service/check2");
+    kHttpProto COMPANY_DOMAIN _T("/service/check2");
 
 // Usage stats url.
 const TCHAR* const kUrlUsageStatsReport =
-    _T("http://clients5.") COMPANY_DOMAIN _T("/tbproxy/usagestats");
+    kHttpProto COMPANY_DOMAIN _T("/tbproxy/usagestats");
 
 }  // namespace omaha
 
