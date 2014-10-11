@@ -125,9 +125,9 @@ for omaha_version_info in env['omaha_versions_info']:
         source=base_name + '.rc',
     )
 
-  if not temp_env.Bit('debug'):
-    # Stubs for W2k compatibility.
-    exe_inputs += '$WDK_PATH/lib/w2k/i386/msvcrt_win2000.obj',
+#  if not temp_env.Bit('debug'):
+#    # Stubs for W2k compatibility.
+#    exe_inputs += '$WDK_PATH/lib/w2k/i386/msvcrt_win2000.obj',
 
   temp_env.ComponentProgram(
       prog_name = prefix + 'mi_exe_stub',

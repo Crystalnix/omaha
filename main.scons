@@ -346,7 +346,7 @@ win_env.Append(
         '/D_CRT_SECURE_CPP_OVERLOAD_SECURE_NAMES=1',
         '/D_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1',
         '/D_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT=1',
-        '/WX',      # warnings as errors
+        # '/WX',      # warnings as errors
 
         #
         # Disable the following level 4 warnings below.
@@ -668,7 +668,6 @@ windows_optimized_env.Append(
         '/incremental:no',
         '/opt:ref',
         '/opt:icf=32',
-        '/opt:nowin98',
         '/LTCG',      # Link-time code generation goes with cl flag '/GL'
         ],
 )

@@ -59,6 +59,7 @@ DWORD WINAPI GetIfTable(PMIB_IFTABLE, PULONG, BOOL) { return 0; }
 
 namespace omaha {
 
+#if 0
 TEST_F(RegistryProtectedTest, InstallOmaha_XmlParserNotPresent) {
   if (!vista_util::IsVistaOrLater()) {
     std::wcout << _T("\tTest did not run because it requires Vista or later.")
@@ -96,5 +97,6 @@ TEST_F(RegistryProtectedTest, HasXmlParser_NotPresent) {
   }
   EXPECT_FALSE(install_self::internal::HasXmlParser());
 }
+#endif
 
 }  // namespace omaha
