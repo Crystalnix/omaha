@@ -50,7 +50,7 @@ const TCHAR* const kGoopdateServer = _T("tools.") COMPANY_DOMAIN;
 
 // Update checks and manifest requests.
 const TCHAR* const kUrlUpdateCheck =
-    kHttpsProto COMPANY_DOMAIN _T("/service/update2");
+    kHttpProto COMPANY_DOMAIN _T("/service/update2");
 
 // Pings.
 const TCHAR* const kUrlPing =
