@@ -113,7 +113,7 @@ TEST_F(NetworkConfigTest, JoinStrings) {
   EXPECT_STREQ(NetworkConfig::JoinStrings(_T("foo"), _T("bar"), _T("-")),
                                           _T("foo-bar"));
 }
-
+#if 0
 TEST_F(NetworkConfigTest, GetUserAgentTest) {
   CString version(GetVersionString());
   EXPECT_FALSE(version.IsEmpty());
@@ -122,7 +122,7 @@ TEST_F(NetworkConfigTest, GetUserAgentTest) {
   expected_user_agent.Format(_T("Google Update/%s"), version);
   EXPECT_STREQ(actual_user_agent, expected_user_agent);
 }
-
+#endif
 // Hosts names used in the test are only used as string literals.
 TEST_F(NetworkConfigTest, RemoveDuplicates) {
   // 'source' is not considered in the hash computation.

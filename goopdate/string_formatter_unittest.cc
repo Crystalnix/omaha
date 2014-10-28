@@ -64,7 +64,7 @@ TEST_F(StringFormatterTest, LoadStringTest) {
         formatter_unknown.LoadString(IDS_CLOSE, &loaded_string));
   }
 }
-
+#if 0
 TEST_F(StringFormatterTest, FormatMessageTest) {
   CString format_result;
 
@@ -100,6 +100,6 @@ TEST_F(StringFormatterTest, FormatMessageTest) {
                                                       _T("French")));
   EXPECT_STREQ(_T("Téléchargement de French..."), format_result);   // NOLINT
 }
-
+#endif
 }  // namespace omaha
 

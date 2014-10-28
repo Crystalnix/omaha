@@ -125,7 +125,7 @@ TEST_F(ResourceManagerTest, GetResourceDllName) {
   expected_filename.Format(kOmahaResourceDllNameFormat, kLang);
   EXPECT_STREQ(expected_filename, ret);
 }
-
+#if 0
 TEST_F(ResourceManagerTest, GetResourceDllName_SpecialCases) {
   // zh-HK -> zh-TW
   EXPECT_STREQ(_T("goopdateres_zh-TW.dll"), GetResourceDllName(_T("zh-TW")));
@@ -135,7 +135,7 @@ TEST_F(ResourceManagerTest, GetResourceDllName_SpecialCases) {
   EXPECT_STREQ(_T("goopdateres_iw.dll"), GetResourceDllName(_T("iw")));
   EXPECT_STREQ(_T("goopdateres_iw.dll"), GetResourceDllName(_T("he")));
 }
-
+#endif
 TEST_F(ResourceManagerTest, LoadResourceFail) {
   SetMachine(false);
 
@@ -169,7 +169,7 @@ TEST_F(ResourceManagerTest, TestCountLanguageDlls) {
   ResourceManager::GetSupportedLanguageDllNames(&filenames);
   EXPECT_EQ(kNumberOfLanguageDlls, filenames.size());
 }
-
+#if 0
 TEST_F(ResourceManagerTest, TestAppropriateLanguageDlls) {
   std::vector<CString> filenames;
   ResourceManager::GetSupportedLanguageDllNames(&filenames);
@@ -233,7 +233,7 @@ TEST_F(ResourceManagerTest, TestAppropriateLanguageDlls) {
   // goopdateres_zh-HK.dll not present
   EXPECT_STREQ(_T("goopdateres_zh-TW.dll"), *iter++);
 }
-
+#endif
 TEST_F(ResourceManagerResourcesProtectedTest, RussianResourcesValid) {
   ResourceManager::Delete();
 

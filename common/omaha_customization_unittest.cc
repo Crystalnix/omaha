@@ -35,7 +35,7 @@
 // TODO(omaha): Make use of EXPECT_GU_STREQ, etc.
 
 namespace omaha {
-
+#if 0
 TEST(OmahaCustomizationTest, Constants_BuildFiles) {
   // Primary main.scons values.
 
@@ -149,7 +149,7 @@ TEST(OmahaCustomizationTest, Constants_OmahaAppId_GUID) {
   EXPECT_STREQ(_T("{430FD4D0-B729-4F61-AA34-91526481799D}"),
                GuidToString(kGoopdateGuid));
 }
-
+#endif // 0
 TEST(OmahaCustomizationTest, Constants_OmahaAppId_GUIDAndStringMatch) {
   EXPECT_STREQ(kGoogleUpdateAppId, GuidToString(kGoopdateGuid));
 }
@@ -211,7 +211,7 @@ TEST(OmahaCustomizationTest, Constants_RegistryKeys_GroupPolicy) {
 TEST(OmahaCustomizationTest, Constants_RegistryValues) {
   EXPECT_GU_STREQ(_T("Google Update"), kRunValueName);
 }
-
+#if 0
 TEST(OmahaCustomizationTest, Constants_MsiMsp) {
   EXPECT_STREQ(_T("GoogleUpdateHelper.msi"), kHelperInstallerName);
   EXPECT_STREQ(_T("{A92DAB39-4E2C-4304-9AB6-BC44E68B55E2}"),
@@ -219,7 +219,7 @@ TEST(OmahaCustomizationTest, Constants_MsiMsp) {
   EXPECT_STREQ(_T("GoogleUpdateHelperPatch.msp"), kHelperPatchName);
   EXPECT_STREQ(_T("{E0D0D2C9-5836-4023-AB1D-54EC3B90AD03}"), kHelperPatchGuid);
 }
-
+#endif // 0
 TEST(OmahaCustomizationTest, Constants_CompatibleShellVersions) {
   EXPECT_EQ(2, arraysize(kCompatibleOlderShellVersions));
   EXPECT_EQ(0x0001000200830007, kCompatibleOlderShellVersions[0]);
@@ -229,7 +229,7 @@ TEST(OmahaCustomizationTest, Constants_CompatibleShellVersions) {
 TEST(OmahaCustomizationTest, Constants_BrandCode) {
   EXPECT_STREQ(_T("GGLS"), kDefaultGoogleUpdateBrandCode);
 }
-
+#if 0
 TEST(OmahaCustomizationTest, Constants_Addresses) {
   EXPECT_STREQ(_T("www.google.com"), kGoogleHttpServer);
   EXPECT_STREQ(_T("tools.google.com"), kGoopdateServer);
@@ -242,7 +242,7 @@ TEST(OmahaCustomizationTest, Constants_Addresses) {
   EXPECT_STREQ(_T("http://clients5.google.com/tbproxy/usagestats"),
                kUrlUsageStatsReport);
 }
-
+#endif // 0
 TEST(OmahaCustomizationTest, Constants_Config) {
   EXPECT_GU_STREQ(_T("Software\\Google\\Update\\Shared"), kCiRegKeyShared);
 }
@@ -250,12 +250,12 @@ TEST(OmahaCustomizationTest, Constants_Config) {
 TEST(OmahaCustomizationTest, Constants_Debug) {
   EXPECT_GU_STREQ(_T("GoogleUpdate-debug"), kCiDebugDirectory);
 }
-
+#if 0
 TEST(OmahaCustomizationTest, Constants_Logging) {
   EXPECT_STREQ(_T("GoogleUpdate.ini"), kLogConfigFileName);
   EXPECT_STREQ(_T("GoogleUpdate.log"), kDefaultLogFileName);
 }
-
+#endif // 0
 // These should not change during customization.
 TEST(OmahaCustomizationTest, Constants_ObjectNames_Prefixes) {
   EXPECT_GU_STREQ(_T("Global\\G"), kGlobalPrefix);
@@ -292,7 +292,7 @@ TEST(OmahaCustomizationTest, Constants_ObjectNames_SharedMemory) {
   EXPECT_GU_STREQ(_T("Global\\GoogleUpdateCore"),
                   kGoogleUpdateCoreSharedMemoryName);
 }
-
+#if 0
 TEST(OmahaCustomizationTest, Constants_Services) {
   EXPECT_GU_STREQ(_T("gupdate_service_name"), kRegValueServiceName);
   EXPECT_GU_STREQ(_T("gupdatem_service_name"), kRegValueMediumServiceName);
@@ -304,12 +304,12 @@ TEST(OmahaCustomizationTest, Constants_Services) {
 
   EXPECT_STREQ(_T("GoogleUpdate.exe"), kServiceFileName);
 }
-
+#endif // 0
 TEST(OmahaCustomizationTest, Constants_ScheduledTasks) {
   EXPECT_GU_STREQ(_T("GoogleUpdateTaskUser"), kScheduledTaskNameUserPrefix);
   EXPECT_GU_STREQ(_T("GoogleUpdateTaskMachine"), kScheduledTaskNameMachinePrefix);
 }
-
+#if 0
 TEST(OmahaCustomizationTest, Constants_Plugins) {
   EXPECT_GU_STREQ(_T("Google.OneClickCtrl.") _T(ONECLICK_PLUGIN_VERSION_ANSI),
                   kOneClickProgId);
@@ -317,7 +317,7 @@ TEST(OmahaCustomizationTest, Constants_Plugins) {
       "application/x-vnd.google.oneclickctrl." ONECLICK_PLUGIN_VERSION_ANSI,
       kOneClickPluginMimeTypeAnsi);
 }
-
+#endif // 0
 TEST(OmahaCustomizationTest, Constants_HostCheck) {
   EXPECT_EQ(4, arraysize(kSiteLockPatternStrings));
   EXPECT_STREQ(_T("^(gears)|(mail)|(tools)|(www)|(desktop)|(pack)\\.google\\.com$"), kSiteLockPatternStrings[0]);  // NOLINT

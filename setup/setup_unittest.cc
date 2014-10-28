@@ -856,7 +856,7 @@ TEST_F(SetupFutureVersionInstalledUserTest, DISABLED_Install_NoRunKey) {
   RestoreRegistryHives();
   ASSERT_SUCCEEDED(RegKey::DeleteKey(kRegistryHiveOverrideRoot, true));
 }
-
+#if 0
 // Command line must be valid to avoid displaying invalid command line error.
 TEST_F(SetupFutureVersionInstalledUserTest, Install_ValidRunKey) {
   RegKey::DeleteKey(kRegistryHiveOverrideRoot, true);
@@ -884,7 +884,7 @@ TEST_F(SetupFutureVersionInstalledUserTest, Install_ValidRunKey) {
   RestoreRegistryHives();
   ASSERT_SUCCEEDED(RegKey::DeleteKey(kRegistryHiveOverrideRoot, true));
 }
-
+#endif
 TEST_F(SetupUserTest, Install_LockTimedOut) {
   TestInstallWhileHoldingLock();
 }
@@ -934,7 +934,7 @@ TEST_F(SetupRegistryProtectedUserTest,
 
   EXPECT_TRUE(ShouldInstall());
 }
-
+#if 0
 TEST_F(SetupRegistryProtectedUserTest,
        ShouldInstall_SameVersionFilesPresentSameLanguage) {
   if (!ShouldRunLargeTest()) {
@@ -1122,7 +1122,7 @@ TEST_F(SetupRegistryProtectedUserTest, ShouldInstall_NewerVersionShellMissing) {
   EXPECT_SUCCEEDED(
       DeleteDirectory(ConcatenatePath(omaha_path_, kFutureVersionString)));
 }
-
+#endif
 //
 // ShouldDelayUninstall/SetDelayUninstall tests.
 //

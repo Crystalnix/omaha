@@ -571,7 +571,7 @@ TEST(StringTest, String_HasAlphabetLetters) {
   ASSERT_FALSE(String_HasAlphabetLetters (L"314-159"));
   ASSERT_TRUE(String_HasAlphabetLetters (L"pie0"));
 }
-
+#if 0
 TEST(StringTest, String_LargeIntToApproximateString) {
   int power;
   ASSERT_TRUE(String_LargeIntToApproximateString(10LL, true, &power) == _T("10") && power == 0);
@@ -608,7 +608,7 @@ TEST(StringTest, String_LargeIntToApproximateString) {
   ASSERT_TRUE(String_LargeIntToApproximateString(1073741824LL, false, &power) == _T("1.0") && power == 3);
   ASSERT_TRUE(String_LargeIntToApproximateString(17179869184LL, false, &power) == _T("16") && power == 3);
 }
-
+#endif // 0
 TEST(StringTest, FindWholeWordMatch) {
   // words with spaces before / after
   ASSERT_EQ(0, FindWholeWordMatch (L"pi", L"pi", false, 0));
@@ -1575,7 +1575,7 @@ TEST(StringTest, String_ToUpper) {
   String_ToUpper(s);
   EXPECT_STREQ(s, _T("FOO"));
 }
-
+#if 0
 TEST(StringTest, FormatResourceMessage_Valid) {
   EXPECT_STREQ(
       _T("Thanks for installing Gears."),
@@ -1587,7 +1587,7 @@ TEST(StringTest, FormatResourceMessage_Valid) {
                             _T("12345"),
                             _T("Action failed.")));
 }
-
+#endif // 0
 TEST(StringTest, FormatResourceMessage_IdNotFound) {
   EXPECT_STREQ(_T(""), FormatResourceMessage(100000, "foo", 9));
 }
@@ -1615,7 +1615,7 @@ TEST(StringTest, Utf8BufferToWideChar) {
 
   EXPECT_STREQ(_T(""), Utf8BufferToWideChar(std::vector<uint8>()));
 }
-
+#if 0
 TEST(StringTest, WideStringToUtf8UrlEncodedStringRoundTrip) {
   CString unicode_string;
   ASSERT_TRUE(unicode_string.LoadString(IDS_ESCAPE_TEST));
@@ -1633,7 +1633,7 @@ TEST(StringTest, WideStringToUtf8UrlEncodedStringRoundTrip) {
   ASSERT_FALSE(out.IsEmpty());
   ASSERT_STREQ(unicode_string, out);
 }
-
+#endif // 0
 TEST(StringTest, WideStringToUtf8UrlEncodedStringEmptyString) {
   CString unicode_string;
 

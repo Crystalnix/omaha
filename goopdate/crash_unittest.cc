@@ -174,7 +174,7 @@ TEST_F(CrashTest, CreateCustomInfoFile) {
                                         custom_client_info,
                                         &actual_custom_info_filepath));
 }
-
+#if 0
 // Tests sending an Omaha crash.
 TEST_F(CrashTest, Report_OmahaCrash) {
   CString crash_filename;
@@ -253,7 +253,7 @@ TEST_F(CrashTest, WriteMinidump) {
                            dump_type, NULL, NULL);
   ASSERT_TRUE(handler.WriteMinidump());
 }
-
+#endif
 // Tests the retrieval of the exception information from an existing mini dump.
 TEST_F(CrashTest, GetExceptionInfo) {
   const uint32 kExceptionAddress  = 0x12345670;

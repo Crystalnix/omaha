@@ -374,7 +374,7 @@ TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_UseRealHttpClient) {
                             DownloadFileInvalidFile,
                             NULL));
 }
-
+#if 0
 TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_FileReturned_Machine) {
   CString saved_arguments_path = ConcatenatePath(app_util::GetTempDir(),
                                                  kSavedArgumentsFileName);
@@ -426,7 +426,7 @@ TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_FileReturned_User) {
   EXPECT_TRUE(::DeleteFile(saved_file_path_));
   EXPECT_TRUE(::DeleteFile(saved_arguments_path));
 }
-
+#endif
 TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_NoFile_Machine) {
   EXPECT_EQ(kDummyNoFileError, FixGoogleUpdate(kDummyAppGuid,
                                                kDummyAppVersion,
@@ -460,7 +460,7 @@ TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_NoFile_User) {
   EXPECT_TRUE(File::Exists(temp_dir))
       << _T("The temp directory was deleted or not created.");
 }
-
+#if 0
 TEST_F(GoogleUpdateRecoveryRegistryProtectedTest,
        FixGoogleUpdate_AllValues_MachineApp) {
   const TCHAR kExpectedUrl[] = _T("http://cr-tools.clients.google.com/service/check2?appid=%7B8E472B0D-3E8B-43b1-B89A-E8506AAF1F16%7D&appversion=3.4.5.6&applang=en-us&machine=1&version=5.6.78.1&osversion=");  // NOLINT
@@ -537,7 +537,7 @@ TEST_F(GoogleUpdateRecoveryRegistryProtectedTest,
   EXPECT_STREQ(kExpectedUrl, saved_url_.Left(arraysize(kExpectedUrl) - 1));
   CheckSavedUrlOSFragment();
 }
-
+#endif
 TEST_F(GoogleUpdateRecoveryRegistryProtectedTest,
        FixGoogleUpdate_NullArgs) {
   EXPECT_EQ(E_INVALIDARG, FixGoogleUpdate(NULL,
@@ -584,7 +584,7 @@ TEST_F(GoogleUpdateRecoveryRegistryProtectedTest,
                             NULL));
   EXPECT_TRUE(saved_url_.IsEmpty());
 }
-
+#if 0
 TEST_F(GoogleUpdateRecoveryRegistryProtectedTest,
        FixGoogleUpdate_AutoUpdateCheckPeriodMinutesIsZeroDwordInHkcu) {
   EXPECT_HRESULT_SUCCEEDED(
@@ -709,7 +709,7 @@ TEST_F(GoogleUpdateRecoveryRegistryProtectedTest,
                saved_url_.Left(kExpectedUrlForDummyAppAndNoOmahaValuesLength));
   CheckSavedUrlOSFragment();
 }
-
+#endif
 // Verifies that the file is saved even if the temp directory doesn't exist.
 TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_SaveToNonExistantDirectory) {
   const TCHAR kNonExistantDirectory[] = _T("c:\\directory_does_not_exist");
@@ -732,7 +732,7 @@ TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_SaveToNonExistantDirectory) {
   EXPECT_TRUE(::SetEnvironmentVariable(_T("TMP"), prev_tmp));
   EXPECT_HRESULT_SUCCEEDED(DeleteDirectory(kNonExistantDirectory));
 }
-
+#if 0
 TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_FileCollision) {
   const CString prev_tmp = GetTmp();
   EXPECT_TRUE(::SetEnvironmentVariable(_T("TMP"), kTempDirectory));
@@ -831,7 +831,7 @@ TEST_F(GoogleUpdateRecoveryTest, VerifyFileSignature_SignedWithNowExpiredCert) {
   EXPECT_TRUE(File::Exists(executable_full_path));
   EXPECT_EQ(TRUST_E_TIME_STAMP, VerifyFileSignature(executable_full_path));
 }
-
+#endif
 TEST_F(GoogleUpdateRecoveryTest, VerifyFileSignature_UntrustedChain) {
   const TCHAR kUntrustedChainExecutable[] =
       _T("unittest_support\\SaveArguments_OmahaTestSigned.exe");
@@ -842,7 +842,7 @@ TEST_F(GoogleUpdateRecoveryTest, VerifyFileSignature_UntrustedChain) {
   EXPECT_TRUE(File::Exists(executable_full_path));
   EXPECT_EQ(CERT_E_UNTRUSTEDROOT, VerifyFileSignature(executable_full_path));
 }
-
+#if 0
 TEST_F(GoogleUpdateRecoveryTest, VerifyFileSignature_HashFails) {
   const TCHAR kCorruptedExecutable[] =
       _T("unittest_support\\GoogleUpdate_corrupted.exe");
@@ -853,7 +853,7 @@ TEST_F(GoogleUpdateRecoveryTest, VerifyFileSignature_HashFails) {
   EXPECT_TRUE(File::Exists(executable_full_path));
   EXPECT_EQ(TRUST_E_BAD_DIGEST, VerifyFileSignature(executable_full_path));
 }
-
+#endif
 // The file for Windows Vista and later may not exist on all systems.
 TEST_F(GoogleUpdateRecoveryTest,
        VerifyFileSignature_NonGoogleSignature) {
@@ -886,7 +886,7 @@ TEST_F(GoogleUpdateRecoveryTest, VerifyRepairFileMarkup_ValidMarkup) {
       _T("unittest_support\\SaveArguments.exe");
   EXPECT_HRESULT_SUCCEEDED(VerifyRepairFileMarkup(kExecutableWithMarkup));
 }
-
+#if 0
 TEST_F(GoogleUpdateRecoveryTest, VerifyRepairFileMarkup_InvalidMarkups) {
   const TCHAR kNoResourcesExecutable[] =
       _T("unittest_support\\SaveArguments_unsigned_no_resources.exe");
@@ -910,7 +910,7 @@ TEST_F(GoogleUpdateRecoveryTest, VerifyRepairFileMarkup_InvalidMarkups) {
       _T("unittest_support\\SaveArguments_unsigned_wrong_markup_value.exe");
   EXPECT_EQ(E_UNEXPECTED, VerifyRepairFileMarkup(kWrongMarkupValueExecutable));
 }
-
+#endif
 TEST_F(GoogleUpdateRecoveryTest, VerifyRepairFileMarkup_BadFilenames) {
   const TCHAR kMissingFile[] = _T("NoSuchFile.exe");
   EXPECT_EQ(FALSE, ::PathFileExists(kMissingFile));
@@ -918,7 +918,7 @@ TEST_F(GoogleUpdateRecoveryTest, VerifyRepairFileMarkup_BadFilenames) {
             VerifyRepairFileMarkup(kMissingFile));
   EXPECT_HRESULT_FAILED(VerifyRepairFileMarkup(_T("")));
 }
-
+#if 0
 //
 // VerifyRepairFileMarkup Tests
 //
@@ -937,6 +937,6 @@ TEST_F(GoogleUpdateRecoveryTest, ProductionServerResponseTest) {
       _T("The production server did not return 204. This may indicate network ")
       _T("issues or that the Code Red server is configured incorrectly");
 }
-
+#endif
 }  // namespace omaha
 

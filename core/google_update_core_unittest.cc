@@ -143,7 +143,7 @@ void GoogleUpdateCoreTest::DoLaunchCmdElevatedTests(IUnknown* core_object) {
   EXPECT_NE(WAIT_FAILED, ::WaitForSingleObject(handle, 10000));
   EXPECT_TRUE(::CloseHandle(handle));
 }
-
+#if 0
 TEST_F(GoogleUpdateCoreTest, LaunchCmdElevated_LocalServerRegistered) {
   RegisterOrUnregisterGoopdateLocalServer(true);
 
@@ -207,6 +207,6 @@ TEST_F(GoogleUpdateCoreTest, LaunchCmdElevated_ServiceRunning) {
   RegisterOrUnregisterGoopdateLocalServer(false);
   RegisterOrUnregisterGoopdateService(false);
 }
-
+#endif // 0
 }  // namespace omaha
 

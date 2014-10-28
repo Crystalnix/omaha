@@ -383,7 +383,7 @@ class SetupGoogleUpdateMachineRegistryProtectedInHklmTest
     hive_override_key_name_ = kRegistryHiveOverrideRootInHklm;
   }
 };
-
+#if 0
 // This test uninstalls all other versions of Omaha.
 TEST_F(SetupGoogleUpdateUserRegistryProtectedTest,
        FinishInstall_RunKeyDoesNotExist) {
@@ -833,5 +833,5 @@ TEST_F(SetupGoogleUpdateMachineTest,
   EXPECT_FALSE(RegKey::HasValue(MsiInstallRegValueKey, kMsiInstallRegValue));
   EXPECT_FALSE(RegKey::HasKey(kMsiUninstallKey));
 }
-
+#endif
 }  // namespace omaha

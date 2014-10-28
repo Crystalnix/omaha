@@ -532,7 +532,7 @@ TEST_F(InstallManagerInstallAppUserTest,
   EXPECT_TRUE(File::Exists(kPayloadFileName));
   EXPECT_SUCCEEDED(File::Remove(kPayloadFileName));
 }
-
+#if 0
 TEST_F(InstallManagerInstallAppUserTest,
        InstallApp_ExeInstallerReturnsNonZeroExitCode) {
   const TCHAR kCommandToExecute[] = _T("exit 1");
@@ -732,7 +732,7 @@ TEST_F(InstallManagerInstallAppMachineTest,
   EXPECT_FALSE(RegKey::HasKey(kFullFooAppClientKeyPath));
   EXPECT_SUCCEEDED(RegKey::DeleteKey(kFullFooAppClientKeyPath));
 }
-
+#endif // 0
 // The use of kGoogleUpdateAppId is the key to this test.
 // Note that the version is not changed - this is the normal self-update case.
 // Among other things, this test verifies that CheckApplicationRegistration() is
@@ -842,7 +842,7 @@ TEST_F(InstallManagerInstallAppUserTest,
 
 // TODO(omaha3): Test for GOOPDATEINSTALL_E_INSTALLER_DID_NOT_CHANGE_VERSION
 // once is_update is supported.
-
+#if 0
 TEST_F(InstallManagerInstallAppUserTest,
        InstallApp_InstallerFailureMsiFileDoesNotExist) {
   CPath msi_dir(app_util::GetTempDir());
@@ -883,7 +883,7 @@ TEST_F(InstallManagerInstallAppUserTest,
   EXPECT_FALSE(RegKey::HasKey(kFullAppClientsKeyPath));
   EXPECT_FALSE(RegKey::HasKey(kFullAppClientStateKeyPath));
 }
-
+#endif // 0
 // Simulates the MSI busy error by having an exe installer return the error
 // as its exit code and specifying MSI error using Installer Result API.
 // Assumes reg.exe is in the path.

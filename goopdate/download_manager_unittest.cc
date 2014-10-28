@@ -1183,7 +1183,7 @@ TEST(DownloadManagerTest, BuildUniqueFileName) {
   EXPECT_SUCCEEDED(DownloadManagerTest::BuildUniqueFileName(_T("a"), &file2));
   EXPECT_STRNE(file1, file2);
 }
-
+#if 0
 TEST(DownloadManagerTest, GetMessageForError) {
   const TCHAR* kEnglish = _T("en");
   EXPECT_SUCCEEDED(ResourceManager::Create(
@@ -1233,5 +1233,5 @@ TEST(DownloadManagerTest, GetMessageForError) {
 
   ResourceManager::Delete();
 }
-
+#endif
 }  // namespace omaha

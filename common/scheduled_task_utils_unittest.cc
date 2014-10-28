@@ -172,7 +172,7 @@ TEST(ScheduledTaskUtilsTest, ScheduledTasksV2) {
 
 }  // namespace internal
 
-
+#if 0
 TEST(ScheduledTaskUtilsTest, GoopdateTasks) {
   const CString task_name = GetCurrentTaskNameCore(IsUserAdmin());
   const CString task_path = GetLongRunningProcessPath();
@@ -263,7 +263,7 @@ TEST(ScheduledTaskUtilsTest, GetExitCodeGoopdateTaskUA) {
                       _T("unittest_support\\saved_arguments.txt"))));
   EXPECT_SUCCEEDED(UninstallGoopdateTasks(IsUserAdmin()));
 }
-
+#endif // 0
 TEST(ScheduledTaskUtilsTest, GetDefaultGoopdateTaskName_Core_Machine) {
   CString expected_task_name(kScheduledTaskNameMachinePrefix);
   expected_task_name += kScheduledTaskNameCoreSuffix;

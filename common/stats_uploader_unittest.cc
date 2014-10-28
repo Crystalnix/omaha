@@ -147,7 +147,7 @@ TEST_F(StatsUploaderTest, AggregateMetrics) {
   EXPECT_HRESULT_SUCCEEDED(GetMetricValue(metric_name_, &value));
   EXPECT_EQ(false, value);
 }
-
+#if 0
 TEST_F(StatsUploaderTest, AggregateAndReportMetrics) {
   metric_test_bool = true;
 
@@ -200,7 +200,7 @@ TEST_F(StatsUploaderTest, AggregateAndReportMetrics) {
   EXPECT_HRESULT_SUCCEEDED(AggregateAndReportMetrics(false, true));
   EXPECT_TRUE(AreMetricsEmpty());
 }
-
+#endif // 0
 TEST_F(StatsUploaderTest, ResetPersistentMetricsTest) {
   const TCHAR* keys[] = {
     _T("HKCU\\Software\\") SHORT_COMPANY_NAME _T("\\") PRODUCT_NAME _T("\\UsageStats\\Daily\\Timings"),  // NOLINT

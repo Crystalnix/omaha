@@ -189,7 +189,7 @@ TEST(ExtraArgsParserTest, ExtraArgumentsAppNameTooLong) {
                     _T("appname=%s"), str);
   EXPECT_FAILED(parser.Parse(extra_args, NULL, &args));
 }
-
+#if 0
 TEST(ExtraArgsParserTest, ExtraArgumentsAppNameUnicode) {
   // Read the non-ascii string from the resources, and convert
   // it into a utf8 encoded, url escaped string.
@@ -248,7 +248,7 @@ TEST(ExtraArgsParserTest, ExtraArgumentsAppNameUnicode2) {
 
   VerifyCommandLineExtraArgs(expected, args);
 }
-
+#endif // 0
 TEST(ExtraArgsParserTest, ExtraArgumentsAppGuidValid) {
   CommandLineExtraArgs args;
   ExtraArgsParser parser;

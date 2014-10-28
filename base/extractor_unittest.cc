@@ -33,7 +33,7 @@ const TCHAR kFilePath[] = _T(".");
 const TCHAR kFileName[] = _T("GoogleUpdate.exe");
 const char kTagString[] = "1234567890abcdefg";
 const char kAppendTagString[] = "..AppendedStr";
-
+#if 0
 TEST(ExtractorTest, EmbedExtract) {
   // Test the extractor.
   TagExtractor extractor;
@@ -208,7 +208,7 @@ TEST(ExtractorTest, AlreadyTaggedError) {
   ON_SCOPE_EXIT(::DeleteFile, tagged_appended_file);
   extractor.CloseFile();
 }
-
+#endif // 0
 TEST(ApplyTagTest, InvalidCharsTest) {
   // Accepted Regex = [-%{}/\a&=._]*
   CString signed_exe_file;

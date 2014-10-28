@@ -61,7 +61,7 @@ class WebServicesClientTest : public testing::Test {
   scoped_ptr<xml::UpdateRequest> update_request_;
   scoped_ptr<xml::UpdateResponse> update_response_;
 };
-
+#if 0
 TEST_F(WebServicesClientTest, Send) {
   EXPECT_HRESULT_SUCCEEDED(web_service_client_->Initialize(update_check_url_,
                                                            HeadersVector(),
@@ -135,7 +135,7 @@ TEST_F(WebServicesClientTest, SendUsingCup) {
       WINHTTP_QUERY_ETAG, WINHTTP_HEADER_NAME_BY_INDEX, &etag));
   EXPECT_FALSE(etag.IsEmpty());
 }
-
+#endif // 0
 TEST_F(WebServicesClientTest, SendForcingHttps) {
   // Skips the test if the update check URL is not https.
   if (!String_StartsWith(update_check_url_, kHttpsProtoScheme, true)) {
@@ -171,7 +171,7 @@ TEST_F(WebServicesClientTest, SendForcingHttps) {
   ASSERT_EQ(1, response.apps.size());
   EXPECT_STREQ(_T("error-unknownApplication"), response.apps[0].status);
 }
-
+#if 0
 TEST_F(WebServicesClientTest, SendWithCustomHeader) {
   HeadersVector headers;
   headers.push_back(std::make_pair(_T("X-RequestAge"), _T("200")));
@@ -240,6 +240,6 @@ TEST_F(WebServicesClientTest, SendStringWithCustomHeader) {
 
   EXPECT_STREQ(_T("424"), foobar_header);
 }
-
+#endif // 0
 }  // namespace omaha
 

@@ -49,11 +49,11 @@ TEST(ClientUtilsTest, GetInstallerDisplayName_EmptyBundleName) {
                GetInstallerDisplayName(CString()));
 }
 #endif  // GOOGLE_UPDATE_BUILD
-
+#if 0
 TEST(ClientUtilsTest, GetInstallerDisplayName_WithBundleName) {
   EXPECT_STREQ(_T("My App Installer"), GetInstallerDisplayName(_T("My App")));
 }
-
+#endif // 0
 }  // namespace client_utils
 
 }  // namespace omaha

@@ -54,6 +54,7 @@ const ULONGLONG kFutureVersion = 0x0009000800070006;
 }  // namespace
 
 void CopyGoopdateFiles(const CString& omaha_path, const CString& version) {
+#if 0
   EXPECT_SUCCEEDED(CreateDir(omaha_path, NULL));
   const CString version_path = ConcatenatePath(omaha_path, version);
 
@@ -103,6 +104,7 @@ void CopyGoopdateFiles(const CString& omaha_path, const CString& version) {
                                        version_path,
                                        _T("goopdateres_\?\?-\?\?\?.dll"),
                                        false));
+#endif
 }
 
 class SetupFilesTest : public testing::Test {
@@ -296,7 +298,7 @@ TEST_F(SetupFilesUserTest,
 
   EXPECT_TRUE(setup_files_->ShouldOverinstallSameVersion());
 }
-
+#if 0
 TEST_F(SetupFilesUserTest,
        ShouldOverinstallSameVersion_SameVersionFilesPresent) {
   ASSERT_SUCCEEDED(RegKey::SetValue(USER_REG_CLIENTS_GOOPDATE,
@@ -400,7 +402,7 @@ TEST_F(SetupFilesUserTest, Install_NotOverInstall) {
 
   InitializeVersion(module_version);
 }
-
+#endif
 // TODO(omaha3): Need a 1.3.x_newer directory.
 TEST_F(SetupFilesUserTest, DISABLED_ShouldCopyShell_ExistingIsNewer) {
   CString target_path = ConcatenatePath(
@@ -478,7 +480,7 @@ TEST_F(SetupFilesUserTest, IsOlderShellVersionCompatible_Incompatible) {
   EXPECT_FALSE(IsOlderShellVersionCompatible(0));
   EXPECT_FALSE(IsOlderShellVersionCompatible(1));
 }
-
+#if 0
 TEST_F(SetupFilesUserTest,
        ShouldCopyShell_ExistingIsOlderButCompatible_1_2_131_7) {
   CString target_path = ConcatenatePath(
@@ -532,7 +534,7 @@ TEST_F(SetupFilesUserTest, ShouldCopyShell_ExistingIsOlderSameMinor) {
   EXPECT_TRUE(already_exists);
 }
 #endif
-
+#endif
 // Assumes LongRunningSilent.exe does not have a version resource.
 TEST_F(SetupFilesUserTest, ShouldCopyShell_ExistingHasNoVersion) {
   CString target_path = ConcatenatePath(

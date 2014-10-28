@@ -99,7 +99,7 @@ TEST(UtilsTest, CallEntryPoint0) {
   HRESULT hr(E_FAIL);
   ASSERT_FAILED(CallEntryPoint0(L"random-nonsense.dll", "foobar", &hr));
 }
-
+#if 0
 TEST(UtilsTest, ReadEntireFile) {
   TCHAR directory[MAX_PATH] = {0};
   ASSERT_TRUE(GetModuleDirectory(NULL, directory));
@@ -114,7 +114,7 @@ TEST(UtilsTest, ReadEntireFile) {
   buffer.resize(0);
   ASSERT_FAILED(ReadEntireFile(L"C:\\WINDOWS\\Greenstone.bmp", 1000, &buffer));
 }
-
+#endif // 0
 // TODO(omaha): Need a test for WriteEntireFile
 // TEST(UtilsTest, WriteEntireFile) {
 // }
@@ -548,7 +548,7 @@ TEST(UtilsTest, IsWindowsInstalling_Installing_Vista_ValidStates) {
   RestoreRegistryHives();
   EXPECT_SUCCEEDED(RegKey::DeleteKey(kRegistryHiveOverrideRoot, true));
 }
-
+#if 0
 TEST(UtilsTest, AddAllowedAce) {
   CString test_file_path = ConcatenatePath(
       app_util::GetCurrentModuleDirectory(), _T("TestAddAllowedAce.exe"));
@@ -645,7 +645,7 @@ TEST(UtilsTest, AddAllowedAce) {
 
   EXPECT_SUCCEEDED(File::Remove(test_file_path));
 }
-
+#endif // 0
 TEST(UtilsTest, CreateForegroundParentWindowForUAC) {
   CWindow foreground_parent;
   foreground_parent.Attach(CreateForegroundParentWindowForUAC());

@@ -24,7 +24,7 @@
 namespace omaha {
 
 namespace worker_utils {
-
+#if 0
 TEST(WorkerUtilsTest, FormatMessageForNetworkError) {
   const TCHAR* const kEnglish = _T("en");
   EXPECT_SUCCEEDED(ResourceManager::Create(
@@ -81,7 +81,7 @@ TEST(WorkerUtilsTest, FormatMessageForNetworkError) {
 
   ResourceManager::Delete();
 }
-
+#endif
 }  // namespace job_controller_utils
 
 }  // namespace omaha

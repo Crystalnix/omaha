@@ -148,11 +148,11 @@ void LocalizationNumberTest() {
   ASSERT_STREQ(Show(12.0, 2), _T("12.00"));
   ASSERT_STREQ(Show(12.0, 5), _T("12.00000"));
 }
-
+#if 0
 TEST(LocalizationTest, Localization) {
   LocalizationTimeTest();
   LocalizationNumberTest();
 }
-
+#endif // 0
 }  // namespace omaha
 

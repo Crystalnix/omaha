@@ -548,7 +548,7 @@ TEST_F(WorkerMockedManagersTest, UpdateAllAppsAsync) {
 // TODO(omaha): Move these to a separate test executable when using Hammer to
 // run tests.
 //
-
+#if 0
 TEST_F(WorkerWithTwoAppsTest, CheckForUpdateAsync_Large) {
   __mutexBlock(worker_->model()->lock()) {
     EXPECT_SUCCEEDED(worker_->CheckForUpdateAsync(app_bundle_.get()));
@@ -664,7 +664,7 @@ TEST_F(WorkerWithTwoAppsTest, DownloadAndInstallAsyncWithoutDownload_Large) {
   EXPECT_EQ(STATE_INSTALL_COMPLETE, app2_->state());
 #endif
 }
-
+#endif
 // Also tests cancellation of a bundle during the update check phase.
 TEST_F(WorkerWithTwoAppsTest, UpdateAllAppsAsync_Large) {
   __mutexBlock(worker_->model()->lock()) {

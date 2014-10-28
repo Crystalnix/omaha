@@ -79,7 +79,7 @@ TEST_F(SignatureValidatorTest, VerifySigneeIsGoogle_OmahaTestSigned) {
   ASSERT_TRUE(File::Exists(executable_full_path));
   EXPECT_TRUE(VerifySigneeIsGoogle(executable_full_path));
 }
-
+#if 0
 // The certificate was valid when it was used to sign the executable, but it has
 // since expired.
 TEST_F(SignatureValidatorTest, VerifySigneeIsGoogle_SignedWithNowExpiredCert) {
@@ -92,7 +92,7 @@ TEST_F(SignatureValidatorTest, VerifySigneeIsGoogle_SignedWithNowExpiredCert) {
   ASSERT_TRUE(File::Exists(executable_full_path));
   EXPECT_TRUE(VerifySigneeIsGoogle(executable_full_path));
 }
-
+#endif // 0
 TEST_F(SignatureValidatorTest, VerifySigneeIsGoogle_TestSigned_NoCN) {
   const TCHAR kRelativePath[] =
       _T("unittest_support\\SaveArguments_no_cn.exe");

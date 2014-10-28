@@ -49,7 +49,7 @@ class SetupServiceTest : public testing::Test {
 CAtlModule* SetupServiceTest::original_atl_module_ = NULL;
 
 // TODO(omaha): Test SetupServiceTest
-
+#if 0
 TEST_F(SetupServiceTest, InstallService_FileDoesNotExist) {
   if (!vista_util::IsUserAdmin()) {
     std::wcout << _T("\tTest did not run because the user is not an admin.")
@@ -73,5 +73,5 @@ TEST_F(SetupServiceTest, InstallService_FileDoesNotExist) {
   EXPECT_SUCCEEDED(DeleteUpdate3Service());
   EXPECT_SUCCEEDED(DeleteMediumService());
 }
-
+#endif
 }  // namespace omaha

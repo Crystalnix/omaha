@@ -104,7 +104,7 @@ TEST(WebPluginUtilsTest, BuildOneClickWorkerArgs_Invalid) {
   args.webplugin_args = _T("/install ") YOUTUBEUPLOADEREN_TAG _T(" /silent");
   EXPECT_EQ(E_INVALIDARG, BuildOneClickWorkerArgs(args, &oneclick_args));
 }
-
+#if 0
 TEST(WebPluginUtilsTest, CopyGoopdateToTempDir) {
   CPath current_goopdate_path(app_util::GetCurrentModuleDirectory());
   current_goopdate_path.Append(_T("unittest_support\\omaha_1.3.x\\"));
@@ -128,7 +128,7 @@ TEST(WebPluginUtilsTest, CopyGoopdateToTempDir) {
 
   EXPECT_HRESULT_SUCCEEDED(DeleteDirectory(goopdate_temp_path));
 }
-
+#endif // 0
 TEST(WebPluginUtilsTest, IsLanguageSupported_InvalidArgs) {
   CString args = _T("/en");
   EXPECT_FAILED(IsLanguageSupported(args));

@@ -439,7 +439,7 @@ TEST_F(PackageCacheTest, PurgeAll) {
 
   EXPECT_EQ(0, package_cache_.Size());
 }
-
+#if 0
 TEST_F(PackageCacheTest, PurgeOldPackagesIfOverSizeLimit) {
   EXPECT_HRESULT_SUCCEEDED(package_cache_.PurgeAll());
 
@@ -478,7 +478,7 @@ TEST_F(PackageCacheTest, PurgeOldPackagesIfOverSizeLimit) {
   EXPECT_FALSE(package_cache_.IsCached(key0, hash_file1_));
   EXPECT_LE(package_cache_.Size(), kSizeLimitBytes);
 }
-
+#endif
 TEST_F(PackageCacheTest, PurgeExpiredCacheFiles) {
   EXPECT_HRESULT_SUCCEEDED(package_cache_.PurgeAll());
 

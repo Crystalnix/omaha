@@ -211,7 +211,7 @@ class InAuditModeTest
     EXPECT_TRUE(ConfigManager::Instance()->IsWindowsInstalling());
   }
 };
-
+#if 0
 TEST_F(InAuditModeTest, OemInstall_NotOffline) {
   if (!vista_util::IsUserAdmin()) {
     std::wcout << _T("\tTest did not run because the user is not an admin.")
@@ -236,7 +236,7 @@ TEST_F(InAuditModeTest, OemInstall_NotOffline) {
 
   EXPECT_SUCCEEDED(scheduled_task_utils::UninstallGoopdateTasks(true));
 }
-
+#endif // 0
 TEST_F(RegistryProtectedWithComInterfacesPrimedInstallTest,
        Install_NotAppInstall_User_NoBrandSpecified_NoExistingBrand) {
   if (vista_util::IsElevatedWithUACMaybeOn()) {
@@ -372,7 +372,7 @@ TEST_F(RegistryProtectedWithComInterfacesPrimedInstallTest,
   EXPECT_EQ(kExistingInstallTime, GetDwordValue(USER_REG_CLIENT_STATE_GOOPDATE,
                                                 kRegValueInstallTimeSec));
 }
-
+#if 0
 TEST_F(RegistryProtectedWithComInterfacesPrimedInstallTest,
        Install_NotAppInstall_Machine_BrandSpecified_NoExistingBrand) {
   PreventSetupFromRunning(true);
@@ -424,7 +424,7 @@ TEST_F(RegistryProtectedWithComInterfacesPrimedInstallTest,
 
   EXPECT_SUCCEEDED(scheduled_task_utils::UninstallGoopdateTasks(true));
 }
-
+#endif // 0
 
 TEST_F(RegistryProtectedWithComInterfacesPrimedInstallTest,
        Install_EulaRequiredNotOffline_User) {
@@ -450,7 +450,7 @@ TEST_F(RegistryProtectedWithComInterfacesPrimedInstallTest,
                     &has_ui_been_displayed));
   EXPECT_FALSE(has_ui_been_displayed);
 }
-
+#if 0
 TEST_F(RegistryProtectedWithComInterfacesPrimedInstallTest,
        Install_EulaRequiredNotOffline_Machine) {
   if (!vista_util::IsUserAdmin()) {
@@ -477,7 +477,7 @@ TEST_F(RegistryProtectedWithComInterfacesPrimedInstallTest,
 
   EXPECT_SUCCEEDED(scheduled_task_utils::UninstallGoopdateTasks(true));
 }
-
+#endif
 TEST_F(RegistryProtectedInstallTest, Install_NeedsElevation_Silent) {
   if (vista_util::IsUserAdmin()) {
     std::wcout << _T("\tTest did not run because the user IS an admin.")

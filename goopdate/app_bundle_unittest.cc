@@ -1129,7 +1129,7 @@ TEST_F(AppBundlePopulatedRegistryUserTest, createAllInstalledApps) {
   EXPECT_SUCCEEDED(app_bundle_->get_Item(1, &app1_obtained));
   EXPECT_EQ(app1, app1_obtained);
 }
-
+#if 0
 TEST_F(AppBundlePopulatedRegistryMachineTest, createAllInstalledApps) {
   App *expected_app0, *expected_app1, *expected_app2;
   PopulateDataAndRegistryForRegisteredAndUnInstalledAppsTests(&expected_app0,
@@ -1176,7 +1176,7 @@ TEST_F(AppBundlePopulatedRegistryMachineTest, createAllInstalledApps) {
   EXPECT_SUCCEEDED(app_bundle_->get_Item(1, &app1_obtained));
   EXPECT_EQ(app1, app1_obtained);
 }
-
+#endif
 TEST_F(AppBundlePopulatedRegistryUserTest,
        createAllInstalledApps_InvalidPvValueType) {
   App *expected_app0, *expected_app1, *expected_app2;

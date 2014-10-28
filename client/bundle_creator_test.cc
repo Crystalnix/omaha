@@ -162,7 +162,7 @@ class BundleCreatorTest : public testing::Test {
 };
 
 scoped_ptr<Goopdate> BundleCreatorTest::goopdates_;
-
+#if 0
 TEST_F(BundleCreatorTest, Create) {
   const CString kDisplayLanguage = _T("en");
   const CString kInstallSource = _T("TestInstallSource");
@@ -382,5 +382,5 @@ TEST_F(BundleCreatorTest, CreateForOnDemand_NonExistApp) {
       process_token.GetHandle(),
       &app_bundle));
 }
-
+#endif // 0
 }  // namespace omaha

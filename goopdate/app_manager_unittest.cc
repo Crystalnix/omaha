@@ -1230,7 +1230,7 @@ TEST_F(AppManagerMachineTest, WritePreInstallData_IsOem) {
   EXPECT_FALSE(RegKey::HasValue(kGuid1ClientStateKeyPathMachine,
                                 _T("eulaaccepted")));
 }
-
+#if 0
 // Creates the ClientStateMedium key with the appropriate permissions then
 // verifies that the created app subkey inherits those.
 // The Update key must be created first to avoid applying ClientStateMedium's
@@ -1269,7 +1269,7 @@ TEST_F(AppManagerMachineTest,
       _T("HKLM\\Software\\") SHORT_COMPANY_NAME
       _T("\\") PRODUCT_NAME _T("\\ClientStateMedium\\"));
 }
-
+#endif
 TEST_F(AppManagerMachineTest,
        WritePreInstallData_ClearClientStateMediumUsageStats) {
   const CString client_state_key_name =
@@ -1528,7 +1528,7 @@ TEST_F(AppManagerReadAppPersistentDataMachineTest, AppExists) {
   EXPECT_SUCCEEDED(expected_app->put_isEulaAccepted(VARIANT_TRUE));
   ValidateExpectedValues(*expected_app, *app_);
 }
-
+#if 0
 TEST_F(AppManagerReadAppPersistentDataUserTest, AppExists_NoDisplayName) {
   App* expected_app = CreateAppForRegistryPopulation(kGuid1);
   PopulateExpectedApp1(expected_app);
@@ -1559,7 +1559,7 @@ TEST_F(AppManagerReadAppPersistentDataUserTest, AppExists_EmptyDisplayName) {
   EXPECT_SUCCEEDED(expected_app->put_isEulaAccepted(VARIANT_TRUE));
   ValidateExpectedValues(*expected_app, *app_);
 }
-
+#endif
 TEST_F(AppManagerReadAppPersistentDataUserTest, EulaNotAccepted) {
   App* expected_app = CreateAppForRegistryPopulation(kGuid1);
   PopulateExpectedApp1(expected_app);
@@ -1667,7 +1667,7 @@ TEST_F(AppManagerReadAppPersistentDataUserTest, NoClientState) {
   EXPECT_SUCCEEDED(expected_app->put_isEulaAccepted(VARIANT_TRUE));
   ValidateExpectedValues(*expected_app, *app_);
 }
-
+#if 0
 // This is the No Clients key case.
 TEST_F(AppManagerReadAppPersistentDataUserTest,
        ReadUninstalledAppPersistentData_UninstalledApp) {
@@ -1807,7 +1807,7 @@ TEST_F(AppManagerReadAppPersistentDataUserTest,
   EXPECT_SUCCEEDED(expected_app->put_isEulaAccepted(VARIANT_TRUE));
   ValidateExpectedValues(*expected_app, *app_);
 }
-
+#endif
 TEST_F(AppManagerUserTest,
        ReadInstallerRegistrationValues_FailsWhenClientsKeyAbsent) {
   __mutexBlock(app_->model()->lock()) {

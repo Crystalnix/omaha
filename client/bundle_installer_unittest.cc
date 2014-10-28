@@ -32,7 +32,7 @@ TEST_F(BuildAppNameListTest, OneApp) {
   app_names_.push_back(_T("Test App1"));
   EXPECT_STREQ(_T("Test App1"), BuildAppNameList(app_names_));
 }
-
+#if 0
 TEST_F(BuildAppNameListTest, TwoApps) {
   app_names_.push_back(_T("Test App1"));
   app_names_.push_back(_T("Next App2"));
@@ -48,7 +48,7 @@ TEST_F(BuildAppNameListTest, ManyApps) {
   EXPECT_STREQ(_T("Test App1, Next App2, My App3, Your App4, Other App5"),
                BuildAppNameList(app_names_));
 }
-
+#endif // 0
 // TODO(omaha): Load "ar" resources and enable after we get translations.
 TEST_F(BuildAppNameListTest, DISABLED_ManyApps_Bidi) {
   app_names_.push_back(_T("Test App1"));
@@ -123,7 +123,7 @@ const TCHAR* GetBundleCompletionMessageTest::kFailedAppCompletionMessage =
     _T("Failed to install the app.");
 const TCHAR* GetBundleCompletionMessageTest::kCanceledAppCompletionMessage =
     _T("Installation is canceled by user.");
-
+#if 0
 TEST_F(GetBundleCompletionMessageTest, SingleAppSucceeded) {
   AddSucceededAppInfo(1);
 
@@ -382,5 +382,5 @@ TEST_F(GetBundleCompletionMessageTest, AppsCanceledWithMultipleFailures) {
       _T("<b>Canceled:</b> AppCanceled4, AppCanceled5, AppCanceled6");
   EXPECT_STREQ(expected_message, bundle_message);
 }
-
+#endif // 0
 }  // namespace omaha

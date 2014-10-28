@@ -505,7 +505,7 @@ TEST_GU_INT_F(OmahaCustomizationGoopdateComInterfaceTest,
   EXPECT_EQ(0, help_context_);
   EXPECT_TRUE(!help_file_);
 }
-
+#if 0
 TEST_GU_INT_F(OmahaCustomizationGoopdateComInterfaceTest,
               IOneClickProcessLauncher) {
   EXPECT_GU_ID_EQ(_T("{5CCCB0EF-7073-4516-8028-4C628D0C8AAB}"),
@@ -518,7 +518,7 @@ TEST_GU_INT_F(OmahaCustomizationGoopdateComInterfaceTest,
   EXPECT_EQ(0, help_context_);
   EXPECT_TRUE(!help_file_);
 }
-
+#endif // 0
 TEST_GU_INT_F(OmahaCustomizationGoopdateComInterfaceTest,
               OneClickMachineProcessLauncherClass) {
   EXPECT_GU_ID_EQ(_T("{AAD4AE2E-D834-46d4-8B09-490FAC9C722B}"),

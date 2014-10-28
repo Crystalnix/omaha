@@ -164,7 +164,7 @@ class CoreUtilsTest : public testing::Test {
 
   CAtlModule* original_atl_module_;
 };
-
+#if 0
 TEST_F(CoreUtilsTest, AreScheduledTasksHealthy) {
   EXPECT_SUCCEEDED(scheduled_task_utils::UninstallGoopdateTasks(is_machine_));
   EXPECT_FALSE(AreScheduledTasksHealthy());
@@ -184,7 +184,7 @@ TEST_F(CoreUtilsTest, AreScheduledTasksHealthy) {
 
   EXPECT_SUCCEEDED(scheduled_task_utils::UninstallGoopdateTasks(is_machine_));
 }
-
+#endif // 0
 TEST_F(CoreUtilsTest, IsCheckingForUpdates) {
   const uint32 now = Time64ToInt32(GetCurrent100NSTime());
   const int k12HourPeriodSec = 12 * 60 * 60;

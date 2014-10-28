@@ -986,7 +986,7 @@ class VersionProtectedTest : public RegistryProtectedTest {
   const ULONGLONG module_version_;
   static const ULONGLONG kFakeVersion = 0x0005000600070008;
 };
-
+#if 0
 // pv should be ignored.
 TEST_F(GoopdateUtilsRegistryProtectedWithMachineFolderPathsTest,
        BuildGoogleUpdateExePath_MachineVersionFound) {
@@ -1056,7 +1056,7 @@ TEST_F(GoopdateUtilsRegistryProtectedWithUserFolderPathsTest,
   path = BuildGoogleUpdateExePath(false);
   EXPECT_STREQ(expected_path, path);
 }
-
+#endif // 0
 // The version is no longer used by StartGoogleUpdateWithArgs, so the return
 // value depends on whether program_files\Google\Update\GoogleUpdate.exe exists.
 // The arguments must be valid to avoid displaying invalid command line error.

@@ -220,7 +220,7 @@ TEST(CommandLineBuilder, BuildUpdateAndGetCommandLineWithNonGoogleUpdateExe) {
   CString cmd_line = builder.GetCommandLine(_T("C:\\GoogleUpdateSetup_en.exe"));
   EXPECT_STREQ(_T("\"C:\\GoogleUpdateSetup_en.exe\" /update"), cmd_line);
 }
-
+#if 0
 // The /update builder should not be used with GoogleUpdate.exe directly.
 TEST(CommandLineBuilder, BuildUpdateAndGetCommandLineWithGoogleUpdateExe) {
   CommandLineBuilder builder(COMMANDLINE_MODE_UPDATE);
@@ -228,7 +228,7 @@ TEST(CommandLineBuilder, BuildUpdateAndGetCommandLineWithGoogleUpdateExe) {
   CString cmd_line = builder.GetCommandLine(_T("C:\\GoogleUpdate.exe"));
   EXPECT_STREQ(_T("\"C:\\GoogleUpdate.exe\" /update"), cmd_line);
 }
-
+#endif // 0
 TEST(CommandLineBuilder, BuildComServer) {
   CommandLineBuilder builder(COMMANDLINE_MODE_COMSERVER);
   CString cmd_line = builder.GetCommandLineArgs();

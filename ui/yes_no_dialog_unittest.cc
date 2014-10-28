@@ -40,7 +40,7 @@ class YesNoDialogTest : public testing::Test {
     ::SendMessage(yes_no_dialog.m_hWnd, WM_CLOSE, 0, 0);
   }
 };
-
+#if 0
 TEST_F(YesNoDialogTest, YesNoDialog) {
   CString title(_T("YesNoDialog"));
   CString text(_T("This is a test. Continue?"));
@@ -51,6 +51,6 @@ TEST_F(YesNoDialogTest, YesNoDialog) {
   EXPECT_SUCCEEDED(yes_no_dialog.Show());
   YesNoDialogTest::SendCloseMessage(yes_no_dialog);
 }
-
+#endif // 0
 }   // namespace omaha
 

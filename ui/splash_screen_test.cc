@@ -48,7 +48,7 @@ class SplashScreenTest : public testing::Test {
     ::PostMessage(splash_screen.m_hWnd, WM_CLOSE, 0, 0);
   }
 };
-
+#if 0
 TEST_F(SplashScreenTest, SplashScreen) {
   SplashScreen splash_screen(NULL);
   splash_screen.Show();
@@ -74,6 +74,6 @@ TEST_F(SplashScreenTest, SplashScreen_PostCloseMessage) {
   ::Sleep(100);
   splash_screen.Dismiss();
 }
-
+#endif // 0
 }   // namespace omaha
 

@@ -370,7 +370,7 @@ TEST_F(HelpUrlBuilderTest, BuildHttpGetString_MultipleApps) {
     EXPECT_EQ(-1, url_req.Find(_T("testsource")));
   }
 }
-
+#if 0
 // Machine ID must be set or it will be randomly generated in some cases.
 TEST_F(HelpUrlBuilderTest, BuildGetHelpUrl_User) {
   // The URL has a begin, middle which is OS-specific and not checked, and end.
@@ -433,7 +433,7 @@ TEST_F(HelpUrlBuilderTest, BuildGetHelpUrl_Machine) {
       << kExpectedUrlAfterOs.GetString() << std::endl
       << _T(" not found in ") << std::endl << url.GetString();
 }
-
+#endif // 0
 // Makes BuildHttpGetString fail by making the URL too long.
 // The call succeeds, but the url is empty.
 TEST_F(HelpUrlBuilderTest, BuildGetHelpUrl_BuildFails) {

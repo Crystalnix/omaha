@@ -26,7 +26,7 @@ namespace omaha {
 
 class PingTest : public testing::Test {
 };
-
+#if 0
 TEST_F(PingTest, BuildOmahaPing) {
   PingEventPtr ping_event1(
       new PingEvent(PingEvent::EVENT_INSTALL_COMPLETE,
@@ -169,7 +169,7 @@ TEST_F(PingTest, SendInProcess) {
   EXPECT_HRESULT_SUCCEEDED(install_ping.BuildRequestString(&request_string));
   EXPECT_HRESULT_SUCCEEDED(install_ping.SendInProcess(request_string));
 }
-
+#endif // 0
 TEST_F(PingTest, IsPingExpired_PastTime) {
   const time64 time = GetCurrent100NSTime() - (Ping::kPingExpiry100ns + 1);
   EXPECT_TRUE(Ping::IsPingExpired(time));
@@ -184,7 +184,7 @@ TEST_F(PingTest, IsPingExpired_FutureTime) {
   const time64 time = GetCurrent100NSTime() + 10;
   EXPECT_TRUE(Ping::IsPingExpired(time));
 }
-
+#if 0
 TEST_F(PingTest, LoadPersistedPings_NoPersistedPings) {
   Ping::PingsVector pings;
   EXPECT_EQ(HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND),
@@ -239,7 +239,7 @@ TEST_F(PingTest, PersistPing) {
 
   EXPECT_HRESULT_SUCCEEDED(RegKey::DeleteKey(Ping::GetPingRegPath(false)));
 }
-
+#endif // 0
 TEST_F(PingTest, DeletePersistedPing) {
   CString ping_reg_path(Ping::GetPingRegPath(false));
 
@@ -255,7 +255,7 @@ TEST_F(PingTest, DeletePersistedPing) {
 
   EXPECT_FALSE(RegKey::HasKey(ping_reg_path));
 }
-
+#if 0
 TEST_F(PingTest, SendPersistedPings) {
   PingEventPtr ping_event(
       new PingEvent(PingEvent::EVENT_INSTALL_COMPLETE,
@@ -283,7 +283,7 @@ TEST_F(PingTest, SendPersistedPings) {
 
   EXPECT_FALSE(RegKey::HasKey(Ping::GetPingRegPath(false)));
 }
-
+#endif //0
 // The tests below rely on the out-of-process mechanism to send install pings.
 // Enable the test to debug the sending code.
 TEST_F(PingTest, DISABLED_SendUsingGoogleUpdate) {

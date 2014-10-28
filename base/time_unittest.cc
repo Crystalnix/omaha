@@ -119,7 +119,7 @@ TEST(TimeTest, TimeToStringTest) {
     TimeToStringTest(&file_time, daylight_savings_time);
   }
 }
-
+#if 0
 TEST(TimeTest, RFC822TimeParsing) {
   SYSTEMTIME time = {0};
   ASSERT_TRUE(RFC822DateToSystemTime(_T("Mon, 16 May 2005 15:44:18 -0700"),
@@ -162,7 +162,7 @@ TEST(TimeTest, RFC822TimeParsing) {
   ASSERT_EQ(time.wMinute , 56);
   ASSERT_EQ(time.wSecond , 18);
 }
-
+#endif // 0
 TEST(TimeTest, FileTimeToInt64) {
   {
   FILETIME file_time = {0};
