@@ -420,7 +420,7 @@ HRESULT InstallerWrapper::DoExecuteAndWaitForInstaller(
   Process p(executable_path, NULL);
   HRESULT hr = p.Start(command_line, user_token);
   if (FAILED(hr)) {
-    OPT_LOG(LE, (_T("[p.Start fail][hr][%s][%s]"),
+    OPT_LOG(LE, (_T("[p.Start fail][0x%08lX][%s][%s]"),
         hr, executable_path, command_line));
     set_error_extra_code1(static_cast<int>(hr));
     return GOOPDATEINSTALL_E_INSTALLER_FAILED_START;
