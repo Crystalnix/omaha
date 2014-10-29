@@ -1057,6 +1057,14 @@ HRESULT XmlParser::BuildAppElement(IXMLDOMNode* parent_node) {
       return hr;
     }
 
+    hr = AddXMLAttributeNode(element,
+                             kXmlNamespace,
+                             xml::attribute::kTag,
+                             app.channel);
+    if (FAILED(hr)) {
+      return hr;
+    }
+
     // TODO(omaha3): Determine whether or not the server is able to accept an
     // empty string here.  If so, remove this IsEmpty() check, and always emit.
     if (!app.experiments.IsEmpty()) {

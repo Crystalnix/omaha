@@ -97,6 +97,7 @@ struct CommandLineExtraArgs {
   GUID installation_id;
   CString brand_code;
   CString client_id;
+  CString channel;
   CString experiment_labels;
   CString referral_id;
   CString language;

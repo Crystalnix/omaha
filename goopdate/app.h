@@ -106,6 +106,8 @@ class App : public ModelObject {
 
   CString client_id() const;
 
+  CString channel() const;
+
   CString GetExperimentLabels() const;
 
   CString referral_id() const;
@@ -173,6 +175,9 @@ class App : public ModelObject {
 
   STDMETHOD(get_clientId)(BSTR* client_id);
   STDMETHOD(put_clientId)(BSTR client_id);
+
+  STDMETHOD(get_channel)(BSTR* channel);
+  STDMETHOD(put_channel)(BSTR channel);
 
   STDMETHOD(get_labels)(BSTR* labels);
   STDMETHOD(put_labels)(BSTR labels);
@@ -356,6 +361,7 @@ class App : public ModelObject {
   GUID iid_;
   CString brand_code_;
   CString client_id_;
+  CString channel_;
   // TODO(omaha3): Rename member and registry value to match the COM property.
   CString referral_id_;
   uint32 install_time_diff_sec_;
@@ -436,6 +442,9 @@ class ATL_NO_VTABLE AppWrapper
 
   STDMETHOD(get_clientId)(BSTR* client_id);
   STDMETHOD(put_clientId)(BSTR client_id);
+
+  STDMETHOD(get_channel)(BSTR* channel);
+  STDMETHOD(put_channel)(BSTR channel);
 
   STDMETHOD(get_labels)(BSTR* labels);
   STDMETHOD(put_labels)(BSTR labels);

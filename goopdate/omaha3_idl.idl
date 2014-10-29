@@ -259,6 +259,9 @@ interface IApp : IDispatch {
   [propget] HRESULT clientId([out, retval] BSTR*);
   [propput] HRESULT clientId([in] BSTR);
 
+  [propget] HRESULT channel([out, retval] BSTR*);
+  [propput] HRESULT channel([in] BSTR);
+
   [propget] HRESULT labels([out, retval] BSTR*);
   [propput] HRESULT labels([in] BSTR);
 

@@ -100,6 +100,7 @@ const TCHAR* const kSize = _T("size");
 const TCHAR* const kStatus = _T("status");
 const TCHAR* const kSuccessAction = _T("onsuccess");
 const TCHAR* const kSuccessUrl = _T("successurl");
+const TCHAR* const kTag = _T("tag");
 const TCHAR* const kTestSource = _T("testsource");
 const TCHAR* const kTerminateAllBrowsers = _T("terminateallbrowsers");
 const TCHAR* const kTTToken = _T("tttoken");

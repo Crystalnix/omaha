@@ -267,6 +267,16 @@ HRESULT ExtraArgsParser::HandleToken(const CString& token,
     args->runtime_only = true;
 
   // The following args are per-app.
+  } else if (name.CompareNoCase(kExtraArgChannel) == 0) {
+    if (value.GetLength() > kMaxNameLength) {
+      return E_INVALIDARG;
+    }
+    HRESULT hr = ConvertUtf8UrlEncodedString(
+        value,
+        &args->channel);
+    if (FAILED(hr)) {
+      return hr;
+    }
   } else if (name.CompareNoCase(kExtraArgAdditionalParameters) == 0) {
     cur_extra_app_args_.ap = value;
   } else if (name.CompareNoCase(kExtraArgTTToken) == 0) {

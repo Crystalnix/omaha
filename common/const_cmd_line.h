@@ -250,6 +250,9 @@ const TCHAR* const kExtraArgBrandCode = _T("brand");
 // This value is used to set the initial client for Omaha and the client app.
 const TCHAR* const kExtraArgClientId = _T("client");
 
+// "channel" extra argument is the channel of the application (stable, dev, beta, etc.)
+const TCHAR* const kExtraArgChannel = _T("channel");
+
 // "experiments" extra argument is a set of experiment labels used to track
 // installs that are included in experiments.  Use "experiments" for
 // per-app arguments; use "omahaexperiments" for Omaha-specific labels.
