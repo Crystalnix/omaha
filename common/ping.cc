@@ -65,6 +65,7 @@ void Ping::LoadAppDataFromExtraArgs(const CommandLineExtraArgs& extra_args) {
     app_data.language = extra_args.language;
     app_data.brand_code = extra_args.brand_code;
     app_data.client_id = extra_args.client_id;
+    app_data.channel = extra_args.channel;
     app_data.installation_id = installation_id;
     app_data.experiment_labels = extra_args.apps[i].experiment_labels;
     apps_data_.push_back(app_data);
@@ -74,6 +75,7 @@ void Ping::LoadAppDataFromExtraArgs(const CommandLineExtraArgs& extra_args) {
   omaha_data_.language = extra_args.language;
   omaha_data_.brand_code = extra_args.brand_code;
   omaha_data_.client_id = extra_args.client_id;
+  omaha_data_.channel = extra_args.channel;
   omaha_data_.installation_id = installation_id;
   omaha_data_.experiment_labels = extra_args.experiment_labels;
 }
@@ -88,6 +90,7 @@ void Ping::LoadOmahaDataFromRegistry() {
       &omaha_data_.language,
       &omaha_data_.brand_code,
       &omaha_data_.client_id,
+      &omaha_data_.channel,
       &omaha_data_.installation_id,
       &omaha_data_.experiment_labels);
 }
@@ -104,6 +107,7 @@ void Ping::LoadAppDataFromRegistry(const std::vector<CString>& app_ids) {
         &app_data.language,
         &app_data.brand_code,
         &app_data.client_id,
+        &app_data.channel,
         &app_data.installation_id,
         &app_data.experiment_labels);
     apps_data_.push_back(app_data);
@@ -173,6 +177,7 @@ xml::request::App Ping::BuildOmahaApp(const CString& version,
   app.lang           = omaha_data_.language;
   app.brand_code     = omaha_data_.brand_code;
   app.client_id      = omaha_data_.client_id;
+  app.channel        = omaha_data_.channel;
   app.experiments    = omaha_data_.experiment_labels;
   app.iid            = omaha_data_.installation_id;
 
@@ -191,6 +196,7 @@ void Ping::BuildAppsPing(const PingEventPtr& ping_event) {
     app.lang           = apps_data_[i].language;
     app.brand_code     = apps_data_[i].brand_code;
     app.client_id      = apps_data_[i].client_id;
+    app.channel        = apps_data_[i].channel;
     app.experiments    = apps_data_[i].experiment_labels;
     app.iid            = apps_data_[i].installation_id;
 

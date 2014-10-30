@@ -186,6 +186,11 @@ class AppManagerTestBase : public AppTestBaseWithRegistryOverride {
                                                  app.client_id_));
     }
 
+    if (!app.channel_.IsEmpty()) {
+      ASSERT_SUCCEEDED(client_state_key.SetValue(kRegValueChannel,
+                                                 app.channel_));
+    }
+
     if (!app.referral_id_.IsEmpty()) {
       ASSERT_SUCCEEDED(client_state_key.SetValue(kRegValueReferralId,
                                                  app.referral_id_));

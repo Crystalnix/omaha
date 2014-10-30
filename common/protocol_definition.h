@@ -101,6 +101,8 @@ struct App {
 
     CString client_id;
 
+    CString channel;
+
     CString experiments;
 
     int install_time_diff_sec;

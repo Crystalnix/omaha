@@ -102,7 +102,19 @@ TEST_F(XmlParserTest, GenerateRequestWithoutUserId_MachineUpdateRequest) {
   app2.experiments = _T("url_exp_2=a|Fri, 14 Aug 2015 16:13:03 GMT");
   xml_request.apps.push_back(app2);
 
-  CString expected_buffer = _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?><request protocol=\"3.0\" version=\"1.2.3.4\" ismachine=\"1\" sessionid=\"unittest_session\" installsource=\"unittest_install\" originurl=\"http://go/foo/&quot;\" testsource=\"dev\" requestid=\"{387E2718-B39C-4458-98CC-24B5293C8383}\" periodoverridesec=\"100000\"><os platform=\"win\" version=\"6.0\" sp=\"Service Pack 1\" arch=\"x86\"/><app appid=\"{8A69D345-D564-463C-AFF1-A69D9E530F96}\" version=\"\" nextversion=\"\" ap=\"ap_with_update_check\" lang=\"en\" brand=\"\" client=\"\"><updatecheck/><data name=\"install\" index=\"verboselogging\"/><ping active=\"0\" r=\"5\"/></app><app appid=\"{AD3D0CC0-AD1E-4b1f-B98E-BAA41DCE396C}\" version=\"1.0\" nextversion=\"2.0\" ap=\"ap_with_no_update_check\" lang=\"en\" brand=\"\" client=\"\" experiments=\"url_exp_2=a|Fri, 14 Aug 2015 16:13:03 GMT\"/></request>");  // NOLINT
+  CString expected_buffer = _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+    _T("<request protocol=\"3.0\" version=\"1.2.3.4\" ismachine=\"1\" sessionid=\"unittest_session\" ")
+    _T("installsource=\"unittest_install\" originurl=\"http://go/foo/&quot;\" testsource=\"dev\" ")
+    _T("requestid=\"{387E2718-B39C-4458-98CC-24B5293C8383}\" periodoverridesec=\"100000\">")
+    _T("<os platform=\"win\" version=\"6.0\" sp=\"Service Pack 1\" arch=\"x86\"/>")
+    _T("<app appid=\"{8A69D345-D564-463C-AFF1-A69D9E530F96}\" version=\"\" nextversion=\"\" ")
+    _T("ap=\"ap_with_update_check\" lang=\"en\" brand=\"\" client=\"\" tag=\"\">")
+    _T("<updatecheck/>")
+    _T("<data name=\"install\" index=\"verboselogging\"/>")
+    _T("<ping active=\"0\" r=\"5\"/></app>")
+    _T("<app appid=\"{AD3D0CC0-AD1E-4b1f-B98E-BAA41DCE396C}\" version=\"1.0\" nextversion=\"2.0\" ")
+    _T("ap=\"ap_with_no_update_check\" lang=\"en\" brand=\"\" client=\"\" tag=\"\" ")
+    _T("experiments=\"url_exp_2=a|Fri, 14 Aug 2015 16:13:03 GMT\"/></request>");  // NOLINT
 
   CString actual_buffer;
   EXPECT_HRESULT_SUCCEEDED(XmlParser::SerializeRequest(*update_request,
@@ -155,7 +167,20 @@ TEST_F(XmlParserTest, GenerateRequestWithUserId_MachineUpdateRequest) {
   app2.experiments = _T("url_exp_2=a|Fri, 14 Aug 2015 16:13:03 GMT");
   xml_request.apps.push_back(app2);
 
-  CString expected_buffer = _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?><request protocol=\"3.0\" version=\"4.3.2.1\" ismachine=\"1\" sessionid=\"unittest_session\" userid=\"{c5bcb37e-47eb-4331-a544-2f31101951ab}\" installsource=\"unittest_install\" originurl=\"http://go/bar/&quot;\" testsource=\"dev\" requestid=\"{387E2718-B39C-4458-98CC-24B5293C8384}\" periodoverridesec=\"200000\"><os platform=\"win\" version=\"7.0\" sp=\"Service Pack 2\" arch=\"x64\"/><app appid=\"{8A69D345-D564-463C-AFF1-A69D9E530F97}\" version=\"\" nextversion=\"\" ap=\"ap_with_update_check\" lang=\"en\" brand=\"\" client=\"\"><updatecheck/><data name=\"install\" index=\"verboselogging\"/><ping active=\"0\" r=\"5\"/></app><app appid=\"{AD3D0CC0-AD1E-4b1f-B98E-BAA41DCE396D}\" version=\"1.0\" nextversion=\"2.0\" ap=\"ap_with_no_update_check\" lang=\"en\" brand=\"\" client=\"\" experiments=\"url_exp_2=a|Fri, 14 Aug 2015 16:13:03 GMT\"/></request>");  // NOLINT
+  CString expected_buffer = _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+    _T("<request protocol=\"3.0\" version=\"4.3.2.1\" ismachine=\"1\" sessionid=\"unittest_session\" ")
+    _T("userid=\"{c5bcb37e-47eb-4331-a544-2f31101951ab}\" installsource=\"unittest_install\" ")
+    _T("originurl=\"http://go/bar/&quot;\" testsource=\"dev\" ")
+    _T("requestid=\"{387E2718-B39C-4458-98CC-24B5293C8384}\" periodoverridesec=\"200000\">")
+    _T("<os platform=\"win\" version=\"7.0\" sp=\"Service Pack 2\" arch=\"x64\"/>")
+    _T("<app appid=\"{8A69D345-D564-463C-AFF1-A69D9E530F97}\" version=\"\" nextversion=\"\" ")
+    _T("ap=\"ap_with_update_check\" lang=\"en\" brand=\"\" client=\"\" tag=\"\">")
+    _T("<updatecheck/>")
+    _T("<data name=\"install\" index=\"verboselogging\"/>")
+    _T("<ping active=\"0\" r=\"5\"/></app>")
+    _T("<app appid=\"{AD3D0CC0-AD1E-4b1f-B98E-BAA41DCE396D}\" version=\"1.0\" nextversion=\"2.0\" ")
+    _T("ap=\"ap_with_no_update_check\" lang=\"en\" brand=\"\" client=\"\" tag=\"\" ")
+    _T("experiments=\"url_exp_2=a|Fri, 14 Aug 2015 16:13:03 GMT\"/></request>");  // NOLINT
 
   CString actual_buffer;
   EXPECT_HRESULT_SUCCEEDED(XmlParser::SerializeRequest(*update_request,

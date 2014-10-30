@@ -45,6 +45,7 @@ TEST_F(PingTest, BuildOmahaPing) {
                    &command_line_extra_args.installation_id);
   command_line_extra_args.brand_code = _T("GGLS");
   command_line_extra_args.client_id  = _T("a client id");
+  command_line_extra_args.channel  = _T("a channel");
   command_line_extra_args.language   = _T("en");
 
   // Machine ping.
@@ -56,7 +57,14 @@ TEST_F(PingTest, BuildOmahaPing) {
                               ping_event2);
 
   CString expected_ping_request_substring;
-  expected_ping_request_substring.Format(_T("<app appid=\"{430FD4D0-B729-4F61-AA34-91526481799D}\" version=\"1.0.0.0\" nextversion=\"2.0.0.0\" lang=\"en\" brand=\"GGLS\" client=\"a client id\" iid=\"{DE06587E-E5AB-4364-A46B-F3AC733007B3}\"><event eventtype=\"2\" eventresult=\"1\" errorcode=\"10\" extracode1=\"20\"/><event eventtype=\"2\" eventresult=\"1\" errorcode=\"30\" extracode1=\"40\"/></app>"));  // NOLINT
+  expected_ping_request_substring.Format(_T("<app ")
+    _T("appid=\"{430FD4D0-B729-4F61-AA34-91526481799D}\" ")
+    _T("version=\"1.0.0.0\" nextversion=\"2.0.0.0\" lang=\"en\" ")
+    _T("brand=\"GGLS\" client=\"a client id\" tag=\"a channel\" ")
+    _T("iid=\"{DE06587E-E5AB-4364-A46B-F3AC733007B3}\">")
+    _T("<event eventtype=\"2\" eventresult=\"1\" errorcode=\"10\" extracode1=\"20\"/>")
+    _T("<event eventtype=\"2\" eventresult=\"1\" errorcode=\"30\" extracode1=\"40\"/>")
+    _T("</app>"));  // NOLINT
 
   CString actual_ping_request;
   install_ping.BuildRequestString(&actual_ping_request);
@@ -76,6 +84,7 @@ TEST_F(PingTest, BuildAppsPing) {
   const CString expected_lang         = _T("en");
   const CString expected_brand_code   = _T("GGLS");
   const CString expected_client_id    = _T("someclientid");
+  const CString expected_channel      = _T("somechannel");
   const CString expected_iid          =
       _T("{7C0B6E56-B24B-436b-A960-A6EA201E886F}");
   const CString expected_experiment_label =
@@ -93,6 +102,9 @@ TEST_F(PingTest, BuildAppsPing) {
   EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
                                             kRegValueClientId,
                                             expected_client_id));
+  EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
+                                            kRegValueChannel,
+                                            expected_channel));
   EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
                                             kRegValueInstallationId,
                                             expected_iid));
@@ -113,7 +125,14 @@ TEST_F(PingTest, BuildAppsPing) {
   apps_ping.BuildAppsPing(ping_event);
 
   CString expected_ping_request_substring;
-  expected_ping_request_substring.Format(_T("<app appid=\"{430FD4D0-B729-4F61-AA34-91526481799D}\" version=\"1.3.23.0\" nextversion=\"\" lang=\"en\" brand=\"GGLS\" client=\"someclientid\" experiments=\"some_experiment=a|Fri, 14 Aug 2015 16:13:03 GMT\" iid=\"{7C0B6E56-B24B-436b-A960-A6EA201E886F}\"><event eventtype=\"2\" eventresult=\"1\" errorcode=\"34\" extracode1=\"6\"/></app>"));  // NOLINT
+  expected_ping_request_substring.Format(_T("<app ")
+    _T("appid=\"{430FD4D0-B729-4F61-AA34-91526481799D}\" ")
+    _T("version=\"1.3.23.0\" nextversion=\"\" lang=\"en\" ")
+    _T("brand=\"GGLS\" client=\"someclientid\" tag=\"somechannel\" ")
+    _T("experiments=\"some_experiment=a|Fri, 14 Aug 2015 16:13:03 GMT\" ")
+    _T("iid=\"{7C0B6E56-B24B-436b-A960-A6EA201E886F}\">")
+    _T("<event eventtype=\"2\" eventresult=\"1\" errorcode=\"34\" extracode1=\"6\"/>")
+    _T("</app>"));  // NOLINT
 
   CString actual_ping_request;
   apps_ping.BuildRequestString(&actual_ping_request);
