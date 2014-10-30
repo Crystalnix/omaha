@@ -26,6 +26,7 @@ namespace {
   const CString kLang = _T("en");
   const CString kBrandCode = _T("GOOG");
   const CString kClientId = _T("testclientid");
+  const CString kChannel = _T("testchannel");
   const CString kIid = _T("{7C0B6E56-B24B-436b-A960-A6EA201E886D}");
 }  // namespace
 
@@ -52,6 +53,9 @@ class DownloadCompletePingEventTest : public testing::Test {
     EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
                                               kRegValueClientId,
                                               kClientId));
+    EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
+                                              kRegValueChannel,
+                                              kChannel));
     EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
                                               kRegValueInstallationId,
                                               kIid));
@@ -90,12 +94,12 @@ TEST_F(DownloadCompletePingEventTest, BuildDownloadCompletePing) {
   CString expected_ping_request_substring;
   expected_ping_request_substring.Format(
       _T("<app appid=\"%s\" version=\"%s\" nextversion=\"\" lang=\"%s\" ")
-      _T("brand=\"%s\" client=\"%s\" iid=\"%s\">")
+      _T("brand=\"%s\" client=\"%s\" tag=\"%s\" iid=\"%s\">")
       _T("<event eventtype=\"%d\" eventresult=\"%d\" ")
       _T("errorcode=\"%d\" extracode1=\"%d\" ")
       _T("download_time_ms=\"%d\" downloaded=\"%I64u\" total=\"%I64u\"/>")
       _T("</app>"),
-      GOOPDATE_APP_ID, kPv, kLang, kBrandCode, kClientId, kIid,
+      GOOPDATE_APP_ID, kPv, kLang, kBrandCode, kClientId, kChannel, kIid,
       PingEvent::EVENT_INSTALL_COMPLETE, PingEvent::EVENT_RESULT_SUCCESS,
       error_code, extra_code1, download_time_ms, num_bytes_downloaded,
       app_packages_total_size);
@@ -132,11 +136,11 @@ TEST_F(DownloadCompletePingEventTest, BuildDownloadCompletePing_NoDownload) {
   CString expected_ping_request_substring;
   expected_ping_request_substring.Format(
       _T("<app appid=\"%s\" version=\"%s\" nextversion=\"\" lang=\"%s\" ")
-      _T("brand=\"%s\" client=\"%s\" iid=\"%s\">")
+      _T("brand=\"%s\" client=\"%s\" tag=\"%s\" iid=\"%s\">")
       _T("<event eventtype=\"%d\" eventresult=\"%d\" ")
       _T("errorcode=\"%d\" extracode1=\"%d\"/>")
       _T("</app>"),
-      GOOPDATE_APP_ID, kPv, kLang, kBrandCode, kClientId, kIid,
+      GOOPDATE_APP_ID, kPv, kLang, kBrandCode, kClientId, kChannel, kIid,
       PingEvent::EVENT_INSTALL_COMPLETE, PingEvent::EVENT_RESULT_SUCCESS,
       error_code, extra_code1);
 

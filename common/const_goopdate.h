@@ -149,6 +149,7 @@ const TCHAR* const kRegValueAdditionalParams = _T("ap");
 const TCHAR* const kRegValueBrandCode        = _T("brand");
 const TCHAR* const kRegValueBrowser          = _T("browser");
 const TCHAR* const kRegValueClientId         = _T("client");
+const TCHAR* const kRegValueChannel          = _T("channel");
 const TCHAR* const kRegValueDidRun           = _T("dr");
 const TCHAR* const kRegValueExperimentLabels = _T("experiment_labels");
 const TCHAR* const kRegValueInstallationId   = _T("iid");

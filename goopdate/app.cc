@@ -174,6 +174,19 @@ STDMETHODIMP App::put_clientId(BSTR client_id) {
   return S_OK;
 }
 
+STDMETHODIMP App::get_channel(BSTR* channel) {
+  __mutexScope(model()->lock());
+  ASSERT1(channel);
+  *channel = channel_.AllocSysString();
+  return S_OK;
+}
+
+STDMETHODIMP App::put_channel(BSTR channel) {
+  __mutexScope(model()->lock());
+  channel_ = channel;
+  return S_OK;
+}
+
 STDMETHODIMP App::get_labels(BSTR* labels) {
   __mutexScope(model()->lock());
   ASSERT1(labels);
@@ -550,6 +563,11 @@ GUID App::iid() const {
 CString App::client_id() const {
   __mutexScope(model()->lock());
   return client_id_;
+}
+
+CString App::channel() const {
+  __mutexScope(model()->lock());
+  return channel_;
 }
 
 CString App::GetExperimentLabels() const {
@@ -1071,6 +1089,16 @@ STDMETHODIMP AppWrapper::get_clientId(BSTR* client_id) {
 STDMETHODIMP AppWrapper::put_clientId(BSTR client_id) {
   __mutexScope(model()->lock());
   return wrapped_obj()->put_clientId(client_id);
+}
+
+STDMETHODIMP AppWrapper::get_channel(BSTR* channel) {
+  __mutexScope(model()->lock());
+  return wrapped_obj()->get_channel(channel);
+}
+
+STDMETHODIMP AppWrapper::put_channel(BSTR channel) {
+  __mutexScope(model()->lock());
+  return wrapped_obj()->put_channel(channel);
 }
 
 STDMETHODIMP AppWrapper::get_labels(BSTR* labels) {

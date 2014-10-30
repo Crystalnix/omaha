@@ -366,6 +366,7 @@ void GetAppVersion(bool is_machine, const CString& app_id, CString* pv) {
 //    lang
 //    brand
 //    client
+//    channel
 //    iid
 //    experiment
 void GetClientStateData(bool is_machine,
@@ -375,6 +376,7 @@ void GetClientStateData(bool is_machine,
                         CString* lang,
                         CString* brand_code,
                         CString* client_id,
+                        CString* channel,
                         CString* iid,
                         CString* experiment_labels) {
   RegKey key;
@@ -399,6 +401,9 @@ void GetClientStateData(bool is_machine,
   }
   if (client_id) {
     key.GetValue(kRegValueClientId, client_id);
+  }
+  if (channel) {
+    key.GetValue(kRegValueChannel, channel);
   }
   if (iid) {
     key.GetValue(kRegValueInstallationId, iid);

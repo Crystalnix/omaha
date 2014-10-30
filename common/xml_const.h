@@ -105,6 +105,7 @@ extern const TCHAR* const kSize;
 extern const TCHAR* const kStatus;
 extern const TCHAR* const kSuccessAction;
 extern const TCHAR* const kSuccessUrl;
+extern const TCHAR* const kTag;
 extern const TCHAR* const kTestSource;
 extern const TCHAR* const kTerminateAllBrowsers;
 extern const TCHAR* const kTTToken;

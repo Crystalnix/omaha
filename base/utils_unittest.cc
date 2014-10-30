@@ -99,7 +99,7 @@ TEST(UtilsTest, CallEntryPoint0) {
   HRESULT hr(E_FAIL);
   ASSERT_FAILED(CallEntryPoint0(L"random-nonsense.dll", "foobar", &hr));
 }
-#if 0
+
 TEST(UtilsTest, ReadEntireFile) {
   TCHAR directory[MAX_PATH] = {0};
   ASSERT_TRUE(GetModuleDirectory(NULL, directory));
@@ -110,11 +110,12 @@ TEST(UtilsTest, ReadEntireFile) {
   ASSERT_FAILED(ReadEntireFile(L"C:\\F00Bar\\ImaginaryFile", 0, &buffer));
 
   ASSERT_SUCCEEDED(ReadEntireFile(file_name, 0, &buffer));
-  ASSERT_EQ(9405, buffer.size());
+  // The size might depend on the way the end-lines are handled
+  ASSERT_TRUE(9405 == buffer.size() || 9514 == buffer.size());
   buffer.resize(0);
   ASSERT_FAILED(ReadEntireFile(L"C:\\WINDOWS\\Greenstone.bmp", 1000, &buffer));
 }
-#endif // 0
+
 // TODO(omaha): Need a test for WriteEntireFile
 // TEST(UtilsTest, WriteEntireFile) {
 // }

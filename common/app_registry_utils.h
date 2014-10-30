@@ -103,6 +103,7 @@ void GetClientStateData(bool is_machine,
                         CString* lang,
                         CString* brand_code,
                         CString* client_id,
+                        CString* channel,
                         CString* iid,
                         CString* experiment_labels);
 

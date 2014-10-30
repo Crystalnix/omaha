@@ -468,6 +468,7 @@ HRESULT AppManager::CreateClientStateKey(const GUID& app_guid,
 //    iid
 //    brand
 //    client
+//    channel
 //    experiment
 //    (referral is intentionally not read)
 //    InstallTime (converted to diff)
@@ -589,6 +590,7 @@ HRESULT AppManager::ReadAppPersistentData(App* app) {
   client_state_key.GetValue(kRegValueBrandCode, &app->brand_code_);
   ASSERT1(app->brand_code_.GetLength() <= kBrandIdLength);
   client_state_key.GetValue(kRegValueClientId, &app->client_id_);
+  client_state_key.GetValue(kRegValueChannel, &app->channel_);
 
   // We do not need the referral_id.
 
@@ -663,6 +665,7 @@ HRESULT AppManager::ReadUninstalledAppPersistentData(App* app) {
 //    ap
 //    brand (in SetAppBranding)
 //    client (in SetAppBranding)
+//    channel
 //    experiment
 //    referral (in SetAppBranding)
 //    InstallTime (in SetAppBranding; converted from diff)
@@ -713,6 +716,13 @@ HRESULT AppManager::WritePreInstallData(const App& app) {
   } else {
     VERIFY1(SUCCEEDED(client_state_key.SetValue(kRegValueAdditionalParams,
                                                 app.ap())));
+  }
+
+  if (app.channel().IsEmpty()) {
+    VERIFY1(SUCCEEDED(client_state_key.DeleteValue(kRegValueChannel)));
+  } else {
+    VERIFY1(SUCCEEDED(client_state_key.SetValue(kRegValueChannel,
+                                                app.channel())));
   }
 
   CString state_key_path = GetClientStateKeyName(app.app_guid());

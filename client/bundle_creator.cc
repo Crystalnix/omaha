@@ -115,6 +115,13 @@ HRESULT PopulateCommonData(const CommandLineExtraArgs& extra_args,
     }
   }
 
+  if (!extra_args.channel.IsEmpty()) {
+    hr = app->put_channel(CComBSTR(extra_args.channel));
+    if (FAILED(hr)) {
+      return hr;
+    }
+  }
+
   if (!extra_args.referral_id.IsEmpty()) {
     hr = app->put_referralId(CComBSTR(extra_args.referral_id));
     if (FAILED(hr)) {
