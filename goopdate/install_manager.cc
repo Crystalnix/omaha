@@ -327,9 +327,14 @@ void InstallManager::PopulateSuccessfulInstallResultInfo(
           &action)) {
     result_info->post_install_url = action.success_url;
 
-    if (result_info->post_install_launch_command_line.IsEmpty() &&
-        action.success_action == SUCCESS_ACTION_EXIT_SILENTLY_ON_LAUNCH_CMD) {
-      CORE_LOG(LW, (_T("[Success action specified launchcmd, but cmd empty]")));
+    if (action.success_action == SUCCESS_ACTION_EXIT_SILENTLY_ON_LAUNCH_CMD) {
+      if (action.program_to_run.IsEmpty() && result_info->post_install_launch_command_line.IsEmpty()) {
+        CORE_LOG(LW, (_T("[Success action specified launchcmd, but cmd empty]")));
+      } else if (!action.program_to_run.IsEmpty()) {
+        result_info->post_install_launch_command_line =
+          action.program_to_run + _T(" ") + action.program_arguments;
+        result_info->post_install_action = POST_INSTALL_ACTION_LAUNCH_COMMAND;
+      }
     }
 
     if (result_info->post_install_action ==
