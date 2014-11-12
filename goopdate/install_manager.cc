@@ -327,23 +327,22 @@ void InstallManager::PopulateSuccessfulInstallResultInfo(
           &action)) {
     result_info->post_install_url = action.success_url;
 
-    if (action.success_action == SUCCESS_ACTION_EXIT_SILENTLY_ON_LAUNCH_CMD) {
-      if (action.program_to_run.IsEmpty() && result_info->post_install_launch_command_line.IsEmpty()) {
-        CORE_LOG(LW, (_T("[Success action specified launchcmd, but cmd empty]")));
-      } else if (!action.program_to_run.IsEmpty()) {
-        result_info->post_install_launch_command_line =
-          action.program_to_run + _T(" ") + action.program_arguments;
-        result_info->post_install_action = POST_INSTALL_ACTION_LAUNCH_COMMAND;
-      }
+    if (action.success_action == SUCCESS_ACTION_EXIT_SILENTLY_ON_LAUNCH_CMD &&
+        action.program_to_run.IsEmpty() &&
+        result_info->post_install_launch_command_line.IsEmpty()) {
+      CORE_LOG(LW, (_T("[Success action specified launchcmd, but cmd empty]")));
     }
 
-    if (result_info->post_install_action ==
-            POST_INSTALL_ACTION_LAUNCH_COMMAND &&
+    if (!action.program_to_run.IsEmpty()) {
+      result_info->post_install_launch_command_line =
+          action.program_to_run + _T(" ") + action.program_arguments;
+      result_info->post_install_action = POST_INSTALL_ACTION_LAUNCH_COMMAND;
+    }
+
+    if (result_info->post_install_action == POST_INSTALL_ACTION_LAUNCH_COMMAND &&
         action.success_action == SUCCESS_ACTION_EXIT_SILENTLY_ON_LAUNCH_CMD) {
-      result_info->post_install_action =
-          POST_INSTALL_ACTION_EXIT_SILENTLY_ON_LAUNCH_COMMAND;
-    } else if (result_info->post_install_action ==
-        POST_INSTALL_ACTION_DEFAULT) {
+      result_info->post_install_action = POST_INSTALL_ACTION_EXIT_SILENTLY_ON_LAUNCH_COMMAND;
+    } else if (result_info->post_install_action == POST_INSTALL_ACTION_DEFAULT) {
       if (action.success_action == SUCCESS_ACTION_EXIT_SILENTLY) {
         result_info->post_install_action = POST_INSTALL_ACTION_EXIT_SILENTLY;
       } else if (!result_info->post_install_url.IsEmpty()) {
