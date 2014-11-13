@@ -11,7 +11,7 @@
         </packages>
         <actions>
           <action event="install" needsadmin="false" run="foo_installer.exe" arguments="-baz"/>
-          <action event="postinstall" onsuccess="exitsilentlyonlaunchcmd"/>
+          <action event="postinstall" successsaction="exitsilentlyonlaunchcmd"/>
         </actions>
       </manifest>
     </updatecheck>
