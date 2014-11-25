@@ -335,6 +335,7 @@ HRESULT Core::StartUpdateWorkerInternal() const {
 }
 
 HRESULT Core::StartCodeRed() const {
+#if 0 // disable code red check
   if (RegKey::HasValue(MACHINE_REG_UPDATE_DEV, kRegValueNoCodeRedCheck)) {
     CORE_LOG(LW, (_T("[Code Red is disabled for this system]")));
     return E_ABORT;
@@ -353,6 +354,9 @@ HRESULT Core::StartCodeRed() const {
   }
   ++metric_core_cr_total;
   return hr;
+#endif
+  CORE_LOG(LW, (_T("[Code Red is disabled]")));
+  return E_ABORT;
 }
 
 HRESULT Core::StartCrashHandler() const {
