@@ -27,8 +27,8 @@ namespace {
 
 #define LABELONE_KEY      _T("test_key_1")
 #define LABELONE_VALUE    _T("test_value_1")
-#define LABELONE_EXP_STR  _T("Fri, 14 Aug 2015 16:13:03 GMT")
-#define LABELONE_EXP_INT  130840423830000000uI64
+#define LABELONE_EXP_STR  _T("Wed, 24 Mar 2021 00:26:06 GMT")
+#define LABELONE_EXP_INT  132610191660000000uI64
 #define LABELONE_COMBINED LABELONE_KEY \
                           LABEL_DELIMITER_KV \
                           LABELONE_VALUE \
@@ -37,8 +37,8 @@ namespace {
 
 #define LABELTWO_KEY      _T("test_key_2")
 #define LABELTWO_VALUE    _T("test_value_2")
-#define LABELTWO_EXP_STR  _T("Thu, 27 Nov 2014 23:59:59 GMT")
-#define LABELTWO_EXP_INT  130616063990000000uI64
+#define LABELTWO_EXP_STR  _T("Tue, 07 Jul 2020 08:13:02 GMT")
+#define LABELTWO_EXP_INT  132385831820000000uI64
 #define LABELTWO_COMBINED LABELTWO_KEY \
                           LABEL_DELIMITER_KV \
                           LABELTWO_VALUE \
