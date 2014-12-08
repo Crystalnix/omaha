@@ -127,7 +127,11 @@ HRESULT SystemInfo::CategorizeOS(OSVersionType* os_ver, DWORD* sp) {
       switch (osviex.dwPlatformId) {
         case VER_PLATFORM_WIN32_NT:
           // Windows 7 beta 1 reports the same major version as Vista does.
-          if (osviex.dwMajorVersion == 6 && osviex.dwMinorVersion == 1) {
+          if (osviex.dwMajorVersion == 6 && osviex.dwMinorVersion == 3) {
+            os_ver_cached = OS_WINDOWS_8_1;
+          } else if (osviex.dwMajorVersion == 6 && osviex.dwMinorVersion == 2) {
+            os_ver_cached = OS_WINDOWS_8;
+          } else if (osviex.dwMajorVersion == 6 && osviex.dwMinorVersion == 1) {
             os_ver_cached = OS_WINDOWS_7;
           } else if (osviex.dwMajorVersion == 6 && osviex.dwMinorVersion == 0) {
             os_ver_cached = OS_WINDOWS_VISTA;
@@ -179,6 +183,8 @@ const wchar_t* SystemInfo::OSVersionTypeAsString(OSVersionType t) {
     case OS_WINDOWS_UNKNOWN:     return _T("OS_WINDOWS_UNKNOWN");
     case OS_WINDOWS_VISTA:       return _T("OS_WINDOWS_VISTA");
     case OS_WINDOWS_7:           return _T("OS_WINDOWS_7");
+    case OS_WINDOWS_8:           return _T("OS_WINDOWS_8");
+    case OS_WINDOWS_8_1:         return _T("OS_WINDOWS_8_1");
     default:                     return _T("<unknown>");
   }
 }

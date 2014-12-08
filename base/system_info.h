@@ -71,7 +71,9 @@ class SystemInfo {
     OS_WINDOWS_XP,
     OS_WINDOWS_SERVER_2003,
     OS_WINDOWS_VISTA,
-    OS_WINDOWS_7
+    OS_WINDOWS_7,
+    OS_WINDOWS_8,
+    OS_WINDOWS_8_1,
   };
   static HRESULT CategorizeOS(OSVersionType* os_version, DWORD* service_pack);
   static const wchar_t* OSVersionTypeAsString(OSVersionType t);
