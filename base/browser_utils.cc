@@ -504,7 +504,19 @@ HRESULT GetBrowserImagePath(BrowserType type, CString* path) {
   HRESULT hr = E_FAIL;
   switch (type) {
     case BROWSER_IE: {
-      hr = RegKey::GetValue(kRegKeyIeClass, kRegValueIeClass, path);
+      //hr = RegKey::GetValue(kRegKeyIeClass, kRegValueIeClass, path);
+      // Using hardcoded value here because sometimes the result of reading from registry is not
+      // what we expect :/
+      // https://social.msdn.microsoft.com/Forums/sqlserver/en-US/cec9dcd4-2103-44a0-b9c8-0eb3ec6e570f/regopenkeyex-regqueryvalueex-returning-the-wrong-value?forum=vcgeneral
+      hr = S_OK;
+      CString env_path = _T("\"%ProgramFiles%\\Internet Explorer\\iexplore.exe\"");
+      wchar_t temporary_buffer[MAX_PATH];
+      DWORD res = ::ExpandEnvironmentStrings(env_path, temporary_buffer, MAX_PATH);
+      if (res == 0 || res >= MAX_PATH) {
+        return E_FAIL;
+      } else {
+        *path = temporary_buffer;
+      }
       break;
     }
     case BROWSER_FIREFOX: {
