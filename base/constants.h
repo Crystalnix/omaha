@@ -406,7 +406,7 @@ const int kMinLastCheckPeriodSec = 60;  // 60 seconds minimum.
 // Internal users are supposed to update at least once every hour. Therefore,
 // start workers every 30 minutes.
 //const int kAUCheckPeriodMs             = 60 * 60 * 1000;  // Hourly.
-    const int kAUCheckPeriodMs             = 30 * 60 * 1000;
+const int kAUCheckPeriodMs             = 30 * 60 * 1000;
 const int kAUCheckPeriodInternalUserMs = 30 * 60 * 1000;  // 30 minutes.
 
 // Avoids starting workers too soon. This helps reduce disk thrashing at
