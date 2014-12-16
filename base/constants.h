@@ -394,7 +394,8 @@ const int kSecondsPerDay      = 24 * kSecondsPerHour;
 // Adjust down the LastCheckPeriod so that the update worker does not miss it.
 //
 // Almost 5 hours for production users and almost hourly for internal users.
-const int kLastCheckPeriodSec              = 5 * 59 * kMinPerHour;
+// const int kLastCheckPeriodSec              = 5 * 59 * kMinPerHour;
+const int kLastCheckPeriodSec              = 300;
 const int kLastCheckPeriodInternalUserSec  = 1 * 59 * kMinPerHour;
 
 
@@ -404,7 +405,8 @@ const int kMinLastCheckPeriodSec = 60;  // 60 seconds minimum.
 // there is nothing to do, a worker does not take more than 200 ms to run.
 // Internal users are supposed to update at least once every hour. Therefore,
 // start workers every 30 minutes.
-const int kAUCheckPeriodMs             = 60 * 60 * 1000;  // Hourly.
+//const int kAUCheckPeriodMs             = 60 * 60 * 1000;  // Hourly.
+const int kAUCheckPeriodMs             = 30 * 60 * 1000;
 const int kAUCheckPeriodInternalUserMs = 30 * 60 * 1000;  // 30 minutes.
 
 // Avoids starting workers too soon. This helps reduce disk thrashing at
