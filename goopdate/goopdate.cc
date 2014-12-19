@@ -346,6 +346,11 @@ GoopdateImpl::~GoopdateImpl() {
           _T("'HKEY_USERS\\.DEFAULT\\Software\\Google\\Update'. ")
           _T("Please delete the key and report to omaha-core team if ")
           _T("the assert fires again.")));
+  ASSERT(!RegKey::HasKey(_T("HKEY_USERS\\.DEFAULT\\Software\\ViaSat\\Update")),
+         (_T("This assert has fired because it has found the registry key at ")
+          _T("'HKEY_USERS\\.DEFAULT\\Software\\ViaSat\\Update'. ")
+          _T("Please delete the key and report to omaha-core team if ")
+          _T("the assert fires again.")));
 
   // The global metrics collection must be uninitialized before the metrics
   // destructors are called.
