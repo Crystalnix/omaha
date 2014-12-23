@@ -99,11 +99,6 @@ _OMAHA_COPYRIGHT_STRING_ENGLISH = 'Copyright 2007-2010 Google Inc.'
 # TODO(omaha3): Allow open source Omaha to be built without support for
 # Omaha 2's COM APIs.
 
-# The hash comes from the Thumbprint item in the Details tab of the file
-# properties for the public key .cer file.
-# TODO(omaha): Can we automate reading this and/or pass it on the command line?
-_BUILD_SERVER_CERTIFICATE_HASH = 'cafd39335d6e76f0e26d81296e7cbbfbdf16a720'
-
 #
 # End vendor-specific constants.
 #
@@ -128,7 +123,6 @@ win_env = Environment(
         'omaha_builders',
     ],
     msc_ver = _msc_ver,
-    build_server_certificate_hash = _BUILD_SERVER_CERTIFICATE_HASH,
     # Visual Studio 2008 does not ship the sign tool. Use the sign tool from
     # the Platform SDK. This must come after the 'code_signing' tool is used.
     # Remove this if http://code.google.com/p/swtoolkit/issues/detail?id=16 is
@@ -158,8 +152,7 @@ win_env['COMPONENT_TEST_SUBSYSTEM_WINDOWS'] = 1
 # authenticode_file and authenticode_password are used by the normal signing
 # tool and to sign manifests for ClickOnce.
 # patching_certificate is used to create patchable MSI installers and MSPs.
-# authenticode_file and authenticode_password are only used if !build_server.
-# patching_certificate is used in all cases.
+# authenticode_file, authenticode_password and patching_certificate are used in all cases
 AddOption(
     '--authenticode_file',
     action='store',
@@ -266,18 +259,15 @@ if win_env.Bit('build_server'):
 if win_env.Bit('all'):
   win_env.ClearBits('min')
 
-# Allow use of command-line-specified certificates to sign with, but
-# only if we're not on the build server.
-if not win_env.Bit('build_server'):
-  win_env.Replace(
-    CERTIFICATE_PATH=GetOption('authenticode_file'),
-    CERTIFICATE_PASSWORD=GetOption('authenticode_password'),
-  )
+win_env.Replace(
+  CERTIFICATE_PATH=GetOption('authenticode_file'),
+  CERTIFICATE_PASSWORD=GetOption('authenticode_password'),
+)
 
-  # Store whether we're using the default test cert separately, because
-  # we won't always know what the default password was.
-  if GetOption('authenticode_password') is default_cert_password:
-    win_env.SetBits('test_certificate')
+# Store whether we're using the default test cert separately, because
+# we won't always know what the default password was.
+if GetOption('authenticode_password') is default_cert_password:
+  win_env.SetBits('test_certificate')
 
 
 # The precompiled headers are to be used as an optional build speed up
