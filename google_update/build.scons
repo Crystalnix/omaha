@@ -126,18 +126,7 @@ sign_output = env.SignedBinary(
 
 env.Replicate('$STAGING_DIR', sign_output)
 
-# Official builds should always use the checked in constant shell unless they
-# are being built with the test certificate, in which case the saved constant
-# shell would fail to validate the certificates in the build.
-if env.Bit('build_server') and not env.Bit('test_certificate'):
-  # Copy the constant shell from its checked in location.
-  source_shell = ('$MAIN_DIR/google_update/bin/%s/GoogleUpdate.exe' %
-      ('opt', 'dbg')[env.Bit('debug')])
-else:
-  # Use the version we just built.
-  source_shell = sign_output[0]
-
-env.Replicate('$STAGING_DIR', source_shell, REPLICATE_REPLACE=[('_signed', '')])
+env.Replicate('$STAGING_DIR', sign_output[0], REPLICATE_REPLACE=[('_signed', '')])
 env.Replicate(target='$STAGING_DIR',
               source=sign_output[0],
               REPLICATE_REPLACE=[('GoogleUpdate_signed', env['omaha_versions_info'][0].crash_handler_filename)]

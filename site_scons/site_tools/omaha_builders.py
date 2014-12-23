@@ -84,16 +84,9 @@ def SignDotNetManifest(env, target, unsigned_manifest):
   sign_manifest_cmd = ('@mage -Sign $SOURCE -ToFile $TARGET -TimestampUri '
                        'http://timestamp.verisign.com/scripts/timstamp.dll ')
 
-  if env.Bit('build_server'):
-    # If signing fails with the following error, the hash may not match any
-    # certificates: "Internal error, please try again. Object reference not set
-    # to an instance of an object."
-    sign_manifest_cmd += ('-CertHash ' +
-                          env['build_server_certificate_hash'])
-  else:
-    sign_manifest_cmd += '-CertFile %s -Password %s' % (
-        env.GetOption('authenticode_file'),
-        env.GetOption('authenticode_password'))
+  sign_manifest_cmd += '-CertFile %s -Password %s' % (
+      env.GetOption('authenticode_file'),
+      env.GetOption('authenticode_password'))
 
   signed_manifest = env.Command(
       target=target,

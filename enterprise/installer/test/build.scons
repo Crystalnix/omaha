@@ -27,8 +27,8 @@ test_setup_env = env.Clone()
 
 test_setup_env.Append(
     LIBS = [
-        ('msvcrt', 'libcmtd')[test_setup_env.Bit('debug')],
-        ('msvcprt', 'libcpmtd')[test_setup_env.Bit('debug')],
+        ('libcmt', 'libcmtd')[test_setup_env.Bit('debug')],
+        ('libcpmt', 'libcpmtd')[test_setup_env.Bit('debug')],
         ],
 )
 

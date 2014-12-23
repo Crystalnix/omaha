@@ -84,8 +84,8 @@ for omaha_version_info in env['omaha_versions_info']:
           'lzma',
           'mi_exe_stub_lib',
           ('atls', 'atlsd')[temp_env.Bit('debug')],
-          ('msvcrt', 'libcmtd')[temp_env.Bit('debug')],
-          ('msvcprt', 'libcpmtd')[temp_env.Bit('debug')],
+          ('libcmt', 'libcmtd')[temp_env.Bit('debug')],
+          ('libcpmt', 'libcpmtd')[temp_env.Bit('debug')],
           # 'msvcprt_btowc.lib',
           # 'ntstc_msvcrt',  # Only required if STL classes are used.
           'shlwapi',
