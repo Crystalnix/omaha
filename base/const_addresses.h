@@ -58,7 +58,7 @@ const TCHAR* const kUrlPing =
 
 // Crash reports.
 const TCHAR* const kUrlCrashReport =
-    kHttpProto COMPANY_DOMAIN _T("/cr/report");
+    kHttpProto COMPANY_DOMAIN _T("/service/crash_report/");
 
 // More information url.
 // Must allow query parameters to be appended to it.
