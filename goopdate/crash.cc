@@ -592,6 +592,7 @@ HRESULT Crash::ReportGoogleUpdateCrash(bool can_upload,
 
   ParameterMap parameters;
   parameters[_T("prod")]    = _T("Update2");
+  parameters[_T("appid")]   = GOOPDATE_APP_ID;
   parameters[_T("ver")]     = ver;
   parameters[_T("userid")]  = uid;
   parameters[_T("lang")]    = lang;
