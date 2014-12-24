@@ -71,7 +71,7 @@ const TCHAR* const kUrlCodeRedCheck =
 
 // Usage stats url.
 const TCHAR* const kUrlUsageStatsReport =
-    kHttpProto COMPANY_DOMAIN _T("/tbproxy/usagestats");
+    _T("http://clients5.google.com/tbproxy/usagestats");
 
 }  // namespace omaha
 
