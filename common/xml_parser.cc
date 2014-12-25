@@ -1213,12 +1213,10 @@ HRESULT XmlParser::BuildDataElement(const request::App& app,
   CORE_LOG(L3, (_T("[XmlParser::BuildDataElement]")));
   ASSERT1(parent_node);
 
-  // Create a DOM element only if there is a data object.
-  if (app.data.install_data_index.IsEmpty()) {
+  // Create a DOM element only if the update check member is valid and there is a data object.
+  if (!app.update_check.is_valid || app.data.install_data_index.IsEmpty()) {
     return S_OK;
   }
-
-  ASSERT1(app.update_check.is_valid);
 
   CComPtr<IXMLDOMNode> element;
   HRESULT hr = CreateElementNode(xml::element::kData, _T(""), &element);
