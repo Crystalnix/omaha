@@ -674,7 +674,7 @@ HRESULT InstallerWrapper::DoInstallApp(HANDLE user_token,
   InstallerType installer_type = UNKNOWN_INSTALLER;
 
   // TODO(omaha): Remove when http://b/1443404 is addressed.
-  const TCHAR* const kChromeGuid = _T("{8A69D345-D564-463C-AFF1-A69D9E530F96}");
+  const TCHAR* const kChromeGuid = _T("{43C257D5-533D-462C-8166-E276519687DE}");
   const TCHAR* const kChromePerMachineArg = _T("--system-level");
   CString modified_arguments = arguments;
   if (kChromeGuid == GuidToString(app_guid) && is_machine_) {
