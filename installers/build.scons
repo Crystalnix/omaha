@@ -32,7 +32,7 @@ _CLICKONCE_DEPLOY_DIR = '$TARGET_ROOT/clickonce_deployment'
 
 # This will be of the form 'GoogleInstaller_en.application'.
 def _GetClickOnceDeploymentName(language):
-  return 'GoogleInstaller_%s.application' % (language)
+  return 'ViaSatInstaller_%s.application' % (language)
 
 # Generate a ClickOnce deployment manifest personalized with the localized
 # display name of 'Google Installer'.

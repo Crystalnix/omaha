@@ -49,7 +49,7 @@ namespace ClickOnceBootstrap {
         query_string = query_string.Substring(1);
         query_string = HttpUtility.UrlDecode(query_string);
         string setup_path = Path.Combine(Application.StartupPath,
-                                          "GoogleUpdateSetup.exe");
+                                          "ViaSatUpdateSetup.exe");
 
         ProcessStartInfo psi = new ProcessStartInfo();
         psi.FileName = setup_path;
