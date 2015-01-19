@@ -82,7 +82,7 @@ class ATL_NO_VTABLE OneClickControl
 
     // The following entries are actually for the NPAPI plugin
     REGMAP_ENTRY(_T("PLUGINDESCRIPTION"), kAppName)
-    REGMAP_ENTRY(_T("PLUGINDOMAIN"),      kGoopdateServer)
+    REGMAP_ENTRY(_T("PLUGINDOMAIN"),      kPluginDomain)
     REGMAP_ENTRY(_T("PLUGINVENDOR"),      kFullCompanyName)
     REGMAP_ENTRY(_T("PLUGINVERSION"),     kOneclickPluginVersion)
     REGMAP_ENTRY(_T("PLUGINPRODUCT"),     kAppName)
