@@ -32,8 +32,7 @@ namespace omaha {
 #define kGoogleHttpServer _T("www.") COMPANY_DOMAIN
 
 // Static string used as an identity for the "Omaha" Google domain.
-// TODO(omaha): Rename this as a plug-in domain.
-const TCHAR* const kGoopdateServer = _T("tools.") COMPANY_DOMAIN;
+const TCHAR* const kPluginDomain = _T("tools.") COMPANY_DOMAIN;
 
 // HTTP protocol prefix
 #define kProtoSuffix              _T("://")

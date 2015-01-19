@@ -66,7 +66,7 @@ class ATL_NO_VTABLE Update3WebControl
     REGMAP_ENTRY(L"SHELLPATH",          GetShellPathForRegMap())
     // The following entries are actually for the NPAPI plugin
     REGMAP_ENTRY(L"PLUGINDESCRIPTION",  kAppName)
-    REGMAP_ENTRY(L"PLUGINDOMAIN",       kGoopdateServer)
+    REGMAP_ENTRY(L"PLUGINDOMAIN",       kPluginDomain)
     REGMAP_ENTRY(L"PLUGINVENDOR",       kFullCompanyName)
     REGMAP_ENTRY(L"PLUGINVERSION",      kUpdate3WebPluginVersion)
     REGMAP_ENTRY(L"PLUGINPRODUCT",      kAppName)
