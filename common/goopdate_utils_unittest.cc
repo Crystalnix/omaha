@@ -1455,7 +1455,7 @@ TEST_F(GoopdateUtilsRegistryProtectedTest,
   const uint32 now = Time64ToInt32(GetCurrent100NSTime());
 
   // The absolute difference is within the check period.
-  ConfigManager::Instance()->SetLastCheckedTime(false, now + 600);
+  ConfigManager::Instance()->SetLastCheckedTime(false, now + 1);
   EXPECT_FALSE(ShouldCheckForUpdates(false));
 
   // The absolute difference is greater than the check period.
