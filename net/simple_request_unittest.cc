@@ -502,7 +502,7 @@ TEST_F(SimpleRequestTest, HttpGet_Redirect) {
     return;
   }
 
-  SimpleGetRedirect(_T("http://tools.google.com/service/update2/oneclick"),
+  SimpleGetRedirect(_T("http://chrome.google.com/"),
                     ProxyConfig());
 }
 

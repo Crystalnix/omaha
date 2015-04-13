@@ -120,7 +120,9 @@ class CupRequestTest : public testing::Test {
   }
 };
 
-TEST_F(CupRequestTest, GetSimpleRequest) {
+// These two tests are disabled because they use Google's URL
+// which apparently stop handling GET-requests.
+TEST_F(CupRequestTest, DISABLED_GetSimpleRequest) {
   if (IsTestRunByLocalSystem()) {
     return;
   }
@@ -129,7 +131,7 @@ TEST_F(CupRequestTest, GetSimpleRequest) {
   DoRequest(new SimpleRequest, kGetUrlNoResponseBody, NULL, 0);
 }
 
-TEST_F(CupRequestTest, GetUrlmonRequest) {
+TEST_F(CupRequestTest, DISABLED_GetUrlmonRequest) {
   DoRequest(new UrlmonRequest, kGetUrl, NULL, 0);
   DoRequest(new UrlmonRequest, kGetUrlNoResponseBody, NULL, 0);
 }
