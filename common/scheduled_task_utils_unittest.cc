@@ -135,7 +135,7 @@ TEST(ScheduledTaskUtilsTest, ScheduledTasks) {
   EXPECT_SUCCEEDED(UninstallScheduledTask(kSchedTestTaskName));
 }
 
-TEST(ScheduledTaskUtilsTest, ScheduledTasksV2) {
+TEST(ScheduledTaskUtilsTest, DISABLED_ScheduledTasksV2) {
   if (!v2::IsTaskScheduler2APIAvailable()) {
     std::wcout << _T("\tTest did not run because this OS does not support the ")
                   _T("Task Scheduler 2.0 API.") << std::endl;
