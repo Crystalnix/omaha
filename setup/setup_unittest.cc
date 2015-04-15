@@ -1178,7 +1178,7 @@ TEST_F(SetupMachineTest, StopGoogleUpdateAndWait_SucceedsUsingOnlyJobObjects) {
 }
 */
 
-TEST_F(SetupUserTest, StopGoogleUpdateAndWait_ProcessesDoNotStop) {
+TEST_F(SetupUserTest, DISABLED_StopGoogleUpdateAndWait_ProcessesDoNotStop) {
   StopGoogleUpdateAndWaitProcessesDoNotStopTest();
 }
 
