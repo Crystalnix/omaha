@@ -37,7 +37,7 @@ namespace omaha {
 
 const int kKnownError = 0x87658765;
 
-const TCHAR* const kDefaultAppName = _T("Google Application");
+const TCHAR* const kDefaultAppName = _T("ViaSat Application");
 
 const uint32 kInitialInstallTimeDiff = static_cast<uint32>(-1 * kSecondsPerDay);
 
