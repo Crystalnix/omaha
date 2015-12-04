@@ -102,7 +102,7 @@ namespace logging {
 
 // Where to record logging output? A flat file and/or system debug log via
 // OutputDebugString. Defaults to LOG_ONLY_TO_FILE.
-enum LoggingDestination { LOG_ONLY_TO_FILE, 
+enum LoggingDestination { LOG_ONLY_TO_FILE,
                           LOG_ONLY_TO_SYSTEM_DEBUG_LOG,
                           LOG_TO_BOTH_FILE_AND_SYSTEM_DEBUG_LOG };
 
