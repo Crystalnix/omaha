@@ -53,6 +53,7 @@
 #include <atlpath.h>
 #include <atlsecurity.h>
 #include "base/basictypes.h"
+#include "base/error.h"
 #include "omaha/base/app_util.h"
 #include "omaha/base/const_debug.h"
 #include "omaha/base/constants.h"
@@ -65,6 +66,39 @@
 #include "omaha/base/utils.h"
 
 namespace omaha {
+
+namespace {
+
+// copy-pasted from omaha/common/config_manager.cc
+HRESULT GetDir(int csidl,
+               const CString& path_tail,
+               bool create_dir,
+               CString* dir) {
+  ASSERT1(dir);
+
+  CString path;
+  HRESULT hr = GetFolderPath(csidl | CSIDL_FLAG_DONT_VERIFY, &path);
+  if (FAILED(hr)) {
+    CORE_LOG(LW, (_T("GetDir failed to find path][%d][0x%08x]"), csidl, hr));
+    return hr;
+  }
+  if (!::PathAppend(CStrBuf(path, MAX_PATH), path_tail)) {
+    CORE_LOG(LW, (_T("GetDir failed to append path][%s][%s]"), path, path_tail));
+    return GOOPDATE_E_PATH_APPEND_FAILED;
+  }
+  dir->SetString(path);
+
+  // Try to create the directory. Continue if the directory can't be created.
+  if (create_dir) {
+    hr = CreateDir(path, NULL);
+    if (FAILED(hr)) {
+      CORE_LOG(LW, (_T("[GetDir failed to create dir][%s][0x%08x]"), path, hr));
+    }
+  }
+  return S_OK;
+}
+
+}  // namespace
 
 // enforce ban on ASSERT/REPORT
 #undef ASSERT
@@ -318,18 +352,10 @@ void Logging::ReadLoggingSettings() {
 
 CString Logging::GetDefaultLogDirectory() const {
   CString path;
-  CStrBuf buf(path, MAX_PATH);
-  HRESULT hr = ::SHGetFolderPath(NULL,
-                                 CSIDL_COMMON_APPDATA,
-                                 NULL,
-                                 SHGFP_TYPE_CURRENT,
-                                 buf);
-  if (FAILED(hr)) {
-    return L"";
-  }
-  if (!::PathAppend(buf, OMAHA_REL_LOG_DIR)) {
-    return L"";
-  }
+  VERIFY1(SUCCEEDED(GetDir(CSIDL_LOCAL_APPDATA,
+                           CString(OMAHA_REL_LOG_DIR),
+                           true,
+                           &path)));
   return path;
 }
 
@@ -901,13 +927,14 @@ CString Logging::GetCurrentConfigurationFilePath() const {
 }
 
 CString Logging::GetConfigurationFilePath() const {
-  CString file_path;
-  CString system_drive = GetEnvironmentVariableAsString(_T("SystemDrive"));
-  if (!system_drive.IsEmpty()) {
-    file_path = system_drive;
-    file_path += L"\\";
-  }
-  return file_path + kLogConfigFileName;
+  CString path;
+  VERIFY1(SUCCEEDED(GetDir(CSIDL_LOCAL_APPDATA,
+                           CString(OMAHA_REL_COMPANY_DIR),
+                           true,
+                           &path)));
+  path.Append(_T("\\"));
+  path.Append(kLogConfigFileName);
+  return path;
 }
 
 LogWriter::LogWriter() {
