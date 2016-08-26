@@ -80,10 +80,18 @@ HRESULT WinHttpAdapter::Connect(HINTERNET session_handle,
                                 int port) {
   __mutexScope(lock_);
 
-  HRESULT hr = http_client_->Connect(session_handle,
-                                     server,
-                                     port,
-                                     &connection_handle_);
+  HRESULT hr = http_client_->SetOptionInt(session_handle,
+                                          WINHTTP_OPTION_SECURE_PROTOCOLS,
+                                          WINHTTP_FLAG_SECURE_PROTOCOL_TLS1_2);
+  if (FAILED(hr)) {
+    return hr;
+  }
+
+  hr = http_client_->Connect(session_handle,
+                             server,
+                             port,
+                             &connection_handle_);
+
   NET_LOG(L3, (_T("[WinHttpAdapter::Connect][0x%p][0x%x][0x%x]"),
               this, connection_handle_, hr));
   return hr;

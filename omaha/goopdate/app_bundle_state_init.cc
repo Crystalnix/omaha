@@ -117,7 +117,7 @@ HRESULT AppBundleStateInit::Initialize(AppBundle* app_bundle) {
       ConfigManager::Instance()->GetUpdateCheckUrl(&update_check_url)));
   scoped_ptr<WebServicesClient> web_service_client;
   web_service_client.reset(new WebServicesClient(app_bundle->is_machine()));
-  hr = web_service_client->Initialize(update_check_url, HeadersVector(), true);
+  hr = web_service_client->Initialize(update_check_url, HeadersVector(), false);
   if (FAILED(hr)) {
     CORE_LOG(LE, (_T("[Update check client init failed][0x%08x]"), hr));
     return hr;
