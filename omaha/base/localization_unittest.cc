@@ -150,6 +150,7 @@ void LocalizationNumberTest() {
 }
 
 TEST(LocalizationTest, Localization) {
+  // ViaSat: May fail because depends on timezone
   LocalizationTimeTest();
   LocalizationNumberTest();
 }

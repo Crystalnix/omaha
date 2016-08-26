@@ -70,7 +70,7 @@ CString Update3ServiceMode::GetCurrentServiceName() {
 }
 
 HRESULT Update3ServiceMode::PreMessageLoop() {
-  SERVICE_LOG(L1, (_T("[Starting Google Update core...]")));
+  SERVICE_LOG(L1, (_T("[Starting ViaSat Update core...]")));
   CommandLineBuilder builder(COMMANDLINE_MODE_CORE);
   CString args = builder.GetCommandLineArgs();
   return goopdate_utils::StartGoogleUpdateWithArgs(true, args, NULL);

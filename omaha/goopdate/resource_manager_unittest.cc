@@ -128,12 +128,12 @@ TEST_F(ResourceManagerTest, GetResourceDllName) {
 
 TEST_F(ResourceManagerTest, GetResourceDllName_SpecialCases) {
   // zh-HK -> zh-TW
-  EXPECT_STREQ(_T("goopdateres_zh-TW.dll"), GetResourceDllName(_T("zh-TW")));
-  EXPECT_STREQ(_T("goopdateres_zh-TW.dll"), GetResourceDllName(_T("zh-HK")));
+  EXPECT_STREQ(_T("vsupdateres_zh-TW.dll"), GetResourceDllName(_T("zh-TW")));
+  EXPECT_STREQ(_T("vsupdateres_zh-TW.dll"), GetResourceDllName(_T("zh-HK")));
 
   // he -> iw
-  EXPECT_STREQ(_T("goopdateres_iw.dll"), GetResourceDllName(_T("iw")));
-  EXPECT_STREQ(_T("goopdateres_iw.dll"), GetResourceDllName(_T("he")));
+  EXPECT_STREQ(_T("vsupdateres_iw.dll"), GetResourceDllName(_T("iw")));
+  EXPECT_STREQ(_T("vsupdateres_iw.dll"), GetResourceDllName(_T("he")));
 }
 
 TEST_F(ResourceManagerTest, LoadResourceFail) {
@@ -176,62 +176,62 @@ TEST_F(ResourceManagerTest, TestAppropriateLanguageDlls) {
 
   std::vector<CString>::iterator iter = filenames.begin();
 
-  EXPECT_STREQ(_T("goopdateres_am.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_ar.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_bg.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_bn.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_ca.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_cs.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_da.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_de.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_el.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_en.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_en-GB.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_es.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_es-419.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_et.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_fa.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_fi.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_fil.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_fr.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_gu.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_hi.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_hr.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_hu.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_id.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_is.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_it.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_iw.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_ja.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_kn.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_ko.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_lt.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_lv.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_ml.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_mr.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_ms.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_nl.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_no.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_pl.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_pt-BR.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_pt-PT.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_ro.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_ru.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_sk.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_sl.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_sr.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_sv.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_sw.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_ta.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_te.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_th.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_tr.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_uk.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_ur.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_vi.dll"), *iter++);
-  EXPECT_STREQ(_T("goopdateres_zh-CN.dll"), *iter++);
-  // goopdateres_zh-HK.dll not present
-  EXPECT_STREQ(_T("goopdateres_zh-TW.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_am.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_ar.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_bg.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_bn.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_ca.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_cs.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_da.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_de.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_el.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_en.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_en-GB.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_es.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_es-419.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_et.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_fa.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_fi.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_fil.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_fr.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_gu.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_hi.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_hr.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_hu.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_id.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_is.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_it.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_iw.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_ja.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_kn.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_ko.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_lt.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_lv.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_ml.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_mr.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_ms.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_nl.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_no.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_pl.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_pt-BR.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_pt-PT.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_ro.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_ru.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_sk.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_sl.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_sr.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_sv.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_sw.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_ta.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_te.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_th.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_tr.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_uk.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_ur.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_vi.dll"), *iter++);
+  EXPECT_STREQ(_T("vsupdateres_zh-CN.dll"), *iter++);
+  // vsupdateres_zh-HK.dll not present
+  EXPECT_STREQ(_T("vsupdateres_zh-TW.dll"), *iter++);
 }
 
 TEST_F(ResourceManagerResourcesProtectedTest, RussianResourcesValid) {

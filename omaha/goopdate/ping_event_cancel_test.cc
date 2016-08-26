@@ -27,6 +27,7 @@ const CString kPv = _T("1.3.99.0");
 const CString kLang = _T("en");
 const CString kBrandCode = _T("GOOG");
 const CString kClientId = _T("testclientid");
+const CString kChannel = _T("testchannel");
 const CString kIid = _T("{7C0B6E56-B24B-436b-A960-A6EA201E886D}");
 
 }  // namespace
@@ -52,6 +53,9 @@ class PingEventCancelTest : public testing::Test {
     EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
                                               kRegValueClientId,
                                               kClientId));
+    EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
+                                              kRegValueChannel,
+                                              kChannel));
     EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
                                               kRegValueInstallationId,
                                               kIid));
@@ -86,14 +90,14 @@ TEST_F(PingEventCancelTest, BuildCancelPing) {
   CString expected_ping_request_substring;
   expected_ping_request_substring.Format(
       _T("<app appid=\"%s\" version=\"%s\" nextversion=\"\" lang=\"%s\" ")
-      _T("brand=\"%s\" client=\"%s\" iid=\"%s\">")
+      _T("brand=\"%s\" client=\"%s\" tag=\"%s\" iid=\"%s\">")
       _T("<event eventtype=\"%d\" eventresult=\"%d\" ")
       _T("errorcode=\"%d\" extracode1=\"%d\" ")
       _T("is_bundled=\"%d\" state_cancelled=\"%d\" ")
       _T("time_since_update_available_ms=\"%d\" ")
       _T("time_since_download_start_ms=\"%d\"/>")
       _T("</app>"),
-      GOOPDATE_APP_ID, kPv, kLang, kBrandCode, kClientId, kIid,
+      GOOPDATE_APP_ID, kPv, kLang, kBrandCode, kClientId, kChannel, kIid,
       PingEvent::EVENT_INSTALL_COMPLETE, PingEvent::EVENT_RESULT_SUCCESS,
       error_code, extra_code1, is_bundled, state_when_canelled,
       time_since_update_available_ms, time_since_download_start_ms);

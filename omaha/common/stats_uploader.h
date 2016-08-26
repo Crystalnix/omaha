@@ -24,7 +24,7 @@
 namespace omaha {
 
 // The product name is chosen so that the stats are persisted under
-// the Google Update registry key for the machine or user, respectively.
+// the ViaSat Update registry key for the machine or user, respectively.
 const TCHAR* const kMetricsProductName           = _T("Update");
 
 const TCHAR* const kMetricsServerParamSourceId   = _T("sourceid");

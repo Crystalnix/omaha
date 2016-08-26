@@ -65,15 +65,16 @@ _is_google_update_build = False
 # These values must be changed when customizing open source Omaha.
 # You may also wish to replace the language-neutral constants in the individual
 # *generated_resources_*.rc files with localized strings.
-_FULL_COMPANY_NAME = 'OmahaCompanyName Inc.'
-_SHORT_COMPANY_NAME = 'OmahaCompanyName'
+_FULL_COMPANY_NAME = 'ViaSat Inc.'
+_SHORT_COMPANY_NAME = 'ViaSat'
 _PRODUCT_NAME = 'Update'
-_COMPANY_DOMAIN_BASE = 'google'
+# TODO(ViaSat): update domains!
+_COMPANY_DOMAIN_BASE = 'omaha-server-dev.elasticbeanstalk'
 _COMPANY_DOMAIN = _COMPANY_DOMAIN_BASE + '.com'
-_MAIN_EXE_BASE_NAME = 'GoogleUpdate'
+_MAIN_EXE_BASE_NAME = 'ViaSatUpdate'
 # TODO(omaha): Use this throughout the build files where goopdate and
 # goopdateres are referenced.
-_MAIN_DLL_BASE_NAME = 'goopdate'
+_MAIN_DLL_BASE_NAME = 'vsupdate'
 # "Google Inc." must not be removed from the copyright string. This literal also
 # appears as LegalCopyright in the VERSIONINFO section of .rc files.
 # TODO(omaha): Use this variable in .wxs files, etc.
@@ -91,7 +92,7 @@ _OMAHA_COPYRIGHT_STRING_ENGLISH = 'Copyright 2007-2010 Google Inc.'
 # The hash comes from the Thumbprint item in the Details tab of the file
 # properties for the public key .cer file.
 # Omaha and Chrome certificate: sha256 (12/15/2015 to 12/16/2018).
-_BUILD_SERVER_CERTIFICATE_HASH = '5a9272ce76a9415a4a3a5002a2589a049312aa40'
+# _BUILD_SERVER_CERTIFICATE_HASH = '5a9272ce76a9415a4a3a5002a2589a049312aa40'
 
 #
 # End vendor-specific constants.
@@ -145,7 +146,7 @@ win_env = Environment(
         'omaha_builders',
     ],
     msc_ver = _msc_ver,
-    build_server_certificate_hash = _BUILD_SERVER_CERTIFICATE_HASH,
+    # build_server_certificate_hash = _BUILD_SERVER_CERTIFICATE_HASH,
 
     # Visual Studio 2008 does not ship the sign tool. Use the sign tool from
     # the Platform SDK. This must come after the 'code_signing' tool is used.
@@ -185,8 +186,7 @@ win_env['COMPONENT_TEST_SUBSYSTEM_WINDOWS'] = 1
 # authenticode_file and authenticode_password are used by the normal signing
 # tool and to sign manifests for ClickOnce.
 # patching_certificate is used to create patchable MSI installers and MSPs.
-# authenticode_file and authenticode_password are only used if !build_server.
-# patching_certificate is used in all cases.
+# authenticode_file, authenticode_password and patching_certificate are used in all cases.
 AddOption(
     '--authenticode_file',
     action='store',
@@ -335,27 +335,24 @@ if win_env.Bit('build_server'):
 if win_env.Bit('all'):
   win_env.ClearBits('min')
 
-# Allow use of command-line-specified certificates to sign with, but
-# only if we're not on the build server.
-if not win_env.Bit('build_server'):
-  win_env.Replace(
-    CERTIFICATE_HASH='',
-    CERTIFICATE_PASSWORD=GetOption('authenticode_password'),
-    CERTIFICATE_PATH=GetOption('authenticode_file'),
-    SHA1_CERTIFICATE_HASH='',
-    SHA2_CERTIFICATE_HASH='',
-    SHA1_CERTIFICATE_ISSUER='',
-    SHA2_CERTIFICATE_ISSUER='',
-    SHA1_CERTIFICATE_PASSWORD=GetOption('sha1_authenticode_password'),
-    SHA2_CERTIFICATE_PASSWORD=GetOption('sha2_authenticode_password'),
-    SHA1_CERTIFICATE_PATH=GetOption('sha1_authenticode_file'),
-    SHA2_CERTIFICATE_PATH=GetOption('sha2_authenticode_file'),
-  )
+win_env.Replace(
+  CERTIFICATE_HASH='',
+  CERTIFICATE_PASSWORD=GetOption('authenticode_password'),
+  CERTIFICATE_PATH=GetOption('authenticode_file'),
+  SHA1_CERTIFICATE_HASH='',
+  SHA2_CERTIFICATE_HASH='',
+  SHA1_CERTIFICATE_ISSUER='',
+  SHA2_CERTIFICATE_ISSUER='',
+  SHA1_CERTIFICATE_PASSWORD=GetOption('sha1_authenticode_password'),
+  SHA2_CERTIFICATE_PASSWORD=GetOption('sha2_authenticode_password'),
+  SHA1_CERTIFICATE_PATH=GetOption('sha1_authenticode_file'),
+  SHA2_CERTIFICATE_PATH=GetOption('sha2_authenticode_file'),
+)
 
-  # Store whether we're using the default test cert separately, because
-  # we won't always know what the default password was.
-  if GetOption('authenticode_password') is default_cert_password:
-    win_env.SetBits('test_certificate')
+# Store whether we're using the default test cert separately, because
+# we won't always know what the default password was.
+if GetOption('authenticode_password') is default_cert_password:
+  win_env.SetBits('test_certificate')
 
 # Build the 64 bit version of the code.
 win_env.SetBitFromOption('x64', False)
@@ -448,7 +445,7 @@ win_env.AppendUnique(
         '/D_CRT_SECURE_CPP_OVERLOAD_SECURE_NAMES=1',
         '/D_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1',
         '/D_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT=1',
-        '/WX',      # warnings as errors
+        # '/WX',      # warnings as errors
         '/d2Zi+',   # better debugging support for optimized code
 
         #

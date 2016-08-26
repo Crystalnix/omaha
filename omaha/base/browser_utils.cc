@@ -472,12 +472,20 @@ HRESULT GetIEPath(CString* path) {
   ASSERT1(path);
 
   CString ie_command_line;
-  HRESULT hr = RegKey::GetValue(kRegKeyIeClass,
-                                kRegValueIeClass,
-                                &ie_command_line);
+  // HRESULT hr = RegKey::GetValue(kRegKeyIeClass,
+  //                               kRegValueIeClass,
+  //                               &ie_command_line);
+  // Using hardcoded value here because sometimes the result of reading from registry is not
+  // what we expect :
+  // https://social.msdn.microsoft.com/Forums/sqlserver/en-US/cec9dcd4-2103-44a0-b9c8-0eb3ec6e570f/regopenkeyex-regqueryvalueex-returning-the-wrong-value?forum=vcgeneral
+  CString program_files;
+  HRESULT hr = GetFolderPath(CSIDL_PROGRAM_FILES, &program_files);
+
   if (FAILED(hr)) {
     return hr;
   }
+
+  ie_command_line = _T("\"") + program_files + _T("\\Internet Explorer\\iexplore.exe\"");
 
   if (ie_command_line.IsEmpty()) {
     return E_UNEXPECTED;

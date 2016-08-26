@@ -58,7 +58,7 @@ def CreateMsiInstallerFiles(env, wxs_file, suffix=''):
   )
 
   old_unsigned_output = old_unsigned_env.WiX(
-      'GoogleUpdateHelper%s_unsigned.msi' % suffix,
+      'ViaSatUpdateHelper%s_unsigned.msi' % suffix,
       wxs_file)
 
   env.Depends(old_unsigned_output, [_custom_actions_path, _required_file])
@@ -84,7 +84,7 @@ def CreateMsiInstallerFiles(env, wxs_file, suffix=''):
   new_unsigned_env['WIXOBJPREFIX'] = new_unsigned_env['WIXOBJPREFIX'] + 'new/'
 
   new_unsigned_output = new_unsigned_env.WiX(
-      target='new/GoogleUpdateHelper%s_unsigned.msi' % suffix,
+      target='new/ViaSatUpdateHelper%s_unsigned.msi' % suffix,
       source=wxs_file
   )
 
@@ -137,7 +137,7 @@ def CreateMsiPatchFile(env, wxs_patch_file, old_msi, new_msi, suffix=''):
     # Remove the temp dir.
     rm_rf(_temp_dir)
 
-  unsigned_msp_name = 'GoogleUpdateHelperPatch%s_unsigned.msp' % suffix
+  unsigned_msp_name = 'ViaSatUpdateHelperPatch%s_unsigned.msp' % suffix
   unsigned_msp_path = '$OBJ_ROOT/recovery/repair_exe/msp/' + unsigned_msp_name
 
   msp_output = msp_env.Command(
@@ -170,17 +170,17 @@ msp_output_for_legacy = CreateMsiPatchFile(
 # Sign the old MSI and MSP files
 #
 signed_msi = env.SignedBinary(
-    target='GoogleUpdateHelper.msi',
+    target='ViaSatUpdateHelper.msi',
     source=old_msi,
 )
 
 signed_msp = env.SignedBinary(
-    target='GoogleUpdateHelperPatch.msp',
+    target='ViaSatUpdateHelperPatch.msp',
     source=msp_output,
 )
 
 signed_msp_for_legacy = env.SignedBinary(
-    target='GoogleUpdateHelperPatchWithLegacyID.msp',
+    target='ViaSatUpdateHelperPatchWithLegacyID.msp',
     source=msp_output_for_legacy,
 )
 

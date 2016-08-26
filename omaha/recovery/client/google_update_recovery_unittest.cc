@@ -14,7 +14,7 @@
 // ========================================================================
 
 //
-// Unit tests for the Google Update recovery mechanism.
+// Unit tests for the ViaSat Update recovery mechanism.
 // All apps that are using the mechanism must also run this test.
 //
 // Unlike the mechanism code, this code relies on code from common because it
@@ -93,7 +93,7 @@ const TCHAR* const kInvalidFileUrl = _T("http://www.google.com/robots.txt");
 const TCHAR kRegistryHiveOverrideRoot[] =
     _T("HKCU\\Software\\Google\\Update\\UnitTest\\");
 
-const TCHAR kExpectedUrlForDummyAppAndNoOmahaValues[] = _T("https://clients2.google.com/service/check2?appid=%7B8E472B0D-3E8B-43b1-B89A-E8506AAF1F16%7D&appversion=3.4.5.6&applang=en-us&machine=1&version=0.0.0.0&userid=&osversion=");  // NOLINT
+const TCHAR kExpectedUrlForDummyAppAndNoOmahaValues[] = _T("https://clients2.") COMPANY_DOMAIN _T("/service/check2?appid=%7B8E472B0D-3E8B-43b1-B89A-E8506AAF1F16%7D&appversion=3.4.5.6&applang=en-us&machine=1&version=0.0.0.0&userid=&osversion=");  // NOLINT
 const int kExpectedUrlForDummyAppAndNoOmahaValuesLength =
     arraysize(kExpectedUrlForDummyAppAndNoOmahaValues) - 1;
 
@@ -510,7 +510,7 @@ INSTANTIATE_TEST_CASE_P(IsDomain,
 
 TEST_P(GoogleUpdateRecoveryRegistryProtectedTest,
        FixGoogleUpdate_AllValues_MachineApp) {
-  const TCHAR kExpectedUrlFormat[] = _T("https://clients2.google.com/service/check2?appid=%%7B8E472B0D-3E8B-43b1-B89A-E8506AAF1F16%%7D&appversion=3.4.5.6&applang=en-us&machine=1&version=5.6.78.1&userid=%s&osversion=");  // NOLINT
+  const TCHAR kExpectedUrlFormat[] = _T("https://clients2.") COMPANY_DOMAIN _T("/service/check2?appid=%%7B8E472B0D-3E8B-43b1-B89A-E8506AAF1F16%%7D&appversion=3.4.5.6&applang=en-us&machine=1&version=5.6.78.1&userid=%s&osversion=");  // NOLINT
 
   const CString prev_tmp = GetTmp();
   EXPECT_TRUE(::SetEnvironmentVariable(_T("TMP"), kTempDirectory));
@@ -538,7 +538,7 @@ TEST_P(GoogleUpdateRecoveryRegistryProtectedTest,
 
 TEST_P(GoogleUpdateRecoveryRegistryProtectedTest,
        FixGoogleUpdate_AllValues_UserApp) {
-  const TCHAR kExpectedUrlFormat[] = _T("https://clients2.google.com/service/check2?appid=%%7B8E472B0D-3E8B-43b1-B89A-E8506AAF1F16%%7D&appversion=3.4.5.6&applang=en-us&machine=0&version=5.6.78.1&userid=%s&osversion=");  // NOLINT
+  const TCHAR kExpectedUrlFormat[] = _T("https://clients2.") COMPANY_DOMAIN _T("/service/check2?appid=%%7B8E472B0D-3E8B-43b1-B89A-E8506AAF1F16%%7D&appversion=3.4.5.6&applang=en-us&machine=0&version=5.6.78.1&userid=%s&osversion=");  // NOLINT
 
   const CString prev_tmp = GetTmp();
   EXPECT_TRUE(::SetEnvironmentVariable(_T("TMP"), kTempDirectory));
@@ -579,7 +579,7 @@ TEST_P(GoogleUpdateRecoveryRegistryProtectedTest,
 
 TEST_P(GoogleUpdateRecoveryRegistryProtectedTest,
        FixGoogleUpdate_EmptyAppInfo) {
-  const TCHAR kExpectedUrl[] = _T("https://clients2.google.com/service/check2?appid=&appversion=&applang=&machine=1&version=0.0.0.0&userid=&osversion=");  // NOLINT
+  const TCHAR kExpectedUrl[] = _T("https://clients2.") COMPANY_DOMAIN _T("/service/check2?appid=&appversion=&applang=&machine=1&version=0.0.0.0&userid=&osversion=");  // NOLINT
 
   EXPECT_EQ(kDummyNoFileError, FixGoogleUpdate(_T(""),
                                                _T(""),

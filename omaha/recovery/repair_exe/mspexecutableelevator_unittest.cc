@@ -137,7 +137,7 @@ TEST_F(RepairGoopdateWithMsiInstalledTest,
        ExecuteGoogleSignedExe_UnsignedFile) {
   CString repair_file(app_util::GetCurrentModuleDirectory());
   EXPECT_TRUE(::PathAppend(CStrBuf(repair_file, MAX_PATH),
-              _T("GoogleUpdate_unsigned.exe")));
+              _T("ViaSatUpdate_unsigned.exe")));
   HANDLE process = NULL;
   HRESULT hr = ExecuteGoogleSignedExeWithCorrectPatchInfo(repair_file,
                                                           _T(""),

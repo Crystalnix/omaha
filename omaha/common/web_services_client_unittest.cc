@@ -36,8 +36,13 @@ namespace omaha {
 class WebServicesClientTest : public testing::Test {
  protected:
   virtual void SetUp() {
-    EXPECT_HRESULT_SUCCEEDED(
-        ConfigManager::Instance()->GetUpdateCheckUrl(&update_check_url_));
+    // EXPECT_HRESULT_SUCCEEDED(
+    //     ConfigManager::Instance()->GetUpdateCheckUrl(&update_check_url_));
+
+    // ViaSat: These tests should point to google servers just in case if our
+    // servers could not process test cases.
+    update_check_url_ = _T("https://tools.google.com/service/update2");
+
 
     web_service_client_.reset(new WebServicesClient(false));
 

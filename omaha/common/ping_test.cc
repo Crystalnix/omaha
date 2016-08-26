@@ -86,6 +86,7 @@ TEST_F(PingTest, BuildOmahaPing) {
                    &command_line_extra_args.installation_id);
   command_line_extra_args.brand_code = _T("GGLS");
   command_line_extra_args.client_id  = _T("a client id");
+  command_line_extra_args.channel    = _T("a channel");
   command_line_extra_args.language   = _T("en");
 
   File::Remove(goopdate_utils::BuildGoogleUpdateExePath(false));
@@ -102,7 +103,7 @@ TEST_F(PingTest, BuildOmahaPing) {
   expected_shell_version_substring.Format(_T(" shell_version=\"%s\" "),
                                           GetShellVersionString());
   CString expected_ping_request_substring;
-  expected_ping_request_substring.Format(_T("<app appid=\"{430FD4D0-B729-4F61-AA34-91526481799D}\" version=\"1.0.0.0\" nextversion=\"2.0.0.0\" lang=\"en\" brand=\"GGLS\" client=\"a client id\" iid=\"{DE06587E-E5AB-4364-A46B-F3AC733007B3}\"><event eventtype=\"2\" eventresult=\"1\" errorcode=\"10\" extracode1=\"20\"/><event eventtype=\"2\" eventresult=\"1\" errorcode=\"30\" extracode1=\"40\"/></app>"));  // NOLINT
+  expected_ping_request_substring.Format(_T("<app appid=\"{555B8D18-076D-4576-9579-1FD7F0399EAE}\" version=\"1.0.0.0\" nextversion=\"2.0.0.0\" lang=\"en\" brand=\"GGLS\" client=\"a client id\" tag=\"a channel\" iid=\"{DE06587E-E5AB-4364-A46B-F3AC733007B3}\"><event eventtype=\"2\" eventresult=\"1\" errorcode=\"10\" extracode1=\"20\"/><event eventtype=\"2\" eventresult=\"1\" errorcode=\"30\" extracode1=\"40\"/></app>"));  // NOLINT
 
   CString actual_ping_request;
   install_ping_no_shell.BuildRequestString(&actual_ping_request);
@@ -115,7 +116,8 @@ TEST_F(PingTest, BuildOmahaPing) {
 
   CPath shell_path_1_2_183_21(app_util::GetCurrentModuleDirectory());
   shell_path_1_2_183_21.Append(_T("unittest_support\\omaha_1.3.x\\"));
-  shell_path_1_2_183_21.Append(kOmahaShellFileName);
+  // ViaSat: The test still uses default precompiled names
+  shell_path_1_2_183_21.Append(_T("GoogleUpdate.exe"));
   EXPECT_SUCCEEDED(File::Copy(shell_path_1_2_183_21,
                               goopdate_utils::BuildGoogleUpdateExePath(false),
                               true));
@@ -146,6 +148,7 @@ TEST_F(PingTest, BuildAppsPing) {
   const CString expected_lang         = _T("en");
   const CString expected_brand_code   = _T("GGLS");
   const CString expected_client_id    = _T("someclientid");
+  const CString expected_channel      = _T("somechannel");
   const CString expected_iid          =
       _T("{7C0B6E56-B24B-436b-A960-A6EA201E886F}");
   const CString experiment_labels =
@@ -163,6 +166,9 @@ TEST_F(PingTest, BuildAppsPing) {
   EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
                                             kRegValueClientId,
                                             expected_client_id));
+  EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
+                                            kRegValueChannel,
+                                            expected_channel));
   EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
                                             kRegValueInstallationId,
                                             expected_iid));
@@ -195,7 +201,7 @@ TEST_F(PingTest, BuildAppsPing) {
   apps_ping.BuildAppsPing(ping_event);
 
   CString expected_ping_request_substring;
-  expected_ping_request_substring.Format(_T("<app appid=\"{430FD4D0-B729-4F61-AA34-91526481799D}\" version=\"1.3.99.0\" nextversion=\"\" lang=\"en\" brand=\"GGLS\" client=\"someclientid\" experiments=\"a=a\" installage=\"2\" installdate=\"9086\" iid=\"{7C0B6E56-B24B-436b-A960-A6EA201E886F}\"><event eventtype=\"2\" eventresult=\"1\" errorcode=\"34\" extracode1=\"6\"/></app>"));  // NOLINT
+  expected_ping_request_substring.Format(_T("<app appid=\"{555B8D18-076D-4576-9579-1FD7F0399EAE}\" version=\"1.3.99.0\" nextversion=\"\" lang=\"en\" brand=\"GGLS\" client=\"someclientid\" tag=\"somechannel\" experiments=\"a=a\" installage=\"2\" installdate=\"9086\" iid=\"{7C0B6E56-B24B-436b-A960-A6EA201E886F}\"><event eventtype=\"2\" eventresult=\"1\" errorcode=\"34\" extracode1=\"6\"/></app>"));  // NOLINT
 
   CString actual_ping_request;
   apps_ping.BuildRequestString(&actual_ping_request);
@@ -205,7 +211,7 @@ TEST_F(PingTest, BuildAppsPing) {
 }
 
 TEST_F(PingTest, DISABLED_SendString) {
-  CString request_string = _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?><request protocol=\"3.0\" version=\"1.3.99.0\" ismachine=\"1\" sessionid=\"unittest\" installsource=\"oneclick\" testsource=\"dev\" requestid=\"{EC821C33-E4EE-4E75-BC85-7E9DFC3652F5}\" periodoverridesec=\"7407360\"><os platform=\"win\" version=\"6.0\" sp=\"Service Pack 1\"/><app appid=\"{430FD4D0-B729-4F61-AA34-91526481799D}\" version=\"1.0.0.0\" nextversion=\"2.0.0.0\" lang=\"en\" brand=\"GGLS\" client=\"a client id\" iid=\"{DE06587E-E5AB-4364-A46B-F3AC733007B3}\"><event eventtype=\"10\" eventresult=\"1\" errorcode=\"0\" extracode1=\"0\"/></app></request>");   // NOLINT
+  CString request_string = _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?><request protocol=\"3.0\" version=\"1.3.99.0\" ismachine=\"1\" sessionid=\"unittest\" installsource=\"oneclick\" testsource=\"dev\" requestid=\"{EC821C33-E4EE-4E75-BC85-7E9DFC3652F5}\" periodoverridesec=\"7407360\"><os platform=\"win\" version=\"6.0\" sp=\"Service Pack 1\"/><app appid=\"{555B8D18-076D-4576-9579-1FD7F0399EAE}\" version=\"1.0.0.0\" nextversion=\"2.0.0.0\" lang=\"en\" brand=\"GGLS\" client=\"a client id\" tag=\"a channel\" iid=\"{DE06587E-E5AB-4364-A46B-F3AC733007B3}\"><event eventtype=\"10\" eventresult=\"1\" errorcode=\"0\" extracode1=\"0\"/></app></request>");   // NOLINT
   EXPECT_HRESULT_SUCCEEDED(Ping::SendString(false,
                                             HeadersVector(),
                                             request_string));
@@ -215,7 +221,7 @@ TEST_F(PingTest, DISABLED_SendString) {
 }
 
 TEST_F(PingTest, DISABLED_HandlePing) {
-  CString request_string = _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?><request protocol=\"3.0\" version=\"1.3.99.0\" ismachine=\"1\" sessionid=\"unittest\" installsource=\"oneclick\" testsource=\"dev\" requestid=\"{EC821C33-E4EE-4E75-BC85-7E9DFC3652F5}\" periodoverridesec=\"7407360\"><os platform=\"win\" version=\"6.0\" sp=\"Service Pack 1\"/><app appid=\"{430FD4D0-B729-4F61-AA34-91526481799D}\" version=\"1.0.0.0\" nextversion=\"2.0.0.0\" lang=\"en\" brand=\"GGLS\" client=\"a client id\" iid=\"{DE06587E-E5AB-4364-A46B-F3AC733007B3}\"><event eventtype=\"10\" eventresult=\"1\" errorcode=\"0\" extracode1=\"0\"/></app></request>");   // NOLINT
+  CString request_string = _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?><request protocol=\"3.0\" version=\"1.3.99.0\" ismachine=\"1\" sessionid=\"unittest\" installsource=\"oneclick\" testsource=\"dev\" requestid=\"{EC821C33-E4EE-4E75-BC85-7E9DFC3652F5}\" periodoverridesec=\"7407360\"><os platform=\"win\" version=\"6.0\" sp=\"Service Pack 1\"/><app appid=\"{555B8D18-076D-4576-9579-1FD7F0399EAE}\" version=\"1.0.0.0\" nextversion=\"2.0.0.0\" lang=\"en\" brand=\"GGLS\" client=\"a client id\" tag=\"a channel\" iid=\"{DE06587E-E5AB-4364-A46B-F3AC733007B3}\"><event eventtype=\"10\" eventresult=\"1\" errorcode=\"0\" extracode1=\"0\"/></app></request>");   // NOLINT
 
   CStringA request_string_utf8(WideToUtf8(request_string));
   CStringA ping_string_utf8;
@@ -241,6 +247,7 @@ TEST_F(PingTest, SendInProcess) {
                    &command_line_extra_args.installation_id);
   command_line_extra_args.brand_code = _T("GGLS");
   command_line_extra_args.client_id  = _T("a client id");
+  command_line_extra_args.channel    = _T("a channel");
   command_line_extra_args.language   = _T("en");
 
   // User ping.
@@ -250,7 +257,7 @@ TEST_F(PingTest, SendInProcess) {
 
   CString request_string;
   EXPECT_HRESULT_SUCCEEDED(install_ping.BuildRequestString(&request_string));
-  EXPECT_HRESULT_SUCCEEDED(install_ping.SendInProcess(request_string));
+  EXPECT_HRESULT_SUCCEEDED(install_ping.SendInProcess(request_string)); // ViaSat: Requres server (may fail)
 }
 
 TEST_F(PingTest, IsPingExpired_PastTime) {
@@ -322,6 +329,7 @@ TEST_F(PingTest, PersistAndSendPersistedPings) {
                    &command_line_extra_args.installation_id);
   command_line_extra_args.brand_code = _T("GGLS");
   command_line_extra_args.client_id  = _T("a client id");
+  command_line_extra_args.channel    = _T("a channel");
   command_line_extra_args.language   = _T("en");
 
   // User ping.
@@ -350,13 +358,13 @@ TEST_F(PingTest, PersistAndSendPersistedPings) {
                                             Ping::kRegValuePersistedPingString,
                                             &persisted_ping));
   EXPECT_NE(-1, persisted_ping.Find(_T("sessionid=\"unittest\"")));
-  EXPECT_NE(-1, persisted_ping.Find(_T("<app appid=\"{430FD4D0-B729-4F61-AA34-91526481799D}\" version=\"1.0.0.0\" nextversion=\"2.0.0.0\" lang=\"en\" brand=\"GGLS\" client=\"a client id\" iid=\"{DE06587E-E5AB-4364-A46B-F3AC733007B3}\"><event eventtype=\"2\" eventresult=\"1\" errorcode=\"0\" extracode1=\"0\"/></app>")));  // NOLINT
+  EXPECT_NE(-1, persisted_ping.Find(_T("<app appid=\"{555B8D18-076D-4576-9579-1FD7F0399EAE}\" version=\"1.0.0.0\" nextversion=\"2.0.0.0\" lang=\"en\" brand=\"GGLS\" client=\"a client id\" tag=\"a channel\" iid=\"{DE06587E-E5AB-4364-A46B-F3AC733007B3}\"><event eventtype=\"2\" eventresult=\"1\" errorcode=\"0\" extracode1=\"0\"/></app>")));  // NOLINT
 
   EXPECT_HRESULT_SUCCEEDED(Ping::SendPersistedPings(false));
 
   RegKey pings_reg_key;
   pings_reg_key.Open(reg_path, KEY_READ);
-  EXPECT_EQ(0, pings_reg_key.GetSubkeyCount());
+  EXPECT_EQ(0, pings_reg_key.GetSubkeyCount()); // ViaSat: Requres server (may fail)
 }
 
 // The tests below rely on the out-of-process mechanism to send install pings.

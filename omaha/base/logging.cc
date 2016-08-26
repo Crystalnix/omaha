@@ -57,6 +57,7 @@
 #include "omaha/base/const_debug.h"
 #include "omaha/base/constants.h"
 #include "omaha/base/debug.h"
+#include "omaha/base/error.h"
 #include "omaha/base/etw_log_writer.h"
 #include "omaha/base/file.h"
 #include "omaha/base/path.h"
@@ -66,6 +67,62 @@
 #include "omaha/base/utils.h"
 
 namespace omaha {
+
+namespace {
+
+// copy-pasted from omaha/common/config_manager.cc
+
+int MapCSIDLFor64Bit(int csidl) {
+  // We assume, for now, that Omaha will always be deployed in a 32-bit form.
+  // If any 64-bit components (such as the crash handler) need to query paths,
+  // they need to be directed to the 32-bit equivalents.
+
+  switch (csidl) {
+    case CSIDL_PROGRAM_FILES:
+      return CSIDL_PROGRAM_FILESX86;
+    case CSIDL_PROGRAM_FILES_COMMON:
+      return CSIDL_PROGRAM_FILES_COMMONX86;
+    case CSIDL_SYSTEM:
+      return CSIDL_SYSTEMX86;
+    default:
+      return csidl;
+  }
+}
+
+HRESULT GetDir32(int csidl,
+                 const CString& path_tail,
+                 bool create_dir,
+                 CString* dir) {
+  ASSERT1(dir);
+
+#ifdef _WIN64
+  csidl = MapCSIDLFor64Bit(csidl);
+#endif
+
+  CString path;
+  HRESULT hr = GetFolderPath(csidl | CSIDL_FLAG_DONT_VERIFY, &path);
+  if (FAILED(hr)) {
+    CORE_LOG(LW, (_T("GetDir failed to find path][%d][0x%08x]"), csidl, hr));
+    return hr;
+  }
+  if (!::PathAppend(CStrBuf(path, MAX_PATH), path_tail)) {
+    CORE_LOG(LW, (_T("GetDir failed to append path][%s][%s]"),
+        path, path_tail));
+    return GOOPDATE_E_PATH_APPEND_FAILED;
+  }
+  dir->SetString(path);
+
+  // Try to create the directory. Continue if the directory can't be created.
+  if (create_dir) {
+    hr = CreateDir(path, NULL);
+    if (FAILED(hr)) {
+      CORE_LOG(LW, (_T("[GetDir failed to create dir][%s][0x%08x]"), path, hr));
+    }
+  }
+  return S_OK;
+}
+
+} // namespace
 
 // enforce ban on ASSERT/REPORT
 #undef ASSERT
@@ -320,18 +377,14 @@ void Logging::ReadLoggingSettings() {
 
 CString Logging::GetDefaultLogDirectory() const {
   CString path;
-  CStrBuf buf(path, MAX_PATH);
-  HRESULT hr = ::SHGetFolderPath(NULL,
-                                 CSIDL_COMMON_APPDATA,
-                                 NULL,
-                                 SHGFP_TYPE_CURRENT,
-                                 buf);
+  HRESULT hr = GetDir32(CSIDL_LOCAL_APPDATA,
+                        CString(OMAHA_REL_LOG_DIR),
+                        true,
+                        &path);
   if (FAILED(hr)) {
     return L"";
   }
-  if (!::PathAppend(buf, OMAHA_REL_LOG_DIR)) {
-    return L"";
-  }
+
   return path;
 }
 
@@ -904,13 +957,18 @@ CString Logging::GetCurrentConfigurationFilePath() const {
 }
 
 CString Logging::GetConfigurationFilePath() const {
-  CString file_path;
-  CString system_drive = GetEnvironmentVariableAsString(_T("SystemDrive"));
-  if (!system_drive.IsEmpty()) {
-    file_path = system_drive;
-    file_path += L"\\";
+  CString path;
+  HRESULT hr = GetDir32(CSIDL_LOCAL_APPDATA,
+                        CString(OMAHA_REL_COMPANY_DIR),
+                        true,
+                        &path);
+  if (FAILED(hr)) {
+    return L"";
   }
-  return file_path + kLogConfigFileName;
+
+  path.Append(_T("\\"));
+  path.Append(kLogConfigFileName);
+  return path;
 }
 
 LogWriter::LogWriter() {

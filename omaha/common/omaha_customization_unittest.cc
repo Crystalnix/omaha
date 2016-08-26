@@ -55,7 +55,7 @@ TEST(OmahaCustomizationTest, Constants_BuildFiles) {
   EXPECT_STREQ("Google Update", OMAHA_APP_NAME_ANSI);
 #endif  // GOOGLE_UPDATE_BUILD
 
-  EXPECT_STREQ("goopdate", MAIN_DLL_BASE_NAME_ANSI);
+  EXPECT_STREQ("vsupdate", MAIN_DLL_BASE_NAME_ANSI);
 
   const GUID kActualProxyClsidIsMachineGuid = PROXY_CLSID_IS_MACHINE;
   EXPECT_TRUE(::IsEqualGUID(kProxyClsidIsMachineGuid,
@@ -76,17 +76,17 @@ TEST(OmahaCustomizationTest, Constants_BuildFiles) {
 #endif
 
   // Primary omaha_version_utils values.
-  EXPECT_STREQ(_T("npGoogleOneClick"), ONECLICK_PLUGIN_NAME);
-  EXPECT_STREQ(_T("npGoogleUpdate"), UPDATE_PLUGIN_NAME);
-  EXPECT_STREQ(_T("GoopdateBho"), BHO_NAME);
+  EXPECT_STREQ(_T("npViaSatOneClick"), ONECLICK_PLUGIN_NAME);
+  EXPECT_STREQ(_T("npViaSatUpdate"), UPDATE_PLUGIN_NAME);
+  EXPECT_STREQ(_T("VSupdateBho"), BHO_NAME);
 
   // Filenames from omaha_version_utils.
   EXPECT_STREQ(
-      _T("npGoogleOneClick") _T(ONECLICK_PLUGIN_VERSION_ANSI) _T(".dll"),
+      _T("npViaSatOneClick") _T(ONECLICK_PLUGIN_VERSION_ANSI) _T(".dll"),
       ONECLICK_PLUGIN_FILENAME);
-  EXPECT_STREQ(_T("npGoogleUpdate") _T(UPDATE_PLUGIN_VERSION_ANSI) _T(".dll"),
+  EXPECT_STREQ(_T("npViaSatUpdate") _T(UPDATE_PLUGIN_VERSION_ANSI) _T(".dll"),
                UPDATE_PLUGIN_FILENAME);
-  EXPECT_STREQ(_T("GoopdateBho.dll"), BHO_FILENAME);
+  EXPECT_STREQ(_T("VSupdateBho.dll"), BHO_FILENAME);
 }
 
 TEST(OmahaCustomizationTest, Constants_Names) {
@@ -117,21 +117,21 @@ TEST(OmahaCustomizationTest, Constants_Names) {
 #endif  // GOOGLE_UPDATE_BUILD
 
   // Filename bases
-  EXPECT_STREQ(_T("GoogleUpdate"), MAIN_EXE_BASE_NAME);
-  EXPECT_STREQ(_T("goopdate"), MAIN_DLL_BASE_NAME);
+  EXPECT_STREQ(_T("ViaSatUpdate"), MAIN_EXE_BASE_NAME);
+  EXPECT_STREQ(_T("vsupdate"), MAIN_DLL_BASE_NAME);
 }
 
 TEST(OmahaCustomizationTest, Constants_Filenames) {
-  EXPECT_STREQ(_T("GoogleUpdate.exe"), kOmahaShellFileName);
-  EXPECT_STREQ(_T("GoogleCrashHandler.exe"), kCrashHandlerFileName);
-  EXPECT_STREQ(_T("GoogleCrashHandler64.exe"), kCrashHandler64FileName);
-  EXPECT_STREQ(_T("goopdate.dll"), kOmahaDllName);
-  EXPECT_STREQ(_T("goopdateres_%s.dll"), kOmahaResourceDllNameFormat);
-  EXPECT_STREQ(_T("GoogleUpdateBroker.exe"), kOmahaBrokerFileName);
-  EXPECT_STREQ(_T("GoogleUpdateOnDemand.exe"), kOmahaOnDemandFileName);
-  EXPECT_STREQ(_T("GoogleUpdateWebPlugin.exe"), kOmahaWebPluginFileName);
-  EXPECT_STREQ(_T("GoogleUpdateSetup.exe"), kOmahaMetainstallerFileName);
-  EXPECT_STREQ(_T("GoogleUpdateComRegisterShell64.exe"),
+  EXPECT_STREQ(_T("ViaSatUpdate.exe"), kOmahaShellFileName);
+  EXPECT_STREQ(_T("ViaSatCrashHandler.exe"), kCrashHandlerFileName);
+  EXPECT_STREQ(_T("ViaSatCrashHandler64.exe"), kCrashHandler64FileName);
+  EXPECT_STREQ(_T("vsupdate.dll"), kOmahaDllName);
+  EXPECT_STREQ(_T("vsupdateres_%s.dll"), kOmahaResourceDllNameFormat);
+  EXPECT_STREQ(_T("ViaSatUpdateBroker.exe"), kOmahaBrokerFileName);
+  EXPECT_STREQ(_T("ViaSatUpdateOnDemand.exe"), kOmahaOnDemandFileName);
+  EXPECT_STREQ(_T("ViaSatUpdateWebPlugin.exe"), kOmahaWebPluginFileName);
+  EXPECT_STREQ(_T("ViaSatUpdateSetup.exe"), kOmahaMetainstallerFileName);
+  EXPECT_STREQ(_T("ViaSatUpdateComRegisterShell64.exe"),
                kOmahaCOMRegisterShell64);
   EXPECT_STREQ(_T("psmachine.dll"), kPSFileNameMachine);
   EXPECT_STREQ(_T("psmachine_64.dll"), kPSFileNameMachine64);
@@ -144,17 +144,17 @@ TEST(OmahaCustomizationTest, Constants_Certificate) {
 }
 
 TEST(OmahaCustomizationTest, Constants_OmahaAppId_String) {
-  EXPECT_STREQ(_T("{430FD4D0-B729-4F61-AA34-91526481799D}"), GOOPDATE_APP_ID);
-  EXPECT_STREQ(_T("{430FD4D0-B729-4F61-AA34-91526481799D}"),
+  EXPECT_STREQ(_T("{555B8D18-076D-4576-9579-1FD7F0399EAE}"), GOOPDATE_APP_ID);
+  EXPECT_STREQ(_T("{555B8D18-076D-4576-9579-1FD7F0399EAE}"),
                kGoogleUpdateAppId);
 }
 
 TEST(OmahaCustomizationTest, Constants_OmahaAppId_GUID) {
   const GUID kExpectedGoogleUpdateGuid =
-      {0x430FD4D0, 0xB729, 0x4F61,
-       {0xAA, 0x34, 0x91, 0x52, 0x64, 0x81, 0x79, 0x9D}};
+      {0x555b8d18, 0x76d, 0x4576,
+       {0x95, 0x79, 0x1f, 0xd7, 0xf0, 0x39, 0x9e, 0xae }};
   EXPECT_TRUE(::IsEqualGUID(kExpectedGoogleUpdateGuid, kGoopdateGuid));
-  EXPECT_STREQ(_T("{430FD4D0-B729-4F61-AA34-91526481799D}"),
+  EXPECT_STREQ(_T("{555B8D18-076D-4576-9579-1FD7F0399EAE}"),
                GuidToString(kGoopdateGuid));
 }
 
@@ -221,10 +221,10 @@ TEST(OmahaCustomizationTest, Constants_RegistryValues) {
 }
 
 TEST(OmahaCustomizationTest, Constants_MsiMsp) {
-  EXPECT_STREQ(_T("GoogleUpdateHelper.msi"), kHelperInstallerName);
+  EXPECT_STREQ(_T("ViaSatUpdateHelper.msi"), kHelperInstallerName);
   EXPECT_STREQ(_T("{A92DAB39-4E2C-4304-9AB6-BC44E68B55E2}"),
                kHelperInstallerProductGuid);
-  EXPECT_STREQ(_T("GoogleUpdateHelperPatch.msp"), kHelperPatchName);
+  EXPECT_STREQ(_T("ViaSatUpdateHelperPatch.msp"), kHelperPatchName);
   EXPECT_STREQ(_T("{E0D0D2C9-5836-4023-AB1D-54EC3B90AD03}"), kHelperPatchGuid);
 }
 
@@ -237,16 +237,17 @@ TEST(OmahaCustomizationTest, Constants_BrandCode) {
 }
 
 TEST(OmahaCustomizationTest, Constants_Addresses) {
-  EXPECT_STREQ(_T("www.google.com"), kGoogleHttpServer);
-  EXPECT_STREQ(_T("tools.google.com"), kGoopdateServer);
-  EXPECT_STREQ(_T("https://tools.google.com/service/update2"), kUrlUpdateCheck);
-  EXPECT_STREQ(_T("https://tools.google.com/service/update2"), kUrlPing);
-  EXPECT_STREQ(_T("https://clients2.google.com/cr/report"), kUrlCrashReport);
-  EXPECT_STREQ(_T("https://www.google.com/support/installer/?"), kUrlMoreInfo);
-  EXPECT_STREQ(_T("https://clients2.google.com/service/check2"),
-               kUrlCodeRedCheck);
-  EXPECT_STREQ(_T("https://clients5.google.com/tbproxy/usagestats"),
-               kUrlUsageStatsReport);
+  // ViaSat: We need to make sure that we don't point to the Google servers
+  EXPECT_GU_STREQ(_T("www.google.com"), kGoogleHttpServer);
+  EXPECT_GU_STREQ(_T("tools.google.com"), kGoopdateServer);
+  EXPECT_GU_STREQ(_T("https://tools.google.com/service/update2"), kUrlUpdateCheck);
+  EXPECT_GU_STREQ(_T("https://tools.google.com/service/update2"), kUrlPing);
+  EXPECT_GU_STREQ(_T("https://clients2.google.com/cr/report"), kUrlCrashReport);
+  EXPECT_GU_STREQ(_T("https://www.google.com/support/installer/?"), kUrlMoreInfo);
+  EXPECT_GU_STREQ(_T("https://clients2.google.com/service/check2"),
+                  kUrlCodeRedCheck);
+  EXPECT_GU_STREQ(_T("https://clients5.google.com/tbproxy/usagestats"),
+                  kUrlUsageStatsReport);
 }
 
 TEST(OmahaCustomizationTest, Constants_Config) {
@@ -258,8 +259,8 @@ TEST(OmahaCustomizationTest, Constants_Debug) {
 }
 
 TEST(OmahaCustomizationTest, Constants_Logging) {
-  EXPECT_STREQ(_T("GoogleUpdate.ini"), kLogConfigFileName);
-  EXPECT_STREQ(_T("GoogleUpdate.log"), kDefaultLogFileName);
+  EXPECT_STREQ(_T("ViaSatUpdate.ini"), kLogConfigFileName);
+  EXPECT_STREQ(_T("ViaSatUpdate.log"), kDefaultLogFileName);
 }
 
 // These should not change during customization.
@@ -306,7 +307,7 @@ TEST(OmahaCustomizationTest, Constants_Services) {
   EXPECT_GU_STREQ(_T("gupdate"), kServicePrefix);
   EXPECT_GU_STREQ(_T("gupdatem"), kMediumServicePrefix);
 
-  EXPECT_STREQ(_T("GoogleUpdate.exe"), kServiceFileName);
+  EXPECT_STREQ(_T("ViaSatUpdate.exe"), kServiceFileName);
 }
 
 TEST(OmahaCustomizationTest, Constants_ScheduledTasks) {
@@ -317,7 +318,7 @@ TEST(OmahaCustomizationTest, Constants_ScheduledTasks) {
 TEST(OmahaCustomizationTest, Constants_Plugins) {
   EXPECT_GU_STREQ(_T("Google.OneClickCtrl.") _T(ONECLICK_PLUGIN_VERSION_ANSI),
                   kOneClickProgId);
-  EXPECT_STREQ(
+  EXPECT_GU_STREQ(
       "application/x-vnd.google.oneclickctrl." ONECLICK_PLUGIN_VERSION_ANSI,
       kOneClickPluginMimeTypeAnsi);
 }
@@ -372,6 +373,7 @@ TEST(OmahaCustomizationTest, ConfigManager_RegistryKeys) {
 }
 
 TEST(OmahaCustomizationTest, IsInternalUser) {
+  // ViaSat: This test requires --omaha_buildsystem if we perform testing on a build server
   if (IsBuildSystem()) {
   // The build system is not configured the same.
   // This may or may not be true in non-Google Update builds.

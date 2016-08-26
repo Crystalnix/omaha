@@ -35,7 +35,7 @@ namespace {
 const int kMaxWaitForProcessMs                  = 120000;
 
 const TCHAR kLongRunningProcessesRelativePath[] =
-    _T("unittest_support\\does_not_shutdown\\GoogleUpdate.exe");
+    _T("unittest_support\\does_not_shutdown\\ViaSatUpdate.exe");
 
 CString GetLongRunningProcessPath() {
   const CString module_dir(app_util::GetCurrentModuleDirectory());

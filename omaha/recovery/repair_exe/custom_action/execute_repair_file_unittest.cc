@@ -117,11 +117,11 @@ TEST(ExecuteRepairFileTest, VerifyFileAndExecute_FilenameIsDirectory) {
 
 TEST(ExecuteRepairFileTest, VerifyFileAndExecute_UnsignedFile) {
   CString expected_copy_path =
-      MSP_TEST_EXPECTED_DIR _T("\\GoogleUpdate_unsigned.exe");
+      MSP_TEST_EXPECTED_DIR _T("\\ViaSatUpdate_unsigned.exe");
   EXPECT_SUCCEEDED(ExpandStringWithSpecialFolders(&expected_copy_path));
   CString repair_file(app_util::GetCurrentModuleDirectory());
   EXPECT_TRUE(::PathAppend(CStrBuf(repair_file, MAX_PATH),
-              _T("GoogleUpdate_unsigned.exe")));
+              _T("ViaSatUpdate_unsigned.exe")));
 
   if (vista_util::IsUserAdmin()) {
     EXPECT_EQ(TRUST_E_NOSIGNATURE, VerifyFileAndExecute(repair_file, _T("")));

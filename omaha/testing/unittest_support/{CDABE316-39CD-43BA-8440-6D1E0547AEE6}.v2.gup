@@ -5,7 +5,7 @@
                  arguments="-baz"
                  codebase="http://dl.google.com/foo/install/1.2.3.4/foo_installer.exe"
                  hash="abcdef" needsadmin="false"
-                 onsuccess="exitsilentlyonlaunchcmd" size="12345678"
+                 successsaction="exitsilentlyonlaunchcmd" size="12345678"
                  status="ok"/>
     <!-- "system_level" is not included in any of the definitions. needsadmin
           controls this. -->

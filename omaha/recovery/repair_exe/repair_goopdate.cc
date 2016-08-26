@@ -13,7 +13,7 @@
 // limitations under the License.
 // ========================================================================
 //
-// Helper for the Google Update repair file. It launches the same repair file
+// Helper for the ViaSat Update repair file. It launches the same repair file
 // elevated using the MSP.
 
 #include "omaha/recovery/repair_exe/repair_goopdate.h"

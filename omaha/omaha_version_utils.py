@@ -17,10 +17,10 @@
 
 """Constants and utilities related to Omaha and tools versions"""
 
-_ONECLICK_PLUGIN_NAME = 'npGoogleOneClick'
-_UPDATE_PLUGIN_NAME = 'npGoogleUpdate'
-_BHO_NAME = 'GoopdateBho'
-_CRASH_HANDLER_NAME = 'GoogleCrashHandler'
+_ONECLICK_PLUGIN_NAME = 'npViaSatOneClick'
+_UPDATE_PLUGIN_NAME = 'npViaSatUpdate'
+_BHO_NAME = 'VSupdateBho'
+_CRASH_HANDLER_NAME = 'ViaSatCrashHandler'
 
 # List of languages that are fully supported in the current build.
 _OMAHA_LANGUAGES = [
@@ -124,16 +124,16 @@ def _GetMetainstallerPayloadFilenames(prefix,
   # files (googleupdate.exe, goopdateres_*.dll, etc.) are hardcoded all over
   # the place, and require a ton of point fixes to customize.
   payload_files = [
-      'GoogleUpdate.exe',
+      'ViaSatUpdate.exe',
       '%s.exe' % _CRASH_HANDLER_NAME,
-      '%sgoopdate.dll' % (prefix),
+      '%svsupdate.dll' % (prefix),
       plugin_dll_name,
       bho_dll_name,
-      'GoogleUpdateHelper.msi',
-      'GoogleUpdateBroker.exe',
-      'GoogleUpdateOnDemand.exe',
-      'GoogleUpdateComRegisterShell64.exe',
-      'GoogleUpdateWebPlugin.exe',
+      'ViaSatUpdateHelper.msi',
+      'ViaSatUpdateBroker.exe',
+      'ViaSatUpdateOnDemand.exe',
+      'ViaSatUpdateComRegisterShell64.exe',
+      'ViaSatUpdateWebPlugin.exe',
       '%spsmachine.dll' % (prefix),
       '%spsmachine_64.dll' % (prefix),
       '%spsuser.dll' % (prefix),
@@ -147,9 +147,9 @@ def _GetMetainstallerPayloadFilenames(prefix,
     payload_files.remove(bho_dll_name)
   elif _IsSupportedOmaha2Version(omaha_version):
     payload_files.remove(plugin_dll_name)
-    payload_files.remove('GoogleUpdateBroker.exe')
-    payload_files.remove('GoogleUpdateOnDemand.exe')
-    payload_files.remove('GoogleUpdateComRegisterShell64.exe')
+    payload_files.remove('ViaSatUpdateBroker.exe')
+    payload_files.remove('ViaSatUpdateOnDemand.exe')
+    payload_files.remove('ViaSatUpdateComRegisterShell64.exe')
     payload_files.remove('psmachine.dll')
     payload_files.remove('psmachine_64.dll')
     payload_files.remove('psuser.dll')
@@ -166,7 +166,7 @@ def _GetMetainstallerPayloadFilenames(prefix,
     payload_files.append('%s64.exe' % _CRASH_HANDLER_NAME)
 
   for language in languages:
-    payload_files += ['%sgoopdateres_%s.dll' % (prefix, language)]
+    payload_files += ['%svsupdateres_%s.dll' % (prefix, language)]
 
   return payload_files
 

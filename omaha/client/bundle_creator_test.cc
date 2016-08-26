@@ -117,6 +117,10 @@ class BundleCreatorTest : public testing::Test {
     EXPECT_SUCCEEDED(app->get_clientId(&client_id));
     EXPECT_STREQ(extra_arg.client_id, client_id);
 
+    CComBSTR channel;
+    EXPECT_SUCCEEDED(app->get_channel(&channel));
+    EXPECT_STREQ(extra_arg.channel, channel);
+
     CComBSTR referral_id;
     EXPECT_SUCCEEDED(app->get_referralId(&referral_id));
     EXPECT_STREQ(extra_arg.referral_id, referral_id);

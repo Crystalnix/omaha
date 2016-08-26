@@ -27,6 +27,7 @@ const CString kPv = _T("1.3.99.0");
 const CString kLang = _T("en");
 const CString kBrandCode = _T("GOOG");
 const CString kClientId = _T("testclientid");
+const CString kChannel = _T("testchannel");
 const CString kIid = _T("{7C0B6E56-B24B-436b-A960-A6EA201E886D}");
 
 }  // namespace
@@ -52,6 +53,9 @@ class PingEventDownloadMetricsTest : public testing::Test {
     EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
                                               kRegValueClientId,
                                               kClientId));
+    EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
+                                              kRegValueChannel,
+                                              kChannel));
     EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(kOmahaUserClientStatePath,
                                               kRegValueInstallationId,
                                               kIid));
@@ -82,9 +86,10 @@ TEST_F(PingEventDownloadMetricsTest, BuildPing) {
 
   CString expected_ping_request_substring;
   expected_ping_request_substring =
-      _T("<app appid=\"{430FD4D0-B729-4F61-AA34-91526481799D}\" ")
+      _T("<app appid=\"{555B8D18-076D-4576-9579-1FD7F0399EAE}\" ")
       _T("version=\"1.3.99.0\" nextversion=\"\" lang=\"en\" brand=\"GOOG\" ")
       _T("client=\"testclientid\" ")
+      _T("tag=\"testchannel\" ")
       _T("iid=\"{7C0B6E56-B24B-436b-A960-A6EA201E886D}\">")
       _T("<event eventtype=\"14\" eventresult=\"0\" errorcode=\"5\" ")
       _T("extracode1=\"0\" downloader=\"winhttp\" url=\"http:\\\\host\\path\" ")

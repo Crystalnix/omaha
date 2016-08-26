@@ -60,16 +60,16 @@ bool PrintToConsole(const TCHAR* format, ...) {
 void NetDiags::Initialize() {
   if (!SystemInfo::IsRunningOnXPOrLater()) {
     ::MessageBox(NULL,
-        _T("GoogleUpdate.exe"),
-        _T("\"GoogleUpdate.exe /NetDiags\" only runs on Windows XP or later."),
+        _T("ViaSatUpdate.exe"),
+        _T("\"ViaSatUpdate.exe /NetDiags\" only runs on Windows XP or later."),
         MB_OK);
     ::ExitProcess(1);
   }
 
   if (!AttachConsoleWrap(ATTACH_PARENT_PROCESS)) {
     ::MessageBox(NULL,
-        _T("GoogleUpdate.exe"),
-        _T("Please run \"GoogleUpdate.exe /NetDiags\" from a cmd.exe window."),
+        _T("ViaSatUpdate.exe"),
+        _T("Please run \"ViaSatUpdate.exe /NetDiags\" from a cmd.exe window."),
         MB_OK);
     ::ExitProcess(1);
   }

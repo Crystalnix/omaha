@@ -49,6 +49,7 @@ void BuildRequest(const App* app,
   request_app.iid            = GuidToString(app->iid());
   request_app.brand_code     = app->brand_code();
   request_app.client_id      = app->client_id();
+  request_app.channel        = app->channel();
   request_app.experiments    = app->GetExperimentLabelsNoTimestamps();
   request_app.ap             = app->ap();
 

@@ -263,7 +263,7 @@ int RunTests(bool is_medium_or_large_test,
     // Load a resource DLL so that strings can be loaded during tests and add it
     // to the list of modules used for CString.LoadString and CreateDialog
     // calls. The unittest executable includes unittest-specific resources.
-    HMODULE resource_dll = ::LoadLibraryEx(_T("goopdateres_en.dll"),
+    HMODULE resource_dll = ::LoadLibraryEx(_T("vsupdateres_en.dll"),
                             NULL,
                             LOAD_LIBRARY_AS_DATAFILE);
     ASSERT1(resource_dll);

@@ -232,6 +232,7 @@ class Ping {
     CString language;
     CString brand_code;
     CString client_id;
+    CString channel;
     CString installation_id;
     CString pv;
     CString experiment_labels;

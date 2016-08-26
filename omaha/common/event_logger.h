@@ -20,7 +20,7 @@
 //
 // The event logging works in both debug and optimized builds. This is not
 // a substitute for the debug log. Instead it is a way to provide some level
-// of transparency into what Google Update is doing at runtime and to help
+// of transparency into what ViaSat Update is doing at runtime and to help
 // diagnosing end user issues.
 //
 // Familiarity with Windows Event Log is helpful in understanding how

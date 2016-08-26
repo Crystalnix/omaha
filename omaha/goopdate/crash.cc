@@ -202,6 +202,7 @@ void CrashReporter::BuildParametersFromGoopdate(ParameterMap* parameters) {
   // the parameter map using the data from the currently running Omaha.
 
   (*parameters)[_T("prod")]   = kCrashOmahaProductName;
+  (*parameters)[_T("appid")]  = GOOPDATE_APP_ID;
   (*parameters)[_T("ver")]    = crash_utils::GetCrashVersionString();
   (*parameters)[_T("guid")] = goopdate_utils::GetUserIdLazyInit(is_machine_);
   (*parameters)[_T("lang")]   = lang::GetDefaultLanguage(is_machine_);

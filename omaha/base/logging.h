@@ -63,9 +63,9 @@ namespace omaha {
 #define kDefaultLogLevel                L3
 #else
 #define kDefaultMaxLogFileSize          10000000    // 10MB
-#define kDefaultLogToFile               0
+#define kDefaultLogToFile               1
 #define kDefaultLogToOutputDebug        0
-#define kDefaultLogLevel                L1
+#define kDefaultLogLevel                L3
 #endif
 
 // Truncates the log file when the size of the log file is this many

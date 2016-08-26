@@ -526,7 +526,7 @@ TEST_GU_INT_F(OmahaCustomizationGoopdateComInterfaceTest,
                   __uuidof(IOneClickProcessLauncher));
 
   EXPECT_SUCCEEDED(GetDocumentation(_T("IOneClickProcessLauncher")));
-  EXPECT_STREQ(_T("Google Update IOneClickProcessLauncher Interface"),
+  EXPECT_STREQ(_T("ViaSat Update IOneClickProcessLauncher Interface"),
                item_doc_string_);
   EXPECT_EQ(0, help_context_);
   EXPECT_TRUE(!help_file_);

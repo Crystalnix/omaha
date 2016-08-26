@@ -65,7 +65,7 @@ class CrashReporter {
   HRESULT ReadCustomInfoFile(const CString& custom_info_filename,
                              ParameterMap* parameters);
 
-  // Builds a ParameterMap from the copy of Google Update currently running.
+  // Builds a ParameterMap from the copy of ViaSat Update currently running.
   void BuildParametersFromGoopdate(ParameterMap* parameters);
 
   // Sends a crash report. If sent successfully, report_id contains the

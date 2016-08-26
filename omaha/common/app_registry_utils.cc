@@ -213,7 +213,7 @@ HRESULT SetInitialDayOfValues(const CString& client_state_key_path,
   return S_OK;
 }
 
-// Google Update does not have a referral_id. Everything else is the same as for
+// ViaSat Update does not have a referral_id. Everything else is the same as for
 // apps.
 HRESULT SetGoogleUpdateBranding(const CString& client_state_key_path,
                                 const CString& brand_code,
@@ -414,6 +414,7 @@ void GetAppLang(bool is_machine, const CString& app_id, CString* lang) {
 //    lang
 //    brand
 //    client
+//    channel
 //    iid
 //    experiment
 //    cohort
@@ -425,6 +426,7 @@ void GetClientStateData(bool is_machine,
                         CString* lang,
                         CString* brand_code,
                         CString* client_id,
+                        CString* channel,
                         CString* iid,
                         CString* experiment_labels,
                         Cohort* cohort,
@@ -452,6 +454,9 @@ void GetClientStateData(bool is_machine,
   }
   if (client_id) {
     key.GetValue(kRegValueClientId, client_id);
+  }
+  if (channel) {
+    key.GetValue(kRegValueChannel, channel);
   }
   if (iid) {
     key.GetValue(kRegValueInstallationId, iid);

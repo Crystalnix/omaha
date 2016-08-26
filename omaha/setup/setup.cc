@@ -843,7 +843,7 @@ HRESULT Setup::WaitForOtherInstancesToExit(const Pids& pids,
       SETUP_LOG(LE, (_T("[::WaitForMultipleObjects failed][%u]"), error));
       hr = HRESULT_FROM_WIN32(error);
     } else if (WAIT_OBJECT_0 != res) {
-      OPT_LOG(LEVEL_ERROR, (_T("[Other GoogleUpdate.exe instances failed to ")
+      OPT_LOG(LEVEL_ERROR, (_T("[Other ViaSatUpdate.exe instances failed to ")
                             _T("shutdown in time][%u]"), res));
 
       extra_code1_ = COMMANDLINE_MODE_UNKNOWN;
@@ -1096,7 +1096,7 @@ HRESULT Setup::StartMachineCoreProcess() const {
 HRESULT Setup::StartUserCoreProcess(const CString& core_cmd_line) const {
   HRESULT hr = System::StartCommandLine(core_cmd_line);
   if (FAILED(hr)) {
-    SETUP_LOG(LE, (_T("[Could not start Google Update Core][0x%08x]"), hr));
+    SETUP_LOG(LE, (_T("[Could not start ViaSat Update Core][0x%08x]"), hr));
     return hr;
   }
 

@@ -65,7 +65,7 @@ const TCHAR* const kCmdLineAppHandoffInstall = _T("handoff");
 
 // The "ig" switch was used in Omaha 2 to indicate a worker to finish installing
 // Omaha and perform an interactive install of an application.
-// ig = Install Google Update.
+// ig = Install ViaSat Update.
 const TCHAR* const kCmdLineLegacyFinishGoogleUpdateInstall = _T("ig");
 
 // The "ua" switch indicates a worker to perform an update check for all
@@ -272,6 +272,8 @@ const TCHAR* const kExtraArgBrandCode = _T("brand");
 // If a client value already exists on the system, it is ignored.
 // This value is used to set the initial client for Omaha and the client app.
 const TCHAR* const kExtraArgClientId = _T("client");
+
+const TCHAR* const kExtraArgChannel = _T("channel");
 
 // "experiments" extra argument is a set of experiment labels used to track
 // installs that are included in experiments.  Use "experiments" for

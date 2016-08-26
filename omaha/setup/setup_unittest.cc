@@ -153,7 +153,7 @@ class SetupTest : public testing::Test {
         not_listening_exe_opposite_path_(!is_machine ?
                                          not_listening_machine_exe_path_ :
                                          not_listening_user_exe_path_) {
-    omaha_exe_path_ = ConcatenatePath(omaha_path_, _T("GoogleUpdate.exe"));
+    omaha_exe_path_ = ConcatenatePath(omaha_path_, _T("ViaSatUpdate.exe"));
   }
 
   virtual void SetUp() {
@@ -741,8 +741,8 @@ class SetupFutureVersionInstalledUserTest : public SetupUserTest {
         false));
     EXPECT_SUCCEEDED(File::Copy(
         ConcatenatePath(app_util::GetCurrentModuleDirectory(),
-                        _T("goopdateres_en.dll")),
-        ConcatenatePath(future_version_path_, _T("goopdateres_en.dll")),
+                        _T("vsupdateres_en.dll")),
+        ConcatenatePath(future_version_path_, _T("vsupdateres_en.dll")),
         false));
 
     EXPECT_SUCCEEDED(RegKey::SetValue(USER_REG_CLIENTS_GOOPDATE,
@@ -836,7 +836,7 @@ TEST_F(SetupFutureVersionInstalledUserTest, Install_ValidRunKey) {
   const CString shell_path = ConcatenatePath(omaha_path_, kOmahaShellFileName);
   CString run_value;
   run_value.Format(_T("\"%s\" /cr"), shell_path);
-  ASSERT_SUCCEEDED(RegKey::SetValue(kRunKey, _T("Google Update"), run_value));
+  ASSERT_SUCCEEDED(RegKey::SetValue(kRunKey, _T("ViaSat Update"), run_value));
 
   CString dll_path = ConcatenatePath(future_version_path_, kOmahaDllName);
   ASSERT_SUCCEEDED(File::Remove(dll_path));

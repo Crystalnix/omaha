@@ -14,7 +14,7 @@
 // ========================================================================
 
 //
-// Defines the interface to the Google Update recovery mechanism to be included
+// Defines the interface to the ViaSat Update recovery mechanism to be included
 // in Google apps.
 
 #ifndef OMAHA_RECOVERY_CLIENT_GOOGLE_UPDATE_RECOVERY_H__

@@ -62,7 +62,12 @@ void CopyGoopdateFiles(const CString& omaha_path, const CString& version) {
 
   EXPECT_SUCCEEDED(CreateDir(version_path, NULL));
 
-  const TCHAR* files[] = {kCrashHandlerFileName,
+  const TCHAR* files[] = {UPDATE_PLUGIN_FILENAME,
+                          kPSFileNameMachine,
+                          kPSFileNameMachine64,
+                          kPSFileNameUser,
+                          kPSFileNameUser64,
+                          kCrashHandlerFileName,
                           kCrashHandler64FileName,
                           kOmahaShellFileName,
                           kHelperInstallerName,
@@ -76,11 +81,6 @@ void CopyGoopdateFiles(const CString& omaha_path, const CString& version) {
 #if 0
                           _T("GoopdateBho.dll"),
 #endif
-                          UPDATE_PLUGIN_FILENAME,
-                          kPSFileNameMachine,
-                          kPSFileNameMachine64,
-                          kPSFileNameUser,
-                          kPSFileNameUser64,
                           };
   for (size_t i = 0; i < arraysize(files); ++i) {
     EXPECT_SUCCEEDED(File::Copy(
@@ -92,19 +92,19 @@ void CopyGoopdateFiles(const CString& omaha_path, const CString& version) {
 
   EXPECT_SUCCEEDED(File::CopyWildcards(app_util::GetCurrentModuleDirectory(),
                                        version_path,
-                                       _T("goopdateres_\?\?.dll"),
+                                       _T("vsupdateres_\?\?.dll"),
                                        false));
   EXPECT_SUCCEEDED(File::CopyWildcards(app_util::GetCurrentModuleDirectory(),
                                        version_path,
-                                       _T("goopdateres_\?\?\?.dll"),
+                                       _T("vsupdateres_\?\?\?.dll"),
                                        false));
   EXPECT_SUCCEEDED(File::CopyWildcards(app_util::GetCurrentModuleDirectory(),
                                        version_path,
-                                       _T("goopdateres_\?\?-\?\?.dll"),
+                                       _T("vsupdateres_\?\?-\?\?.dll"),
                                        false));
   EXPECT_SUCCEEDED(File::CopyWildcards(app_util::GetCurrentModuleDirectory(),
                                        version_path,
-                                       _T("goopdateres_\?\?-\?\?\?.dll"),
+                                       _T("vsupdateres_\?\?-\?\?\?.dll"),
                                        false));
 }
 
@@ -179,6 +179,11 @@ class SetupFilesTest : public testing::Test {
     EXPECT_SUCCEEDED(FindFiles(version_path, _T("*.*"), &files));
     ASSERT_EQ(kExpectedFilesReturnedByFindFiles, files.size());
     int file_index = kExtraFilesReturnedByFindFiles;
+    EXPECT_STREQ(UPDATE_PLUGIN_FILENAME, files[file_index++]);
+    EXPECT_STREQ(kPSFileNameMachine, files[file_index++]);
+    EXPECT_STREQ(kPSFileNameMachine64, files[file_index++]);
+    EXPECT_STREQ(kPSFileNameUser, files[file_index++]);
+    EXPECT_STREQ(kPSFileNameUser64, files[file_index++]);
     EXPECT_STREQ(kCrashHandlerFileName, files[file_index++]);
     EXPECT_STREQ(kCrashHandler64FileName, files[file_index++]);
     EXPECT_STREQ(kOmahaShellFileName, files[file_index++]);
@@ -193,66 +198,61 @@ class SetupFilesTest : public testing::Test {
 #if 0
     EXPECT_STREQ(_T("GoopdateBho.dll"), files[file_index++]);
 #endif
-    EXPECT_STREQ(_T("goopdateres_am.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_ar.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_bg.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_bn.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_ca.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_cs.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_da.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_de.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_el.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_en-GB.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_en.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_es-419.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_es.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_et.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_fa.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_fi.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_fil.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_fr.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_gu.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_hi.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_hr.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_hu.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_id.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_is.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_it.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_iw.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_ja.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_kn.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_ko.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_lt.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_lv.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_ml.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_mr.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_ms.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_nl.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_no.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_pl.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_pt-BR.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_pt-PT.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_ro.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_ru.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_sk.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_sl.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_sr.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_sv.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_sw.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_ta.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_te.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_th.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_tr.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_uk.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_ur.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_vi.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_zh-CN.dll"), files[file_index++]);
-    EXPECT_STREQ(_T("goopdateres_zh-TW.dll"), files[file_index++]);
-    EXPECT_STREQ(UPDATE_PLUGIN_FILENAME, files[file_index++]);
-    EXPECT_STREQ(kPSFileNameMachine, files[file_index++]);
-    EXPECT_STREQ(kPSFileNameMachine64, files[file_index++]);
-    EXPECT_STREQ(kPSFileNameUser, files[file_index++]);
-    EXPECT_STREQ(kPSFileNameUser64, files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_am.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_ar.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_bg.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_bn.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_ca.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_cs.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_da.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_de.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_el.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_en-GB.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_en.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_es-419.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_es.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_et.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_fa.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_fi.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_fil.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_fr.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_gu.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_hi.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_hr.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_hu.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_id.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_is.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_it.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_iw.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_ja.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_kn.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_ko.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_lt.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_lv.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_ml.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_mr.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_ms.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_nl.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_no.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_pl.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_pt-BR.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_pt-PT.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_ro.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_ru.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_sk.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_sl.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_sr.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_sv.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_sw.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_ta.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_te.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_th.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_tr.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_uk.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_ur.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_vi.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_zh-CN.dll"), files[file_index++]);
+    EXPECT_STREQ(_T("vsupdateres_zh-TW.dll"), files[file_index++]);
 
     EXPECT_SUCCEEDED(DeleteDirectory(version_path));
   }
@@ -397,7 +397,7 @@ TEST_F(SetupFilesUserTest,
        ShouldCopyShell_ExistingIsOlderButCompatible_1_2_131_7) {
   CString target_path = ConcatenatePath(
       ConcatenatePath(exe_parent_dir_, _T("omaha_1.2.131.7_shell")),
-      kOmahaShellFileName);
+      _T("GoogleUpdate.exe"));
   ASSERT_TRUE(File::Exists(target_path));
   bool should_copy = false;
   bool already_exists = false;
@@ -410,7 +410,7 @@ TEST_F(SetupFilesUserTest,
        ShouldCopyShell_ExistingIsOlderButCompatible_1_2_183_9) {
   CString target_path = ConcatenatePath(
       ConcatenatePath(exe_parent_dir_, _T("omaha_1.2.183.9_shell")),
-      kOmahaShellFileName);
+      _T("GoogleUpdate.exe"));
   ASSERT_TRUE(File::Exists(target_path));
   bool should_copy = false;
   bool already_exists = false;
@@ -422,7 +422,7 @@ TEST_F(SetupFilesUserTest,
 TEST_F(SetupFilesUserTest, ShouldCopyShell_ExistingIsOlderMinor) {
   CString target_path = ConcatenatePath(
       ConcatenatePath(exe_parent_dir_, _T("omaha_1.2.x")),
-      kOmahaShellFileName);
+      _T("GoogleUpdate.exe"));
   ASSERT_TRUE(File::Exists(target_path));
   bool should_copy = false;
   bool already_exists = false;
@@ -434,7 +434,7 @@ TEST_F(SetupFilesUserTest, ShouldCopyShell_ExistingIsOlderMinor) {
 TEST_F(SetupFilesUserTest, ShouldCopyShell_ExistingIsOlderSameMinor) {
   CString target_path = ConcatenatePath(
       ConcatenatePath(exe_parent_dir_, _T("omaha_1.3.x")),
-      kOmahaShellFileName);
+      _T("GoogleUpdate.exe"));
   ASSERT_TRUE(File::Exists(target_path));
   bool should_copy = false;
   bool already_exists = false;

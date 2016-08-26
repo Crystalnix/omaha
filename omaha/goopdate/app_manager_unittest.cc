@@ -187,6 +187,11 @@ class AppManagerTestBase : public AppTestBaseWithRegistryOverride {
                                                  app.client_id_));
     }
 
+    if (!app.channel_.IsEmpty()) {
+      ASSERT_SUCCEEDED(client_state_key.SetValue(kRegValueChannel,
+                                                 app.channel_));
+    }
+
     if (!app.referral_id_.IsEmpty()) {
       ASSERT_SUCCEEDED(client_state_key.SetValue(kRegValueReferralId,
                                                  app.referral_id_));
@@ -1280,7 +1285,11 @@ class AppManagerWithBundleTest : public AppManagerTestBase {
     // instead of REGDB_E_CLASSNOTREG without this WMI hack. This has to be done
     // before the registry overriding that is done by the base class.
     WmiQuery wmi_query;
-    EXPECT_SUCCEEDED(wmi_query.Connect(_T("root\\SecurityCenter")));
+    HRESULT hr = wmi_query.Connect(_T("root\\SecurityCenter"));
+    if (FAILED(hr)) {
+      // ViaSat: In case if we run tests on Windows 2003 server
+      EXPECT_SUCCEEDED(wmi_query.Connect(_T("root\\Security")));
+    }
   }
 
   static void PopulateDataAndRegistryForRegisteredAndUnInstalledAppsTests(

@@ -82,7 +82,7 @@ TEST_F(NetworkConfigTest, GetUserAgentTest) {
   EXPECT_FALSE(version.IsEmpty());
   CString actual_user_agent(NetworkConfig::GetUserAgent());
   CString expected_user_agent;
-  expected_user_agent.Format(_T("Google Update/%s"), version);
+  expected_user_agent.Format(_T("ViaSat Update/%s"), version);
   EXPECT_STREQ(actual_user_agent, expected_user_agent);
 }
 

@@ -154,10 +154,10 @@ const TCHAR* const kTemporaryFilenamePrefix = _T("gup");
 // Omaha's app ID
 //
 // TODO(omaha): Rename all of these "Omaha".
-#define GOOPDATE_APP_ID _T("{430FD4D0-B729-4F61-AA34-91526481799D}")
+#define GOOPDATE_APP_ID _T("{555B8D18-076D-4576-9579-1FD7F0399EAE}")
 const TCHAR* const kGoogleUpdateAppId = GOOPDATE_APP_ID;
-const GUID kGoopdateGuid = {0x430FD4D0, 0xB729, 0x4F61,
-                            {0xAA, 0x34, 0x91, 0x52, 0x64, 0x81, 0x79, 0x9D}};
+const GUID kGoopdateGuid = {0x555b8d18, 0x76d, 0x4576,
+                            {0x95, 0x79, 0x1f, 0xd7, 0xf0, 0x39, 0x9e, 0xae }};
 
 // Chrome AppIDs
 #define CHROME_APP_ID _T("{8A69D345-D564-463C-AFF1-A69D9E530F96}")
@@ -418,7 +418,8 @@ const int kSecondsPerDay      = 24 * kSecondsPerHour;
 // hourly mark, the timer interval between updates will have a high likelihood
 // of being satisfied.
 const int kLastCheckJitterSec = 5 * kSecPerMin;
-const int kLastCheckPeriodSec = 5 * kSecondsPerHour - kLastCheckJitterSec;
+//const int kLastCheckPeriodSec = 5 * kSecondsPerHour - kLastCheckJitterSec;
+const int kLastCheckPeriodSec = 300;
 const int kLastCheckPeriodInternalUserSec = kLastCheckPeriodSec / 5;
 
 const int kMinLastCheckPeriodSec = 60;  // 60 seconds minimum.
@@ -427,7 +428,8 @@ const int kMinLastCheckPeriodSec = 60;  // 60 seconds minimum.
 // there is nothing to do, a worker does not take more than 200 ms to run.
 // Internal users are supposed to update at least once every hour. Therefore,
 // start workers every 30 minutes.
-const int kAUCheckPeriodMs             = 60 * 60 * 1000;  // Hourly.
+//const int kAUCheckPeriodMs             = 60 * 60 * 1000;  // Hourly.
+const int kAUCheckPeriodMs             = 30 * 60 * 1000;  // 30 minutes.
 const int kAUCheckPeriodInternalUserMs = 30 * 60 * 1000;  // 30 minutes.
 
 // Avoids starting workers too soon. This helps reduce disk thrashing at

@@ -2480,6 +2480,7 @@ TEST_P(AppRegistryUtilsRegistryProtectedTest, GetClientStateData) {
   const CString expected_lang         = _T("some lang");
   const CString expected_brand_code   = _T("some brand");
   const CString expected_client_id    = _T("some client id");
+  const CString expected_channel      = _T("some channel");
   const CString expected_iid          =
       _T("{7C0B6E56-B24B-436b-A960-A6EA201E886F}");
   const CString experiment_label =
@@ -2508,6 +2509,9 @@ TEST_P(AppRegistryUtilsRegistryProtectedTest, GetClientStateData) {
                                             kRegValueClientId,
                                             expected_client_id));
   EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(GetClientStatePath(),
+                                            kRegValueChannel,
+                                            expected_channel));
+  EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(GetClientStatePath(),
                                             kRegValueInstallationId,
                                             expected_iid));
   EXPECT_HRESULT_SUCCEEDED(RegKey::SetValue(GetClientStatePath(),
@@ -2528,7 +2532,8 @@ TEST_P(AppRegistryUtilsRegistryProtectedTest, GetClientStateData) {
                                     kRegValueInstallTimeSec,
                                     one_day_back));
   CString actual_pv, actual_ap, actual_lang, actual_brand_code,
-      actual_client_id, actual_experiment_label, actual_iid;
+      actual_client_id, actual_channel, actual_experiment_label,
+      actual_iid;
   Cohort actual_cohort;
   int actual_day_of_install(0);
   int actual_install_time_diff_sec(0);
@@ -2540,6 +2545,7 @@ TEST_P(AppRegistryUtilsRegistryProtectedTest, GetClientStateData) {
                      &actual_lang,
                      &actual_brand_code,
                      &actual_client_id,
+                     &actual_channel,
                      &actual_iid,
                      &actual_experiment_label,
                      &actual_cohort,
@@ -2551,6 +2557,7 @@ TEST_P(AppRegistryUtilsRegistryProtectedTest, GetClientStateData) {
   EXPECT_STREQ(expected_lang, actual_lang);
   EXPECT_STREQ(expected_brand_code, actual_brand_code);
   EXPECT_STREQ(expected_client_id, actual_client_id);
+  EXPECT_STREQ(expected_channel, actual_channel);
   EXPECT_STREQ(expected_iid, actual_iid);
   EXPECT_STREQ(expected_experiment_label, actual_experiment_label);
   EXPECT_STREQ(expected_cohort.cohort, actual_cohort.cohort);

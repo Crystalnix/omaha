@@ -32,7 +32,7 @@ _CLICKONCE_DEPLOY_DIR = '$TARGET_ROOT/clickonce_deployment'
 
 # This will be of the form 'GoogleInstaller_en.application'.
 def _GetClickOnceDeploymentName(language):
-  return 'GoogleInstaller_%s.application' % (language)
+  return 'ViaSatInstaller_%s.application' % (language)
 
 # Generate a ClickOnce deployment manifest personalized with the localized
 # display name of 'Google Installer'.
@@ -118,7 +118,7 @@ def _GenerateDeploymentForOneLanguage(omaha_version_info, language):
 
 def _BuildSetup(omaha_versions_info, is_repair = False):
   # Build the meta-installer for each version.
-  _PRODUCT_NAME = 'GoogleUpdate'
+  _PRODUCT_NAME = 'ViaSatUpdate'
 
   for omaha_version_info in omaha_versions_info:
     prefix = omaha_version_info.filename_prefix
@@ -159,7 +159,7 @@ def _BuildSetupRepairVersion(omaha_version_info,
       prefix = prefix,
       suffix = '_repair',
       additional_payload_contents = [
-          '$STAGING_DIR/GoogleUpdateHelperPatch.msp',
+          '$STAGING_DIR/ViaSatUpdateHelperPatch.msp',
           ],
   )
 
@@ -210,7 +210,7 @@ if not env.Bit('official_installers'):
           '$TARGET_ROOT/clickonce_deployment/bin/',
           '$STAGING_DIR',
           ],
-      source='$OBJ_ROOT/installers/GoogleUpdateSetup.exe',
+      source='$OBJ_ROOT/installers/ViaSatUpdateSetup.exe',
   )
 
   # Build the repair installer.

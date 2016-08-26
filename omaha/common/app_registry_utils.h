@@ -70,7 +70,7 @@ HRESULT SetUsageStatsEnable(bool is_machine,
 HRESULT SetInitialDayOfValues(const CString& client_state_key_path,
                               int num_days_since_datum);
 
-// Writes branding information for Google Update in the registry if it does not
+// Writes branding information for ViaSat Update in the registry if it does not
 // already exist. Otherwise, the information remains unchanged.
 // Writes a default Omaha-specific brand code if one is not specified in args.
 HRESULT SetGoogleUpdateBranding(const CString& client_state_key_path,
@@ -122,6 +122,7 @@ void GetClientStateData(bool is_machine,
                         CString* lang,
                         CString* brand_code,
                         CString* client_id,
+                        CString* channel,
                         CString* iid,
                         CString* experiment_labels,
                         Cohort* cohort,

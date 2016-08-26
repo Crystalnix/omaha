@@ -134,6 +134,7 @@ TEST(TimeTest, RFC822TimeParsing) {
   ASSERT_EQ(time.wMinute , 44);
   ASSERT_EQ(time.wSecond , 18);
 
+  // ViaSat: May fail because depends on timezone
   ASSERT_TRUE(RFC822DateToSystemTime(_T("Mon, 16 May 2005 15:44:18 -0700"),
                                      &time,
                                      true));
@@ -154,6 +155,7 @@ TEST(TimeTest, RFC822TimeParsing) {
   ASSERT_EQ(time.wMinute , 56);
   ASSERT_EQ(time.wSecond , 18);
 
+  // ViaSat: May fail because depends on timezone
   ASSERT_TRUE(RFC822DateToSystemTime(_T("Tue, 17 May 2005 02:56:18 +0400"),
                                      &time,
                                      true));
