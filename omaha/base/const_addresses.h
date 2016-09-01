@@ -73,7 +73,8 @@ const TCHAR* const kUrlCrashReport =
 // More information url.
 // Must allow query parameters to be appended to it.
 const TCHAR* const kUrlMoreInfo =
-    _T("https://www.") COMPANY_DOMAIN _T("/support/installer/?");
+    //_T("https://www.") COMPANY_DOMAIN _T("/support/installer/?");
+    _T("http://www.sparrowbrowser.com");
 
 // Code Red check url.
 const TCHAR* const kUrlCodeRedCheck =

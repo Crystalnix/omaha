@@ -71,9 +71,10 @@ HRESULT HelpUrlBuilder::BuildUrl(const std::vector<AppResult>& app_results,
   ASSERT1(help_url);
   help_url->Empty();
 
-  CString more_info_url;
-  VERIFY1(SUCCEEDED(ConfigManager::Instance()->GetMoreInfoUrl(&more_info_url)));
-
+  //CString more_info_url;
+  VERIFY1(SUCCEEDED(ConfigManager::Instance()->GetMoreInfoUrl(help_url)));
+  /*
+  ViaSat: We don't have a page for support. So no need to append additional arguments.
   const TCHAR* const kHelpLinkSourceId = _T("gethelp");
   HRESULT hr = BuildHttpGetString(more_info_url,
                                   app_results,
@@ -85,7 +86,7 @@ HRESULT HelpUrlBuilder::BuildUrl(const std::vector<AppResult>& app_results,
     help_url->Empty();
     return hr;
   }
-
+  */
   return S_OK;
 }
 
