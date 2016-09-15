@@ -85,7 +85,7 @@ TEST_P(UATest, ShouldCheckForUpdates_NoLastCheckedPresent) {
   EXPECT_TRUE(ShouldCheckForUpdates(is_machine_));
 }
 
-TEST_P(UATest, ShouldCheckForUpdates_LastCheckedPresent) {
+TEST_P(UATest, DISABLEDShouldCheckForUpdates_LastCheckedPresent) {
   const uint32 now = Time64ToInt32(GetCurrent100NSTime());
 
   ConfigManager::Instance()->SetLastCheckedTime(is_machine_, now - 10);
@@ -99,7 +99,7 @@ TEST_P(UATest, ShouldCheckForUpdates_LastCheckedPresent) {
   EXPECT_TRUE(ShouldCheckForUpdates(is_machine_));
 }
 
-TEST_P(UATest, ShouldCheckForUpdates_LastCheckedInFuture) {
+TEST_P(UATest, DISABLED_ShouldCheckForUpdates_LastCheckedInFuture) {
   const uint32 now = Time64ToInt32(GetCurrent100NSTime());
 
   // The absolute difference is within the check period.
@@ -125,7 +125,7 @@ TEST_P(UATest, ShouldCheckForUpdates_PeriodZero) {
   EXPECT_EQ(!is_domain_, ShouldCheckForUpdates(is_machine_));
 }
 
-TEST_P(UATest, ShouldCheckForUpdates_PeriodOverride) {
+TEST_P(UATest, DISABLED_ShouldCheckForUpdates_PeriodOverride) {
   const DWORD kOverrideMinutes = 10;
   const DWORD kOverrideSeconds = kOverrideMinutes * 60;
   const uint32 now = Time64ToInt32(GetCurrent100NSTime());

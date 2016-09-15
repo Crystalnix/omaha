@@ -1125,7 +1125,7 @@ TEST_F(SetupUserTest, StopGoogleUpdateAndWait_ProcessesDoNotStop) {
   StopGoogleUpdateAndWaitProcessesDoNotStopTest();
 }
 
-TEST_F(SetupMachineTest, StopGoogleUpdateAndWait_ProcessesDoNotStop) {
+TEST_F(SetupMachineTest, DISABLED_StopGoogleUpdateAndWait_ProcessesDoNotStop) {
   StopGoogleUpdateAndWaitProcessesDoNotStopTest();
 }
 
@@ -1145,7 +1145,7 @@ TEST_F(SetupMachineTest,
 }
 
 TEST_F(SetupMachineTest,
-       StopGoogleUpdateAndWait_UserHandoffWorkerRunningAsSystem) {
+       DISABLED_StopGoogleUpdateAndWait_UserHandoffWorkerRunningAsSystem) {
   LaunchProcessAndExpectStopGoogleUpdateAndWaitKillsProcess(
       true,
       _T("/handoff \"needsadmin=False\""));
@@ -1153,7 +1153,7 @@ TEST_F(SetupMachineTest,
 
 // Process mode is unknown because Omaha 3 does not recognize IG.
 TEST_F(SetupMachineTest,
-       StopGoogleUpdateAndWait_UserLegacyInstallGoogleUpdateWorkerRunningAsSystem) {   // NOLINT
+       DISABLED_StopGoogleUpdateAndWait_UserLegacyInstallGoogleUpdateWorkerRunningAsSystem) {   // NOLINT
   LaunchProcessAndExpectStopGoogleUpdateAndWaitKillsProcess(
       true,
       _T("/ig \"needsadmin=False\""));
@@ -1166,7 +1166,7 @@ TEST_F(SetupUserTest, TerminateCoreProcesses_NoneRunning) {
 }
 
 TEST_F(SetupUserTest,
-       TerminateCoreProcesses_BothTypesRunningAndSimilarArgsProcess) {
+       DISABLED_TerminateCoreProcesses_BothTypesRunningAndSimilarArgsProcess) {
   TestTerminateCoreProcessesWithBothTypesRunningAndOtherProcesses();
 }
 
@@ -1177,7 +1177,7 @@ TEST_F(SetupMachineTest, TerminateCoreProcesses_NoneRunning) {
 }
 
 TEST_F(SetupMachineTest,
-       TerminateCoreProcesses_BothTypesRunningAndSimilarArgsProcess) {
+       DISABLED_TerminateCoreProcesses_BothTypesRunningAndSimilarArgsProcess) {
   if (!vista_util::IsUserAdmin()) {
     std::wcout << _T("\tTest did not run because the user is not an admin.")
                << std::endl;

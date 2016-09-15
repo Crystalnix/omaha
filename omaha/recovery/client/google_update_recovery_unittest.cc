@@ -418,7 +418,7 @@ TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_UseRealHttpClient) {
                             NULL));
 }
 
-TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_FileReturned_Machine) {
+TEST_F(GoogleUpdateRecoveryTest, DISABLED_FixGoogleUpdate_FileReturned_Machine) {
   CString saved_arguments_path = ConcatenatePath(app_util::GetTempDir(),
                                                  kSavedArgumentsFileName);
 
@@ -444,7 +444,7 @@ TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_FileReturned_Machine) {
   EXPECT_TRUE(::DeleteFile(saved_arguments_path));
 }
 
-TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_FileReturned_User) {
+TEST_F(GoogleUpdateRecoveryTest, DISABLED_FixGoogleUpdate_FileReturned_User) {
   CString saved_arguments_path = ConcatenatePath(app_util::GetTempDir(),
                                                  kSavedArgumentsFileName);
 
@@ -788,7 +788,7 @@ TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_SaveToNonExistantDirectory) {
   EXPECT_HRESULT_SUCCEEDED(DeleteDirectory(kNonExistantDirectory));
 }
 
-TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_FileCollision) {
+TEST_F(GoogleUpdateRecoveryTest, DISABLED_FixGoogleUpdate_FileCollision) {
   const CString prev_tmp = GetTmp();
   EXPECT_TRUE(::SetEnvironmentVariable(_T("TMP"), kTempDirectory));
 
@@ -840,14 +840,14 @@ TEST_F(GoogleUpdateRecoveryTest, FixGoogleUpdate_FileCollision) {
 //
 // VerifyFileSignature Tests
 //
-TEST_F(GoogleUpdateRecoveryTest, VerifyFileSignature_SignedValid) {
+TEST_F(GoogleUpdateRecoveryTest, DISABLED_VerifyFileSignature_SignedValid) {
   const CString executable_full_path(MakeTestFilepath(
       kArgumentSavingExecutableRelativePath));
   EXPECT_TRUE(File::Exists(executable_full_path));
   EXPECT_HRESULT_SUCCEEDED(VerifyFileSignature(executable_full_path));
 }
 
-TEST_F(GoogleUpdateRecoveryTest, VerifyFileSignature_NotSigned) {
+TEST_F(GoogleUpdateRecoveryTest, DISABLED_VerifyFileSignature_NotSigned) {
   const CString executable_full_path(MakeTestFilepath(
       _T("GoogleUpdate_unsigned.exe")));
   EXPECT_TRUE(File::Exists(executable_full_path));
@@ -910,7 +910,7 @@ TEST_F(GoogleUpdateRecoveryTest, VerifyRepairFileMarkup_ValidMarkup) {
       _T("unittest_support\\SaveArguments.exe"))));
 }
 
-TEST_F(GoogleUpdateRecoveryTest, VerifyRepairFileMarkup_InvalidMarkups) {
+TEST_F(GoogleUpdateRecoveryTest, DISABLED_VerifyRepairFileMarkup_InvalidMarkups) {
   const TCHAR kNoResourcesExecutable[] =
       _T("unittest_support\\SaveArguments_unsigned_no_resources.exe");
 
@@ -957,7 +957,7 @@ TEST_F(GoogleUpdateRecoveryTest, VerifyRepairFileMarkup_BadFilenames) {
 //
 // Production Server Response Tests Tests
 //
-TEST_F(GoogleUpdateRecoveryTest, ProductionServerResponseTest) {
+TEST_F(GoogleUpdateRecoveryTest, DISABLED_ProductionServerResponseTest) {
   EXPECT_EQ(kDummyNoFileError, FixGoogleUpdate(kDummyAppGuid,
                                                kDummyAppVersion,
                                                kDummyAppLang,
