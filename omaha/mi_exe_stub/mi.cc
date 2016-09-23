@@ -625,6 +625,9 @@ HRESULT HandleError(HRESULT result) {
     case GOOPDATE_E_UNTAGGED_METAINSTALLER:
     default:
       msg_box_text.LoadString(IDS_GENERIC_ERROR);
+      WORD result_code = HRESULT_CODE(result);
+      msg_box_text.AppendFormat(_T(": %d (0x%x)"),result_code,
+                                result_code);
       _ASSERTE(!msg_box_text.IsEmpty());
       break;
   }
