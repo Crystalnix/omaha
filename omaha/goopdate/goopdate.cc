@@ -578,7 +578,7 @@ HRESULT GoopdateImpl::DoMain(HINSTANCE instance,
              (_T("[InitializeGoopdateAndLoadResources failed][0x%08x]"), hr));
     if (internal::CanDisplayUi(args_.mode, args_.is_silent_set)) {
       // The resources are unavaliable, so we must use hard-coded text.
-      const TCHAR* const kMsgBoxTitle = _T("Google Installer");
+      const TCHAR* const kMsgBoxTitle = _T("ViaSat Installer");
       CString message;
       SafeCStringFormat(&message, _T("Installation failed with error 0x%08x."),
                         hr);
@@ -606,7 +606,7 @@ HRESULT GoopdateImpl::DoMain(HINSTANCE instance,
   bool has_ui_been_displayed = false;
 
   if (!is_machine_ && vista_util::IsElevatedWithEnableLUAOn()) {
-    CORE_LOG(LW, (_T("User GoogleUpdate is possibly running in an unsupported ")
+    CORE_LOG(LW, (_T("User ViaSatUpdate is possibly running in an unsupported ")
                   _T("way, at High integrity with UAC possibly enabled.")));
   }
 

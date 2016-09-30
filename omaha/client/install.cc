@@ -475,7 +475,7 @@ HRESULT LaunchHandoffProcess(bool is_machine,
                                                          cmd_line,
                                                          process);
   if (FAILED(hr)) {
-    OPT_LOG(LE, (_T("[Google Update hand off failed][%s][0x%08x]"),
+    OPT_LOG(LE, (_T("[ViaSat Update hand off failed][%s][0x%08x]"),
                  cmd_line, hr));
     // TODO(omaha3): Report hr somehow. Was reported in extra code in Omaha 2.
     return GOOPDATE_E_HANDOFF_FAILED;
