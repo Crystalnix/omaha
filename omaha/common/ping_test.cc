@@ -235,7 +235,8 @@ TEST_F(PingTest, DISABLED_HandlePing) {
   EXPECT_EQ(0x80042190, Ping::HandlePing(false, _T("")));
 }
 
-TEST_F(PingTest, SendInProcess) {
+// TODO(viasat): The server doesn't accept the "unittest" string as session ID.
+TEST_F(PingTest, DISABLED_SendInProcess) {
   PingEventPtr ping_event(
       new PingEvent(PingEvent::EVENT_INSTALL_COMPLETE,
                     PingEvent::EVENT_RESULT_SUCCESS,
@@ -317,7 +318,8 @@ TEST_F(PingTest, LoadAndDeletePersistedPings) {
   EXPECT_EQ(0, pings_reg_key.GetSubkeyCount());
 }
 
-TEST_F(PingTest, PersistAndSendPersistedPings) {
+// TODO(viasat): The server doesn't accept the "unittest" string as session ID.
+TEST_F(PingTest, DISABLED_PersistAndSendPersistedPings) {
   PingEventPtr ping_event(
       new PingEvent(PingEvent::EVENT_INSTALL_COMPLETE,
                     PingEvent::EVENT_RESULT_SUCCESS,

@@ -605,7 +605,8 @@ TEST_F(InstallManagerInstallAppUserTest,
   EXPECT_EQ(POST_INSTALL_ACTION_DEFAULT, GetPostInstallAction(app_));
 }
 
-TEST_F(InstallManagerInstallAppMachineTest, InstallApp_MsiInstallerSucceeds) {
+// TODO(viasat): Check registry keys of the msi file.
+TEST_F(InstallManagerInstallAppMachineTest, DISABLED_InstallApp_MsiInstallerSucceeds) {
   if (!vista_util::IsUserAdmin()) {
     std::wcout << _T("\tTest did not run because the user is not an admin.")
                << std::endl;
@@ -687,8 +688,9 @@ TEST_F(InstallManagerInstallAppMachineTest, InstallApp_MsiInstallerSucceeds) {
   EXPECT_SUCCEEDED(RegKey::DeleteKey(kFullFooAppClientKeyPath));
 }
 
+// TODO(viasat): Check registry keys of the msi file.
 TEST_F(InstallManagerInstallAppMachineTest,
-       InstallApp_MsiInstallerWithArgumentSucceeds) {
+       DISABLED_InstallApp_MsiInstallerWithArgumentSucceeds) {
   if (!vista_util::IsUserAdmin()) {
     std::wcout << _T("\tTest did not run because the user is not an admin.")
                << std::endl;

@@ -419,6 +419,7 @@ TEST_F(SetupFilesUserTest,
   EXPECT_TRUE(already_exists);
 }
 
+// TODO(viasat): Check why the directory not being copied.
 TEST_F(SetupFilesUserTest, ShouldCopyShell_ExistingIsOlderMinor) {
   CString target_path = ConcatenatePath(
       ConcatenatePath(exe_parent_dir_, _T("omaha_1.2.x")),

@@ -729,7 +729,8 @@ TEST_F(SetupGoogleUpdateUserRegistryProtectedTest,
 
 // The helper can be installed when the test begins.
 // It will not be installed when the test successfully completes.
-TEST_F(SetupGoogleUpdateMachineTest, InstallAndUninstallMsiHelper) {
+// TODO(viasat): Check registry keys of the msi file.
+TEST_F(SetupGoogleUpdateMachineTest, DISABLED_InstallAndUninstallMsiHelper) {
   const TCHAR* MsiInstallRegValueKey =
       ConfigManager::Instance()->machine_registry_update();
 
@@ -796,8 +797,9 @@ TEST_F(SetupGoogleUpdateMachineTest, InstallAndUninstallMsiHelper) {
 // original filename in the new directory.
 // The helper can be installed when the test begins.
 // It will not be installed when the test successfully completes.
+// TODO(viasat): Check registry keys of the msi file.
 TEST_F(SetupGoogleUpdateMachineTest,
-       InstallMsiHelper_OverinstallDifferentMsiBuild) {
+       DISABLED_InstallMsiHelper_OverinstallDifferentMsiBuild) {
   if (!vista_util::IsUserAdmin()) {
     std::wcout << _T("\tThis test did not run because it must be run as admin.")
                << std::endl;

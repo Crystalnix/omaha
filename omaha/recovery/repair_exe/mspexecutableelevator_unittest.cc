@@ -151,8 +151,9 @@ TEST_F(RepairGoopdateWithMsiInstalledTest,
 }
 
 // This valid repair file saves the arguments passed to it to a file.
+// TODO(viasat): Requires CodeRed. Check the repair file.
 TEST_F(RepairGoopdateWithMsiInstalledTest,
-       ExecuteGoogleSignedExe_ValidRepairFile) {
+       DISABLED_ExecuteGoogleSignedExe_ValidRepairFile) {
   const TCHAR kArgs[] = _T("These /are the args.");
   CString repair_file(app_util::GetCurrentModuleDirectory());
   EXPECT_TRUE(::PathAppend(CStrBuf(repair_file, MAX_PATH),

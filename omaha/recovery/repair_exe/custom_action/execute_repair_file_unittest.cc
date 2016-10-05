@@ -138,11 +138,13 @@ TEST(ExecuteRepairFileTest, VerifyFileAndExecute_UnsignedFile) {
   }
 }
 
-TEST(ExecuteRepairFileTest, VerifyFileAndExecute_ValidRepairFileWithArgs) {
+// TODO(viasat): Requires CodeRed. Check the repair file.
+TEST(ExecuteRepairFileTest, DISABLED_VerifyFileAndExecute_ValidRepairFileWithArgs) {
   RunAndVerifySavedArgs(_T("These /are the args."));
 }
 
-TEST(ExecuteRepairFileTest, VerifyFileAndExecute_ValidRepairFileWithoutArgs) {
+// TODO(viasat): Requires CodeRed. Check the repair file.
+TEST(ExecuteRepairFileTest, DISABLED_VerifyFileAndExecute_ValidRepairFileWithoutArgs) {
   RunAndVerifySavedArgs(_T(""));
 }
 

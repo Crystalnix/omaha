@@ -62,8 +62,9 @@ TEST_F(RepairGoopdateTest, LaunchRepairFileElevated_MachineInstancePreVista) {
 }
 
 // This test only runs on Windows Vista and later OSes.
+// TODO(viasat): Requires CodeRed. Check the repair file.
 TEST_F(RepairGoopdateTest,
-       LaunchRepairFileElevated_MachineInstanceVistaWithMsiInstalledValidFile) {
+       DISABLED_LaunchRepairFileElevated_MachineInstanceVistaWithMsiInstalledValidFile) {
   if (!vista_util::IsVistaOrLater()) {
     std::wcout << _T("\tThis test did not run because it requires Windows ")
                   _T("Vista or later.") << std::endl;
