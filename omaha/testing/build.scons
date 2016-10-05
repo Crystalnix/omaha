@@ -96,7 +96,7 @@ unittest_support += env.Replicate(
     'unittest_support/omaha_1.2.183.9_shell/GoogleUpdate.exe',
     ])
 unittest_support += env.Replicate('$STAGING_DIR/unittest_support/omaha_1.2.x/',
-    'unittest_support/omaha_1.2.x/GooleUpdate.exe'
+    'unittest_support/omaha_1.2.x/GoogleUpdate.exe'
     )
 unittest_support += env.Replicate('$STAGING_DIR/unittest_support/omaha_1.3.x/',
     [ 'unittest_support/omaha_1.3.x/GoogleUpdate.exe',
