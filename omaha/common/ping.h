@@ -164,7 +164,7 @@ class Ping {
   FRIEND_TEST(PingTest, BuildAppsPing);
   FRIEND_TEST(PingTest, BuildAppsPingFromRegistry);
   FRIEND_TEST(PingTest, DISABLED_SendString);
-  FRIEND_TEST(PingTest, SendInProcess);
+  FRIEND_TEST(PingTest, DISABLED_SendInProcess);
   FRIEND_TEST(PingTest, IsPingExpired_PastTime);
   FRIEND_TEST(PingTest, IsPingExpired_CurrentTime);
   FRIEND_TEST(PingTest, IsPingExpired_FutureTime);
@@ -172,7 +172,7 @@ class Ping {
   FRIEND_TEST(PingTest, LoadAndDeletePersistedPings);
   FRIEND_TEST(PingTest, PersistPing);
   FRIEND_TEST(PingTest, PersistPing_Load_Delete);
-  FRIEND_TEST(PingTest, PersistAndSendPersistedPings);
+  FRIEND_TEST(PingTest, DISABLED_PersistAndSendPersistedPings);
   FRIEND_TEST(PingTest, DISABLED_SendUsingGoogleUpdate);
   FRIEND_TEST(PersistedPingsTest, AddPingEvents);
 
