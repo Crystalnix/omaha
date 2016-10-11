@@ -170,7 +170,7 @@ def BuildMetaInstaller(
   )
 
   authenticode_signed_target_prefix = 'authenticode_'
-  authenticode_signed_exe = env.DualSignedBinary(
+  authenticode_signed_exe = env.SignedBinary(
       target=authenticode_signed_target_prefix + target_name,
       source=merged_output,
       )
