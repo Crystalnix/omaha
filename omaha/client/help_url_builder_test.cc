@@ -371,7 +371,7 @@ TEST_F(HelpUrlBuilderTest, BuildHttpGetString_MultipleApps) {
 }
 
 // Machine ID must be set or it will be randomly generated in some cases.
-TEST_F(HelpUrlBuilderTest, BuildGetHelpUrl_User) {
+TEST_F(HelpUrlBuilderTest, DISABLED_BuildGetHelpUrl_User) {
   // The URL has a begin, middle which is OS-specific and not checked, and end.
   const CString kExpectedUrlBegin =
       _T("https://www.") COMPANY_DOMAIN _T("/support/installer/?hl=en-GB&")
@@ -401,7 +401,7 @@ TEST_F(HelpUrlBuilderTest, BuildGetHelpUrl_User) {
       << _T(" not found in ") << std::endl << url.GetString();
 }
 
-TEST_F(HelpUrlBuilderTest, BuildGetHelpUrl_Machine) {
+TEST_F(HelpUrlBuilderTest, DISABLED_BuildGetHelpUrl_Machine) {
   // The URL has a begin, middle which is OS-specific and not checked, and end.
   const CString kExpectedUrlBegin =
       _T("https://www.") COMPANY_DOMAIN _T("/support/installer/?hl=en-GB&")
@@ -434,7 +434,7 @@ TEST_F(HelpUrlBuilderTest, BuildGetHelpUrl_Machine) {
 }
 
 // Use extra code instead if it exists when installer error happens.
-TEST_F(HelpUrlBuilderTest, BuildGetHelpUrl_InstallerErrorWithExtraCode) {
+TEST_F(HelpUrlBuilderTest, DISABLED_BuildGetHelpUrl_InstallerErrorWithExtraCode) {
   // The URL has a begin, middle which is OS-specific and not checked, and end.
   const CString kExpectedUrlBegin =
       _T("https://www.") COMPANY_DOMAIN _T("/support/installer/?hl=en-GB&")
@@ -467,7 +467,7 @@ TEST_F(HelpUrlBuilderTest, BuildGetHelpUrl_InstallerErrorWithExtraCode) {
 
 // Keep using error code if extra code does not have meaningful value when
 // installer error happens.
-TEST_F(HelpUrlBuilderTest, BuildGetHelpUrl_InstallerErrorWithoutExtraCode) {
+TEST_F(HelpUrlBuilderTest, DISABLED_BuildGetHelpUrl_InstallerErrorWithoutExtraCode) {
   // The URL has a begin, middle which is OS-specific and not checked, and end.
   const CString kExpectedUrlBegin =
       _T("https://www.") COMPANY_DOMAIN _T("/support/installer/?hl=en-GB&")
@@ -500,7 +500,7 @@ TEST_F(HelpUrlBuilderTest, BuildGetHelpUrl_InstallerErrorWithoutExtraCode) {
 
 // Makes BuildHttpGetString fail by making the URL too long.
 // The call succeeds, but the url is empty.
-TEST_F(HelpUrlBuilderTest, BuildGetHelpUrl_BuildFails) {
+TEST_F(HelpUrlBuilderTest, DISABLED_BuildGetHelpUrl_BuildFails) {
   EXPECT_LT(INTERNET_MAX_URL_LENGTH, arraysize(kStringAlmostTooLongForUrl) + 5);
 
   ExpectAsserts expect_asserts;  // BuildHttpGetString asserts on URL length.

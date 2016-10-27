@@ -85,7 +85,7 @@ TEST_P(UATest, ShouldCheckForUpdates_NoLastCheckedPresent) {
   EXPECT_TRUE(ShouldCheckForUpdates(is_machine_));
 }
 
-TEST_P(UATest, DISABLEDShouldCheckForUpdates_LastCheckedPresent) {
+TEST_P(UATest, DISABLED_ShouldCheckForUpdates_LastCheckedPresent) {
   const uint32 now = Time64ToInt32(GetCurrent100NSTime());
 
   ConfigManager::Instance()->SetLastCheckedTime(is_machine_, now - 10);
