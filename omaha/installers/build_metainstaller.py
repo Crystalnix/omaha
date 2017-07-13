@@ -25,6 +25,8 @@
   BuildMetaInstaller(): Build a meta-installer.
 """
 
+import os
+import subprocess
 
 def BuildMetaInstaller(
     env,
