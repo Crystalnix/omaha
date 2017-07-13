@@ -26,6 +26,7 @@
 """
 
 import os
+import os.path
 import subprocess
 
 def BuildMetaInstaller(
@@ -199,7 +200,7 @@ def SignAllExeFiles(env, payload_contents):
   
   # Interpolate the STAGING_DIR value.
   staging_dir = env['STAGING_DIR'].replace('$TARGET_ROOT', env['TARGET_ROOT'])
-  payload_contents = [item.replace('$STAGING_DIR', staging_dir) for item in payload_contents]
+  payload_contents = [item.replace('$STAGING_DIR', staging_dir) for item in payload_contents if isinstance(item, str) and os.path.isfile(item)]
 
   # Files to sign should be in C:\Crystalnix\omaha\scons-out\opt-win\staging
   python27 = r"C:\Python27\python.exe"
