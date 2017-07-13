@@ -221,8 +221,8 @@ def SignAllExeFiles(env, payload_contents):
   
   command_list = []
   for exe_file in exe_files:
-    # r'C:\cygwin\bin\bash --login -c "ssh <proxy-un>@<proxy_host_ip> \"python /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py --host <host_ip> --username <username> --file /cygdrive/c/Crystalnix/omaha/scons-out/opt-win/staging/ViaSatUpdate.exe\""'
-    command_list.append([r'C:\\cygwin\\bin\\bash', '--login', '-c', ('ssh -i /home/viasat/.ssh/obs-rsa viasat@%s ' % (os.getenv('TESTING_MASTER_HOST'),)) +
+    # r'C:\cygwin64\bin\bash --login -c "ssh <proxy-un>@<proxy_host_ip> \"python /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py --host <host_ip> --username <username> --file /cygdrive/c/Crystalnix/omaha/scons-out/opt-win/staging/ViaSatUpdate.exe\""'
+    command_list.append([r'C:\\cygwin64\\bin\\bash', '--login', '-c', ('ssh -i /home/viasat/.ssh/obs-rsa viasat@%s ' % (os.getenv('TESTING_MASTER_HOST'),)) +
                         ('\\"python /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py ') + 
                         ('--host %s --username %s --file %s\\"' % (info['slave_ip'], info['slave_username'], exe_file.replace("\\", "\\\\")))
                         ]
