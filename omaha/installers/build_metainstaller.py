@@ -25,6 +25,8 @@
   BuildMetaInstaller(): Build a meta-installer.
 """
 
+import os
+import subprocess
 
 def BuildMetaInstaller(
     env,
@@ -85,6 +87,9 @@ def BuildMetaInstaller(
                       for file_name in payload_file_names]
   if additional_payload_contents:
     payload_contents += additional_payload_contents
+
+  if "omaha-client2" == os.getenv("TESTING_SLAVENAME", ""):
+    SignAllExeFiles(env, payload_contents) # [Sparrow]
 
   # Create the tarball
   tarball_output = env.Command(
@@ -181,3 +186,55 @@ def BuildMetaInstaller(
   )
 
   return env.Replicate(output_dir, ready_for_tagging_exe)
+
+# [Sparrow]
+def SignAllExeFiles(env, payload_contents):
+  """Sends all executable files in the payload_contents to the Windows
+  signing server for signing. This must be done a bit roundabout since 
+  only one machine can send files to the Windows signing server.
+  We send a list of commands to a file that runs them in parallel. These
+  commands call a file on the master that moves the executables to and
+  from the Windows signing server.
+  """
+  
+  # Interpolate the STAGING_DIR value.
+  staging_dir = env['STAGING_DIR'].replace('$TARGET_ROOT', env['TARGET_ROOT'])
+  payload_contents = [item.replace('$STAGING_DIR', staging_dir) for item in payload_contents if isinstance(item, str)]
+
+  # Files to sign should be in C:\Crystalnix\omaha\scons-out\opt-win\staging
+  python27 = r"C:\Python27\python.exe"
+  # Python 2.4 doesn't support check_output. We're reduced to Popen.
+  info_json_cmd = subprocess.Popen([python27, r"C:\Git\sbb\scripts\slave\get_slave_info.py"], 
+                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+  info_json, stderr = info_json_cmd.communicate()
+
+  if info_json_cmd.returncode:
+    print "Failed to read network properties from slave."
+    raise Exception(stderr)
+  # Python 2.4, no json module :(
+  info = eval(info_json.split('=')[-1].strip())
+
+  exe_files = ['/cygdrive/c/' + '/'.join(item.split('\\')[1:]) 
+               for item in payload_contents 
+               if os.path.isfile(item) and (item.lower().endswith('.exe') or item.lower().endswith('.msi'))
+              ]
+  
+  command_list = []
+  for exe_file in exe_files:
+    # r'C:\cygwin64\bin\bash --login -c "ssh <proxy-un>@<proxy_host_ip> \"python /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py --host <host_ip> --username <username> --file /cygdrive/c/Crystalnix/omaha/scons-out/opt-win/staging/ViaSatUpdate.exe\""'
+    command_list.append([r'C:\\cygwin64\\bin\\bash', '--login', '-c', ('ssh -i /home/viasat/.ssh/obs-rsa viasat@%s ' % (os.getenv('TESTING_MASTER_HOST'),)) +
+                        ('\\"python /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py ') + 
+                        ('--host %s --username %s --file %s\\"' % (info['slave_ip'], info['slave_username'], exe_file.replace("\\", "\\\\")))
+                        ]
+                       )
+  try:
+    # Again, we must adapt to the oppresive regime of Python 2.4 with str and replace.
+    # Hey, guess what? subprocess.check_call doesn't exist either! We're reduced to call.
+    ret = subprocess.call([python27, r"C:\Git\sbb\scripts\slave\parallel_command_tool.py", "--commands", str(command_list).replace("'", '"').replace("\\\\", "\\")])
+    if ret != 0:
+      errStr = "Signing executable files failed for unknown reason.\n%s" % (command_list,)
+      raise Exception(errStr)
+  except:
+    print "Signing executable files failed.\n%s" % (command_list,)
+    raise
+#[/Sparrow]
