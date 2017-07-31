@@ -26,6 +26,7 @@
 """
 
 import os
+import os.path
 import subprocess
 
 def BuildMetaInstaller(
@@ -197,44 +198,104 @@ def SignAllExeFiles(env, payload_contents):
   from the Windows signing server.
   """
   
-  # Interpolate the STAGING_DIR value.
-  staging_dir = env['STAGING_DIR'].replace('$TARGET_ROOT', env['TARGET_ROOT'])
-  payload_contents = [item.replace('$STAGING_DIR', staging_dir) for item in payload_contents if isinstance(item, str)]
-
-  # Files to sign should be in C:\Crystalnix\omaha\scons-out\opt-win\staging
-  python27 = r"C:\Python27\python.exe"
-  # Python 2.4 doesn't support check_output. We're reduced to Popen.
-  info_json_cmd = subprocess.Popen([python27, r"C:\Git\sbb\scripts\slave\get_slave_info.py"], 
-                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-  info_json, stderr = info_json_cmd.communicate()
-
-  if info_json_cmd.returncode:
-    print "Failed to read network properties from slave."
-    raise Exception(stderr)
-  # Python 2.4, no json module :(
-  info = eval(info_json.split('=')[-1].strip())
-
-  exe_files = ['/cygdrive/c/' + '/'.join(item.split('\\')[1:]) 
-               for item in payload_contents 
-               if os.path.isfile(item) and (item.lower().endswith('.exe') or item.lower().endswith('.msi'))
-              ]
+  ### START Helper Functions ###
+  # Helper functions declared here to contain scope.
+  # I want to avoid name conflicts with Crystalnix and Google code as much as possible without a lot of overhead.
   
-  command_list = []
-  for exe_file in exe_files:
-    # r'C:\cygwin64\bin\bash --login -c "ssh <proxy-un>@<proxy_host_ip> \"python /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py --host <host_ip> --username <username> --file /cygdrive/c/Crystalnix/omaha/scons-out/opt-win/staging/ViaSatUpdate.exe\""'
-    command_list.append([r'C:\\cygwin64\\bin\\bash', '--login', '-c', ('ssh -i /home/viasat/.ssh/obs-rsa viasat@%s ' % (os.getenv('TESTING_MASTER_HOST'),)) +
-                        ('\\"python /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py ') + 
-                        ('--host %s --username %s --file %s\\"' % (info['slave_ip'], info['slave_username'], exe_file.replace("\\", "\\\\")))
-                        ]
-                       )
-  try:
-    # Again, we must adapt to the oppresive regime of Python 2.4 with str and replace.
-    # Hey, guess what? subprocess.check_call doesn't exist either! We're reduced to call.
-    ret = subprocess.call([python27, r"C:\Git\sbb\scripts\slave\parallel_command_tool.py", "--commands", str(command_list).replace("'", '"').replace("\\\\", "\\")])
-    if ret != 0:
-      errStr = "Signing executable files failed for unknown reason.\n%s" % (command_list,)
-      raise Exception(errStr)
-  except:
-    print "Signing executable files failed.\n%s" % (command_list,)
-    raise
+  def GetFiles(env, payload_contents):
+    # Collect EXE and MSI files.
+
+    # Interpolate the STAGING_DIR value.
+    staging_dir = env['STAGING_DIR'].replace('$TARGET_ROOT', env['TARGET_ROOT'])
+    payload_contents = [item.replace('$STAGING_DIR', staging_dir) for item in payload_contents if isinstance(item, str)]
+
+    # Files to sign should be in C:\Crystalnix\omaha\omaha\scons-out\opt-win\staging
+    exe_files = ['/cygdrive/c/' + '/'.join(item.split('\\')[1:]) 
+                 for item in payload_contents 
+                 if os.path.isfile(item) and (item.lower().endswith('.exe') or item.lower().endswith('.msi'))
+                ]
+    return exe_files
+  
+  def GetCygwinPath():
+    # These are two standard Cygwin installation paths.
+    # If a dev uses a different installation, this code could get way more complicated
+    # because of the path rewriting in GetFiles.
+    if os.path.isfile(r'C:\cygwin64\bin\bash.exe'):
+      return r'C:\\cygwin64\\bin\\bash'
+    elif os.path.isfile(r'C:\cygwin\bin\bash.exe'):
+      return r'C:\\cygwin\\bin\\bash'
+    else:
+      raise Exception(r"Could not find Cygwin installation. (C:\cygwin64\bin\bash and C:\cygwin\bin\bash not found.)")
+  
+  def GetSlaveInfo(python, scripts_dir):
+    # Collect IP address and username of this machine.
+
+    # Python 2.4 doesn't support check_output. We're reduced to Popen.
+    info_json_cmd = subprocess.Popen([python, os.path.join(scripts_dir, "get_slave_info.py")], 
+                                      stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    info_json, stderr = info_json_cmd.communicate()
+
+    if info_json_cmd.returncode:
+      print "Failed to read network properties from slave."
+      raise Exception(stderr)
+    # Python 2.4, no json module :(
+    return eval(info_json.split('=')[-1].strip())
+  
+  def BuildParallelCommand(python, scripts_dir, exe_files):
+    # Format and string together a string to send to the parallel_command_tool.py.
+
+    cygwin = GetCygwinPath()
+    info = GetSlaveInfo(python, scripts_dir)
+
+    command_list = []
+    for exe_file in exe_files:
+      # (r'C:\cygwin64\bin\bash --login -c "ssh <proxy-un>@<proxy_host_ip> \"python 
+      #   /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py --host <host_ip> --username <username> 
+      #   --file /cygdrive/c/Crystalnix/omaha/scons-out/opt-win/staging/ViaSatUpdate.exe\""')
+      command_list.append([
+                           cygwin, '--login', '-c',
+                           ('ssh -i /home/viasat/.ssh/obs-rsa viasat@%s ' % (os.getenv('TESTING_MASTER_HOST'),)) +
+                           ('\\"python /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py ') +
+                           ('--host %s --username %s --file %s\\"' % (
+                                                                      info['slave_ip'], info['slave_username'],
+                                                                      exe_file.replace("\\", "\\\\")
+                                                                     )
+                           )
+                          ]
+                         )
+    return command_list
+  
+  def SignFiles(python, scripts_dir, exe_files):
+    # Build a string and send it to the parallel_command_tool.py.
+
+    command_list = BuildParallelCommand(python, scripts_dir, exe_files)
+    
+    try:
+      # Again, we must adapt to the oppresive regime of Python 2.4 with str and replace.
+      # Hey, guess what? subprocess.check_call doesn't exist either! We're reduced to call.
+      ret = subprocess.call(
+                            [
+                             python, os.path.join(scripts_dir, "parallel_command_tool.py"), 
+                             "--commands",
+                             str(command_list).replace("'", '"').replace("\\\\", "\\")
+                            ]
+                           )
+      if ret != 0:
+        errStr = "Signing executable files failed for unknown reason.\n%s" % (command_list,)
+        raise Exception(errStr)
+    except:
+      print "Signing executable files failed.\n%s" % (command_list,)
+      raise
+  
+  ### END Helper Functions ###
+
+  # This is a standard Windows python installation path.
+  python27 = r"C:\Python27\python.exe"
+  # This is a de-facto office standard. Devs are expected to conform.
+  scripts_dir = r"C:\Git\sbb\scripts\slave"
+
+  exe_files = GetFiles(env, payload_contents)
+
+  SignFiles(python27, scripts_dir, exe_files)
+
 #[/Sparrow]
