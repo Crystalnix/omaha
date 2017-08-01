@@ -220,6 +220,7 @@ def SignAllExeFiles(env, payload_contents):
     # These are two standard Cygwin installation paths.
     # If a dev uses a different installation, this code could get way more complicated
     # because of the path rewriting in GetFiles.
+    # We're using double slashes because these strings need to get interpolated into the parallel command.
     if os.path.isfile(r'C:\cygwin64\bin\bash.exe'):
       return r'C:\\cygwin64\\bin\\bash'
     elif os.path.isfile(r'C:\cygwin\bin\bash.exe'):
@@ -249,6 +250,10 @@ def SignAllExeFiles(env, payload_contents):
 
     command_list = []
     for exe_file in exe_files:
+      # This is a list of strings that will get parsed into JSON and sent to the command line. Since both the comamnd line
+      # and JSON use double quotes, the string needs to escape the inner pair with slashes. Because we don't have a JSON 
+      # module, we have to do this intricate procedure. It may be possible to optimize this, but this is easier to follow.
+
       # (r'C:\cygwin64\bin\bash --login -c "ssh <proxy-un>@<proxy_host_ip> \"python 
       #   /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py --host <host_ip> --username <username> 
       #   --file /cygdrive/c/Crystalnix/omaha/scons-out/opt-win/staging/ViaSatUpdate.exe\""')
@@ -258,6 +263,8 @@ def SignAllExeFiles(env, payload_contents):
                            ('\\"python /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py ') +
                            ('--host %s --username %s --file %s\\"' % (
                                                                       info['slave_ip'], info['slave_username'],
+                                                                      # Replace one slash with two slashes, so we
+                                                                      # can keep one slash when converting to JSON.
                                                                       exe_file.replace("\\", "\\\\")
                                                                      )
                            )
@@ -271,12 +278,17 @@ def SignAllExeFiles(env, payload_contents):
     command_list = BuildParallelCommand(python, scripts_dir, exe_files)
     
     try:
-      # Again, we must adapt to the oppresive regime of Python 2.4 with str and replace.
+      # Again, we must adapt to the oppresive regime of Python 2.4 with str and replace
+      # because Python 2.4 doesn't have a json module.
       # Hey, guess what? subprocess.check_call doesn't exist either! We're reduced to call.
       ret = subprocess.call(
                             [
                              python, os.path.join(scripts_dir, "parallel_command_tool.py"), 
                              "--commands",
+                             # This is how you convert a python object to JSON without JSON.
+                             # Take the Python string representation of the object and replace 
+                             # the single quotes with double quotes and remove the escape slashes
+                             # that Python adds when generating the string.
                              str(command_list).replace("'", '"').replace("\\\\", "\\")
                             ]
                            )
