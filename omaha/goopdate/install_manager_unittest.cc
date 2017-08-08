@@ -13,11 +13,13 @@
 // limitations under the License.
 // ========================================================================
 
-#include <thread>
-#include <chrono>
+
+
 
 #include <atlpath.h>
 #include <atlstr.h>
+#include <chrono>
+#include <thread>
 #include "base/scoped_ptr.h"
 #include "omaha/base/app_util.h"
 #include "omaha/base/error.h"
