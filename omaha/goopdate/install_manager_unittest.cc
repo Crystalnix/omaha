@@ -13,6 +13,9 @@
 // limitations under the License.
 // ========================================================================
 
+#include <thread>
+#include <chrono>
+
 #include <atlpath.h>
 #include <atlstr.h>
 #include "base/scoped_ptr.h"
@@ -1275,6 +1278,7 @@ TEST_P(InstallManagerTest, InstallDir_ReadOnlyFiles) {
   InstallManager install_manager(&fake_glock, IsMachine());
 
   EXPECT_TRUE(File::Exists(install_dir));
+  std::this_thread::sleep_for(std::chrono::seconds(1));
   EXPECT_TRUE(::PathIsDirectoryEmpty(install_dir));
 
   EXPECT_SUCCEEDED(DeleteDirectory(install_dir));
