@@ -13,9 +13,6 @@
 // limitations under the License.
 // ========================================================================
 
-
-
-
 #include <atlpath.h>
 #include <atlstr.h>
 #include <chrono>
