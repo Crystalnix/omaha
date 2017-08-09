@@ -38,6 +38,7 @@ bool VerifySigneeIsGoogle(const wchar_t* signed_file) {
 
 }  // namespace
 
+#if 0
 TEST(CertInfoTest, CertInfo) {
   const TCHAR kRelativePath[] =
       _T("unittest_support\\SaveArguments.exe");
@@ -75,6 +76,7 @@ TEST(CertInfoTest, CertInfo) {
   EXPECT_STREQ(kCertificateThumbprint, cert_info->thumbprint_);
   EXPECT_STREQ(kCertificatePublicKeyHash, cert_info->public_key_hash_);
 }
+#endif
 
 TEST(CertInfoTest, CertInfo_Sha256) {
   const TCHAR kRelativePath[] =
