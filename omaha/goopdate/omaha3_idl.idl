@@ -132,7 +132,7 @@ interface IGoogleUpdate3 : IDispatch {
 [
   object,
   dual,
-  uuid(d91eff8c-2604-40a0-99a8-570534d53e3d),
+  uuid(da59372b-1365-4a2f-95e3-81530fe3943f),
   helpstring("IAppBundle Interface"),
   pointer_default(unique)
 ]
@@ -243,7 +243,7 @@ interface IAppBundle : IDispatch {
 [
   object,
   dual,
-  uuid(64a84e46-632f-44d6-be39-60aec4e9970a),
+  uuid(47b1e23f-2ec0-4114-b789-cc85e807d8d8),
   helpstring("IApp Interface"),
   pointer_default(unique)
 ]
@@ -592,7 +592,7 @@ interface IAppBundleWeb : IDispatch {
 [
   object,
   dual,
-  uuid(6ebac4fb-8d2c-423b-a999-5a47750d165b),
+  uuid(9a2776b9-7ef8-4736-be0f-3e75d9d23579),
   helpstring("IAppWeb Interface"),
   pointer_default(unique),
 ]
@@ -664,7 +664,7 @@ interface IAppVersionWeb : IDispatch {
 [
   object,
   dual,
-  uuid(e5572e8f-d47c-46a1-825f-8410c30f2B8d),
+  uuid(cc493451-af6a-408f-9879-89b2dc81e0c6),
   helpstring("ICoCreateAsyncStatus Interface"),
   pointer_default(unique)
 ]
