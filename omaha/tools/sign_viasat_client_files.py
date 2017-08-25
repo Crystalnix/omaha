@@ -21,7 +21,7 @@ def SignAllExeFiles(payload_contents):
   # This is an example of the google signing command that just ran before this code.
   # sign /f "C:\Crystalnix\omaha\omaha/data/OmahaTestCert.pfx" /p "test" /t "http://timestamp.verisign.com/scripts/timestamp.dll" "scons-out\opt-win\obj\google_update\ViaSatUpdate_signed.exe"
 
-  whitelist = {"ViaSatUpdate_signed.exe",
+  whitelist = ["ViaSatUpdate_signed.exe",
                "ViaSatCrashHandler.exe",
                "ViaSatUpdateHelper.msi",
                "ViaSatUpdateBroker.exe",
@@ -29,7 +29,7 @@ def SignAllExeFiles(payload_contents):
                "ViaSatUpdateComRegisterShell64.exe",
                "ViaSatUpdateWebPlugin.exe",
                "ViaSatCrashHandler64.exe"
-              }
+              ]
   
   ### START Helper Functions ###
   # Helper functions declared here to contain scope.
