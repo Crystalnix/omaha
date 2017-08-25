@@ -25,6 +25,11 @@ def SignAllExeFiles(payload_contents):
   # Helper functions declared here to contain scope.
   # I want to avoid name conflicts with Crystalnix and Google code as much as possible without a lot of overhead.
   
+  def LoadEnv():
+  # Load environment variables.
+  with open(r'C:\Git\sbb\scripts\slave\omaha_client\restoreEnv.bat', 'r') as env_file:
+    
+  
   def GetFiles(payload_contents):
     # Collect EXE and MSI files.
 
@@ -47,7 +52,7 @@ def SignAllExeFiles(payload_contents):
     else:
       raise Exception(r"Could not find Cygwin installation. (C:\cygwin64\bin\bash and C:\cygwin\bin\bash not found.)")
   
-  def GetSlaveInfo(python, scripts_dir):
+  def GetSlaveInfo(env, python, scripts_dir):
     # Collect IP address and username of this machine.
 
     # Python 2.4 doesn't support check_output. We're reduced to Popen.
@@ -61,11 +66,11 @@ def SignAllExeFiles(payload_contents):
     # Python 2.4, no json module :(
     return eval(info_json.split('=')[-1].strip())
   
-  def BuildParallelCommand(python, scripts_dir, exe_files):
+  def BuildParallelCommand(env, python, scripts_dir, exe_files):
     # Format and string together a string to send to the parallel_command_tool.py.
 
     cygwin = GetCygwinPath()
-    info = GetSlaveInfo(python, scripts_dir)
+    info = GetSlaveInfo(env, python, scripts_dir)
 
     command_list = []
     for exe_file in exe_files:
@@ -78,7 +83,7 @@ def SignAllExeFiles(payload_contents):
       #   --file /cygdrive/c/Crystalnix/omaha/scons-out/opt-win/staging/ViaSatUpdate.exe\""')
       command_list.append([
                            cygwin, '--login', '-c',
-                           ('ssh -i /home/viasat/.ssh/obs-rsa viasat@%s ' % (os.getenv('TESTING_MASTER_HOST'),)) +
+                           ('ssh -i /home/viasat/.ssh/obs-rsa viasat@%s ' % (env('TESTING_MASTER_HOST'),)) +
                            ('\\"python /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py ') +
                            ('--host %s --username %s --file %s\\"' % (
                                                                       info['slave_ip'], info['slave_username'],
@@ -91,10 +96,10 @@ def SignAllExeFiles(payload_contents):
                          )
     return command_list
   
-  def SignFiles(python, scripts_dir, exe_files):
+  def SignFiles(env, python, scripts_dir, exe_files):
     # Build a string and send it to the parallel_command_tool.py.
 
-    command_list = BuildParallelCommand(python, scripts_dir, exe_files)
+    command_list = BuildParallelCommand(env, python, scripts_dir, exe_files)
     
     try:
       # Again, we must adapt to the oppresive regime of Python 2.4 with str and replace
@@ -125,8 +130,10 @@ def SignAllExeFiles(payload_contents):
   # This is a de-facto office standard. Devs are expected to conform.
   scripts_dir = r"C:\Git\sbb\scripts\slave"
 
-  exe_files = GetFiles(env, payload_contents)
+  env = LoadEnv(scripts_dir)
+  
+  exe_files = GetFiles(payload_contents)
 
-  SignFiles(python27, scripts_dir, exe_files)
+  SignFiles(env, python27, scripts_dir, exe_files)
 
 #[/Sparrow]
