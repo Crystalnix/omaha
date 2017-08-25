@@ -1,10 +1,8 @@
 #!/usr/bin/python
 
 # [Sparrow]
-import os
 import os.path
 import sign_viasat_client_files
-import socket
 # [/Sparrow]
 import subprocess
 import sys

@@ -2,6 +2,7 @@
 
 import os
 import os.path
+import socket
 import subprocess
 
 def SignAllExeFiles(payload_contents):
@@ -25,16 +26,26 @@ def SignAllExeFiles(payload_contents):
   # Helper functions declared here to contain scope.
   # I want to avoid name conflicts with Crystalnix and Google code as much as possible without a lot of overhead.
   
-  def LoadEnv():
-  # Load environment variables.
-  with open(r'C:\Git\sbb\scripts\slave\omaha_client\restoreEnv.bat', 'r') as env_file:
+  def LoadEnv(scripts_dir):
+    # Load environment variables.
     
+    env = {}
+    env_file_path = os.path.join(scripts_dir, r'omaha_client\restoreEnv.bat')
+    
+    env_file = open(env_file_path, 'r')
+    for line in env_file:
+      if line.startswith('set '):
+        label, value = line[4:].strip().split('=', 1)
+        env[label] = value
+    env_file.close()
+    
+    return env
   
   def GetFiles(payload_contents):
     # Collect EXE and MSI files.
 
     # Files to sign should be in C:\Crystalnix\omaha\omaha\scons-out\opt-win\staging
-    exe_files = ['/cygdrive/c/Crystalnix/omaha/omaha/' + '/'.join(item.split('\\')[1:]) 
+    exe_files = ['/cygdrive/c/Crystalnix/omaha/omaha/' + '/'.join(item.split('\\')) 
                  for item in payload_contents 
                  if os.path.isfile(item) and (item.lower().endswith('.exe') or item.lower().endswith('.msi'))
                 ]
@@ -52,25 +63,18 @@ def SignAllExeFiles(payload_contents):
     else:
       raise Exception(r"Could not find Cygwin installation. (C:\cygwin64\bin\bash and C:\cygwin\bin\bash not found.)")
   
-  def GetSlaveInfo(env, python, scripts_dir):
+  def GetSlaveIp():
     # Collect IP address and username of this machine.
 
-    # Python 2.4 doesn't support check_output. We're reduced to Popen.
-    info_json_cmd = subprocess.Popen([python, os.path.join(scripts_dir, "get_slave_info.py")], 
-                                      stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    info_json, stderr = info_json_cmd.communicate()
-
-    if info_json_cmd.returncode:
-      print "Failed to read network properties from slave."
-      raise Exception(stderr)
-    # Python 2.4, no json module :(
-    return eval(info_json.split('=')[-1].strip())
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.connect(('google.com', 0))
+    return sock.getsockname()[0]
   
-  def BuildParallelCommand(env, python, scripts_dir, exe_files):
+  def BuildParallelCommand(env, exe_files):
     # Format and string together a string to send to the parallel_command_tool.py.
 
     cygwin = GetCygwinPath()
-    info = GetSlaveInfo(env, python, scripts_dir)
+    slave_ip = GetSlaveIp()
 
     command_list = []
     for exe_file in exe_files:
@@ -83,10 +87,10 @@ def SignAllExeFiles(payload_contents):
       #   --file /cygdrive/c/Crystalnix/omaha/scons-out/opt-win/staging/ViaSatUpdate.exe\""')
       command_list.append([
                            cygwin, '--login', '-c',
-                           ('ssh -i /home/viasat/.ssh/obs-rsa viasat@%s ' % (env('TESTING_MASTER_HOST'),)) +
+                           ('ssh -i /home/viasat/.ssh/obs-rsa viasat@%s ' % (env['TESTING_MASTER_HOST'],)) +
                            ('\\"python /home/viasat/Git/sparrow_buildbot/scripts/slave/windows_exe_signer.py ') +
                            ('--host %s --username %s --file %s\\"' % (
-                                                                      info['slave_ip'], info['slave_username'],
+                                                                      slave_ip, env['USERNAME'],
                                                                       # Replace one slash with two slashes, so we
                                                                       # can keep one slash when converting to JSON.
                                                                       exe_file.replace("\\", "\\\\")
@@ -99,7 +103,7 @@ def SignAllExeFiles(payload_contents):
   def SignFiles(env, python, scripts_dir, exe_files):
     # Build a string and send it to the parallel_command_tool.py.
 
-    command_list = BuildParallelCommand(env, python, scripts_dir, exe_files)
+    command_list = BuildParallelCommand(env, exe_files)
     
     try:
       # Again, we must adapt to the oppresive regime of Python 2.4 with str and replace
