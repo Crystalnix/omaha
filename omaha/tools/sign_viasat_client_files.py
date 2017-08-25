@@ -21,6 +21,15 @@ def SignAllExeFiles(payload_contents):
   # This is an example of the google signing command that just ran before this code.
   # sign /f "C:\Crystalnix\omaha\omaha/data/OmahaTestCert.pfx" /p "test" /t "http://timestamp.verisign.com/scripts/timestamp.dll" "scons-out\opt-win\obj\google_update\ViaSatUpdate_signed.exe"
 
+  whitelist = {"ViaSatUpdate_signed.exe",
+               "ViaSatCrashHandler.exe",
+               "ViaSatUpdateHelper.msi",
+               "ViaSatUpdateBroker.exe",
+               "ViaSatUpdateOnDemand.exe",
+               "ViaSatUpdateComRegisterShell64.exe",
+               "ViaSatUpdateWebPlugin.exe",
+               "ViaSatCrashHandler64.exe"
+              }
   
   ### START Helper Functions ###
   # Helper functions declared here to contain scope.
@@ -33,11 +42,16 @@ def SignAllExeFiles(payload_contents):
     env_file_path = os.path.join(scripts_dir, r'omaha_client\restoreEnv.bat')
     
     env_file = open(env_file_path, 'r')
-    for line in env_file:
-      if line.startswith('set '):
-        label, value = line[4:].strip().split('=', 1)
-        env[label] = value
-    env_file.close()
+    try:
+      for line in env_file:
+        if line.startswith('set '):
+          label, value = line[4:].strip().split('=', 1)
+          env[label] = value
+    except:
+      print "Failed to open restoreEnv.bat"
+      raise
+    finally:
+      env_file.close()
     
     return env
   
@@ -128,15 +142,20 @@ def SignAllExeFiles(payload_contents):
       raise
   
   ### END Helper Functions ###
-
+  
   # This is a standard Windows python installation path.
   python27 = r"C:\Python27\python.exe"
   # This is a de-facto office standard. Devs are expected to conform.
   scripts_dir = r"C:\Git\sbb\scripts\slave"
 
+  approved_files = []
+  for file_path in payload_contents:
+    if file_path.rsplit('\\', 1)[-1] in whitelist:
+      approved_files.append(file_path)
+
   env = LoadEnv(scripts_dir)
   
-  exe_files = GetFiles(payload_contents)
+  exe_files = GetFiles(approved_files)
 
   SignFiles(env, python27, scripts_dir, exe_files)
 
