@@ -43,13 +43,14 @@ def SignAllExeFiles(payload_contents):
     
     env_file = open(env_file_path, 'r')
     try:
-      for line in env_file:
-        if line.startswith('set '):
-          label, value = line[4:].strip().split('=', 1)
-          env[label] = value
-    except:
-      print "Failed to open restoreEnv.bat"
-      raise
+      try:
+        for line in env_file:
+          if line.startswith('set '):
+            label, value = line[4:].strip().split('=', 1)
+            env[label] = value
+      except:
+        print "Failed to open restoreEnv.bat"
+        raise
     finally:
       env_file.close()
     
