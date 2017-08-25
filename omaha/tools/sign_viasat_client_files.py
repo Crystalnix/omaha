@@ -33,11 +33,13 @@ def SignAllExeFiles(payload_contents):
     env_file_path = os.path.join(scripts_dir, r'omaha_client\restoreEnv.bat')
     
     env_file = open(env_file_path, 'r')
-    for line in env_file:
-      if line.startswith('set '):
-        label, value = line[4:].strip().split('=', 1)
-        env[label] = value
-    env_file.close()
+    try:
+      for line in env_file:
+        if line.startswith('set '):
+          label, value = line[4:].strip().split('=', 1)
+          env[label] = value
+    finally:
+      env_file.close()
     
     return env
   
