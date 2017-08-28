@@ -2,7 +2,6 @@
 
 # [Sparrow]
 import os.path
-import sign_viasat_client_files
 # [/Sparrow]
 import subprocess
 import sys
@@ -21,10 +20,13 @@ for i in range(times):
   if retcode == 0:
     # [Sparrow]
     # Only a viasat machine should have this essential file.
-    if (os.path.isfile(r'C:\Git\sbb\scripts\slave\omaha_client\restoreEnv.bat') and 
+    if (os.path.isfile(r'C:\Git\sbb\scripts\slave\sign_viasat_client_files.py') and 
         str(sys.argv[3]).endswith('signtool.exe') and 
         str(sys.argv[-1]).split('.')[-1] in ['exe', 'msi']):
-      sign_viasat_client_files.SignAllExeFiles([sys.argv[-1]])
+      ret_code = subprocess.call([r'C:\Python27\python.exe', 
+                                 r'C:\Git\sbb\scripts\slave\sign_viasat_client_files.py', 
+                                 '--files', sys.argv[-1]])
+      sys.exit(ret_code)
     # [/Sparrow]
     sys.exit(0)
   time.sleep(duration)
