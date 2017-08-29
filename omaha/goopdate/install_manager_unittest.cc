@@ -15,8 +15,6 @@
 
 #include <atlpath.h>
 #include <atlstr.h>
-#include <chrono>
-#include <thread>
 #include "base/scoped_ptr.h"
 #include "omaha/base/app_util.h"
 #include "omaha/base/error.h"
@@ -1277,7 +1275,6 @@ TEST_P(InstallManagerTest, InstallDir_ReadOnlyFiles) {
   InstallManager install_manager(&fake_glock, IsMachine());
 
   EXPECT_TRUE(File::Exists(install_dir));
-  std::this_thread::sleep_for(std::chrono::seconds(1));
   EXPECT_TRUE(::PathIsDirectoryEmpty(install_dir));
 
   EXPECT_SUCCEEDED(DeleteDirectory(install_dir));
