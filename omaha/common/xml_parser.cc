@@ -397,6 +397,10 @@ class PackageElementHandler : public ElementHandler {
       return hr;
     }
 
+    hr = ReadStringAttribute(node,
+                             xml::attribute::kUrlParameters,
+                             &install_package.url_parameters);
+
     install_package.is_required = true;
     hr = ReadBooleanAttribute(node,
                               xml::attribute::kRequired,

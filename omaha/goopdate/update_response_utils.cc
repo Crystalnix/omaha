@@ -214,7 +214,7 @@ HRESULT BuildApp(const xml::UpdateResponse* update_response,
     FileHash hash;
     hash.sha1 = package.hash_sha1;
     hash.sha256 = package.hash_sha256;
-    HRESULT hr = next_version->AddPackage(package.name, package.size, hash);
+    HRESULT hr = next_version->AddPackage(package.name, package.size, hash, package.url_parameters);
     if (FAILED(hr)) {
       return hr;
     }

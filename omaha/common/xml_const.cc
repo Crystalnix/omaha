@@ -106,6 +106,7 @@ const TCHAR* const kName = _T("name");
 const TCHAR* const kNextVersion = _T("nextversion");
 const TCHAR* const kOriginURL = _T("originurl");
 const TCHAR* const kParameter = _T("parameter");
+const TCHAR* const kUrlParameters = _T("url_parameters");
 const TCHAR* const kPeriodOverrideSec = _T("periodoverridesec");
 const TCHAR* const kPhysMemory = _T("physmemory");
 const TCHAR* const kPingFreshness = _T("ping_freshness");

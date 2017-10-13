@@ -122,7 +122,8 @@ void Package::OnRequestRetryScheduled(time64 next_download_retry_time) {
 
 void Package::SetFileInfo(const CString& filename,
                           uint64 size,
-                          const FileHash& expected_hash) {
+                          const FileHash& expected_hash,
+                          const CString& url_parameters) {
   __mutexScope(model()->lock());
 
   ASSERT1(!filename.IsEmpty());
@@ -132,12 +133,23 @@ void Package::SetFileInfo(const CString& filename,
   filename_ = filename;
   expected_size_ = size;
   expected_hash_ = expected_hash;
+  url_parameters_ = url_parameters;
 }
 
 CString Package::filename() const {
   __mutexScope(model()->lock());
   ASSERT1(!filename_.IsEmpty());
   return filename_;
+}
+
+CString Package::url_parameters() const {
+  __mutexScope(model()->lock());
+  return url_parameters_;
+}
+
+CString Package::packageWithUrlParams() const{
+  const CString url_params = url_parameters();
+  return filename() + (url_params.IsEmpty() ? _T("") : _T("?") + url_params);
 }
 
 uint64 Package::expected_size() const {

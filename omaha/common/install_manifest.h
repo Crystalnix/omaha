@@ -33,6 +33,7 @@ struct InstallPackage {
   InstallPackage() : is_required(false), size(0) {}
 
   CString name;
+  CString url_parameters;
   CString version;
   bool is_required;
   int size;

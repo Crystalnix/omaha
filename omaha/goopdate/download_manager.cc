@@ -337,6 +337,7 @@ HRESULT DownloadManager::DoDownloadPackage(Package* package, State* state) {
   const CString app_id(app->app_guid_string());
   const CString version(package->app_version()->version());
   const CString package_name(package->filename());
+  const CString packageWithUrlParams(package->packageWithUrlParams());
 
   const ConfigManager& cm = *ConfigManager::Instance();
   // TODO(omaha): Since we don't currently have is_manual, check the least
@@ -392,7 +393,7 @@ HRESULT DownloadManager::DoDownloadPackage(Package* package, State* state) {
       CString url;
       DWORD url_length(INTERNET_MAX_URL_LENGTH);
       hr = ::UrlCombine(download_base_urls[i],
-                        package_name,
+                        packageWithUrlParams,
                         CStrBuf(url, INTERNET_MAX_URL_LENGTH),
                         &url_length,
                         0);

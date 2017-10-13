@@ -64,7 +64,8 @@ class AppVersion : public ModelObject {
 
   // Adds a package to this app version.
   HRESULT AddPackage(const CString& filename, uint32 size,
-                     const FileHash& expected_hash);
+                     const FileHash& expected_hash,
+                     const CString& url_parameters);
 
   // Returns the list of download servers to use in order of preference.
   const std::vector<CString>& download_base_urls() const;

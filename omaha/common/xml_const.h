@@ -106,6 +106,7 @@ extern const TCHAR* const kName;
 extern const TCHAR* const kNextVersion;
 extern const TCHAR* const kOriginURL;
 extern const TCHAR* const kParameter;
+extern const TCHAR* const kUrlParameters;
 extern const TCHAR* const kPeriodOverrideSec;
 extern const TCHAR* const kPhysMemory;
 extern const TCHAR* const kPingFreshness;

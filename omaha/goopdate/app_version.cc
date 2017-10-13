@@ -85,10 +85,11 @@ size_t AppVersion::GetNumberOfPackages() const {
 
 HRESULT AppVersion::AddPackage(const CString& filename,
                                uint32 size,
-                               const FileHash& hash) {
+                               const FileHash& hash,
+                               const CString& url_parameters) {
   __mutexScope(model()->lock());
   Package* package = new Package(this);
-  package->SetFileInfo(filename, size, hash);
+  package->SetFileInfo(filename, size, hash, url_parameters);
   packages_.push_back(package);
   return S_OK;
 }
